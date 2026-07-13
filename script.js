@@ -21,3 +21,44 @@ function setTheme(theme) {
 
 // Auto-update footer year
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Spreadsheet-style sortable tables
+document.querySelectorAll(".fav-table").forEach((table) => {
+  const headers = table.querySelectorAll("thead th");
+  headers.forEach((th, index) => {
+    th.classList.add("sortable");
+    th.addEventListener("click", () => sortTable(table, index, th, headers));
+  });
+});
+
+function sortTable(table, col, th, headers) {
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows);
+  const ascending = th.dataset.sortDir !== "asc"; // toggle direction
+
+  // Reset all header indicators, then mark the active one
+  headers.forEach((h) => {
+    delete h.dataset.sortDir;
+    h.classList.remove("sorted-asc", "sorted-desc");
+  });
+  th.dataset.sortDir = ascending ? "asc" : "desc";
+  th.classList.add(ascending ? "sorted-asc" : "sorted-desc");
+
+  const cellText = (row) => (row.cells[col] ? row.cells[col].textContent.trim() : "");
+  const asNumber = (s) => parseFloat(s.replace(/[^0-9.\-]/g, ""));
+  const numeric = rows.every((r) => {
+    const stripped = cellText(r).replace(/[^0-9.\-]/g, "");
+    return stripped !== "" && !isNaN(stripped);
+  });
+
+  rows.sort((a, b) => {
+    const x = cellText(a);
+    const y = cellText(b);
+    if (numeric) {
+      return ascending ? asNumber(x) - asNumber(y) : asNumber(y) - asNumber(x);
+    }
+    return ascending ? x.localeCompare(y) : y.localeCompare(x);
+  });
+
+  rows.forEach((r) => tbody.appendChild(r));
+}
