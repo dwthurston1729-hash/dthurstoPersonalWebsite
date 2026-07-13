@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Thurston</title>
+  <meta name="description" content="Personal website of David Thurston." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="#" class="brand">DT</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero container">
+      <p class="eyebrow">Hi, my name is</p>
+      <h1>David Thurston.</h1>
+      <h2 class="tagline">I build things and solve problems.</h2>
+      <p class="intro">
+        A short one- or two-sentence intro about who you are and what you do.
+        Replace this with your own words — what you're passionate about, what
+        you're working on, or what you'd like visitors to know first.
+      </p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section container">
+      <h3 class="section-title"><span>01.</span> About Me</h3>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Write a couple of paragraphs about your background here. Where you
+            work, what you enjoy building, how you got into your field, and what
+            you're focused on right now.
+          </p>
+          <p>Here are a few technologies and skills I work with:</p>
+          <ul class="skills">
+            <li>Skill one</li>
+            <li>Skill two</li>
+            <li>Skill three</li>
+            <li>Skill four</li>
+            <li>Skill five</li>
+            <li>Skill six</li>
+          </ul>
+        </div>
+        <div class="about-photo">
+          <div class="photo-frame" aria-hidden="true">
+            <span>Your<br />photo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section container">
+      <h3 class="section-title"><span>02.</span> Things I've Built</h3>
+      <div class="projects">
+        <article class="card">
+          <div class="card-top">
+            <span class="folder">📁</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Project One</h4>
+          <p>
+            A short description of the project — what it does, the problem it
+            solves, and your role in building it.
+          </p>
+          <ul class="tech-list">
+            <li>Tech</li><li>Stack</li><li>Here</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="folder">📁</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Project Two</h4>
+          <p>
+            Another project description. Highlight what makes it interesting or
+            what you learned building it.
+          </p>
+          <ul class="tech-list">
+            <li>Tech</li><li>Stack</li><li>Here</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="folder">📁</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Project Three</h4>
+          <p>
+            One more. Duplicate this card block to add as many projects as you
+            like.
+          </p>
+          <ul class="tech-list">
+            <li>Tech</li><li>Stack</li><li>Here</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container contact">
+      <h3 class="section-title centered"><span>03.</span> Get In Touch</h3>
+      <p class="contact-text">
+        I'm always happy to connect. Whether you have a question or just want to
+        say hi, my inbox is open.
+      </p>
+      <a href="mailto:you@example.com" class="btn btn-primary">Say Hello</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built by David Thurston · <span id="year"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
