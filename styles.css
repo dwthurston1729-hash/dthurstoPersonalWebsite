@@ -109,6 +109,15 @@ a:hover { opacity: 0.75; }
 .fav-table .col-year { color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; width: 1%; }
 .fav-table .col-title { font-weight: 600; }
 .fav-table .col-genre { color: var(--text-muted); }
+.fav-table .col-memo {
+  min-width: 96px; cursor: text; border-bottom: 1px dashed var(--border);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.fav-table .col-memo:hover { border-bottom-color: var(--accent); }
+.fav-table .col-memo:focus { outline: none; border-bottom: 1px solid var(--accent); background: var(--accent-soft); }
+.fav-table .col-memo:empty::before {
+  content: attr(data-placeholder); color: var(--text-muted); opacity: 0.5; font-style: italic;
+}
 
 /* Quotes table */
 .quote-table .col-quote { font-family: var(--serif); font-size: 1.05rem; line-height: 1.5; max-width: 640px; }

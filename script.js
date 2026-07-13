@@ -62,3 +62,17 @@ function sortTable(table, col, th, headers) {
 
   rows.forEach((r) => tbody.appendChild(r));
 }
+
+// Editable "Memorized?" cells — saved in this browser via localStorage,
+// keyed by the poem title so entries survive page updates.
+document.querySelectorAll("td.col-memo").forEach((cell) => {
+  const titleCell = cell.parentElement.querySelector(".col-title");
+  const key = "memo:" + (titleCell ? titleCell.textContent.trim() : cell.cellIndex);
+  const saved = localStorage.getItem(key);
+  if (saved) cell.textContent = saved;
+  cell.addEventListener("blur", () => {
+    const val = cell.textContent.trim();
+    if (val) localStorage.setItem(key, val);
+    else localStorage.removeItem(key);
+  });
+});
