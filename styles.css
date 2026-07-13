@@ -81,6 +81,15 @@ a:hover { opacity: 0.75; }
 .section-title { display: flex; align-items: baseline; gap: 12px; font-size: 1.6rem; margin-bottom: 32px; font-weight: 600; }
 .section-title span { color: var(--accent); font-size: 1rem; font-family: monospace; }
 
+/* ---------- Favorite sub-groups ---------- */
+.fav-group { margin-bottom: 52px; }
+.fav-group:last-child { margin-bottom: 0; }
+.sub-title {
+  font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  color: var(--text); letter-spacing: 0.2px;
+}
+
 /* ---------- Entry lists (books, movies, etc.) ---------- */
 .entries { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 .entry {
