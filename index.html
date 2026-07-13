@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>David Thurston</title>
-  <meta name="description" content="Personal website of David Thurston." />
+  <meta name="description" content="A personal collection of favorite books, films, music, art, and projects by David Thurston." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,9 +15,15 @@
     <nav class="nav container">
       <a href="#" class="brand">DT</a>
       <div class="nav-links">
-        <a href="#about">About</a>
+        <a href="#books">Books</a>
+        <a href="#movies">Movies</a>
+        <a href="#essays">Essays</a>
+        <a href="#stories">Stories</a>
+        <a href="#quotes">Quotes</a>
+        <a href="#piano">Piano</a>
+        <a href="#albums">Albums</a>
+        <a href="#paintings">Paintings</a>
         <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
@@ -26,116 +32,251 @@
   <main>
     <!-- Hero -->
     <section class="hero container">
-      <p class="eyebrow">Hi, my name is</p>
-      <h1>David Thurston.</h1>
-      <h2 class="tagline">I build things and solve problems.</h2>
+      <p class="eyebrow">David Thurston</p>
+      <h1>A few of my<br />favorite things.</h1>
       <p class="intro">
-        A short one- or two-sentence intro about who you are and what you do.
-        Replace this with your own words — what you're passionate about, what
-        you're working on, or what you'd like visitors to know first.
+        A running collection of the books, films, music, art, and ideas I keep
+        coming back to — plus the things I'm building. Replace this intro with a
+        sentence or two in your own voice.
       </p>
-      <div class="cta">
-        <a href="#projects" class="btn btn-primary">See my work</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </section>
+
+    <!-- Books -->
+    <section id="books" class="section container">
+      <h3 class="section-title"><span>01.</span> Favorite Books</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Book Title</h4>
+          <p class="meta">Author Name</p>
+          <p class="note">One line on why it stuck with you.</p>
+        </article>
+        <article class="entry">
+          <h4>Another Book</h4>
+          <p class="meta">Author Name</p>
+          <p class="note">Optional note — delete this line if you prefer.</p>
+        </article>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section container">
-      <h3 class="section-title"><span>01.</span> About Me</h3>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            Write a couple of paragraphs about your background here. Where you
-            work, what you enjoy building, how you got into your field, and what
-            you're focused on right now.
-          </p>
-          <p>Here are a few technologies and skills I work with:</p>
-          <ul class="skills">
-            <li>Skill one</li>
-            <li>Skill two</li>
-            <li>Skill three</li>
-            <li>Skill four</li>
-            <li>Skill five</li>
-            <li>Skill six</li>
-          </ul>
-        </div>
-        <div class="about-photo">
-          <div class="photo-frame" aria-hidden="true">
-            <span>Your<br />photo</span>
-          </div>
-        </div>
+    <!-- Movies -->
+    <section id="movies" class="section container">
+      <h3 class="section-title"><span>02.</span> Favorite Movies</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Film Title</h4>
+          <p class="meta">Director · Year</p>
+        </article>
+        <article class="entry">
+          <h4>Another Film</h4>
+          <p class="meta">Director · Year</p>
+        </article>
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Essays -->
+    <section id="essays" class="section container">
+      <h3 class="section-title"><span>03.</span> Favorite Essays</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>
+            <a href="#" target="_blank" rel="noopener">Essay Title ↗</a>
+          </h4>
+          <p class="meta">Author Name · Publication</p>
+        </article>
+        <article class="entry">
+          <h4>Another Essay</h4>
+          <p class="meta">Author Name</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Short stories -->
+    <section id="stories" class="section container">
+      <h3 class="section-title"><span>04.</span> Favorite Short Stories</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Story Title</h4>
+          <p class="meta">Author Name</p>
+        </article>
+        <article class="entry">
+          <h4>Another Story</h4>
+          <p class="meta">Author Name</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Quotes -->
+    <section id="quotes" class="section container">
+      <h3 class="section-title"><span>05.</span> Favorite Quotes</h3>
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote>“Our lives begin to end the day we become silent about things that matter.”</blockquote>
+          <figcaption>— Martin Luther King Jr.</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“A ship in port is safe, but that’s not what ships are built for.”</blockquote>
+          <figcaption>— Grace Hopper</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“The voyage of the best ship is a zigzag line of a hundred tacks.”</blockquote>
+          <figcaption>— Ralph Waldo Emerson</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“When you were born, you cried and the world rejoiced. Live your life in such a manner that when you die the world cries and you rejoice.”</blockquote>
+          <figcaption>— Indian proverb</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Things which do not grow and change are dead things.”</blockquote>
+          <figcaption>— Louise Erdrich</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“If everything seems under control, you’re just not moving fast enough.”</blockquote>
+          <figcaption>— Mario Andretti (of Andretti Indoor Karting &amp; Games fame)</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“The horizon is still way beyond you.”</blockquote>
+          <figcaption>— Zora Neale Hurston</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Skill is successfully walking a tightrope over Niagara Falls. Intelligence is not trying.”</blockquote>
+          <figcaption>— Unknown</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Success has been defined as the ability to go from failure to failure without losing enthusiasm.”</blockquote>
+          <figcaption>— David Guy Powers</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Sometimes, rather than relying on people to constantly make good decisions, you have to design the system so that success is not dependent on every decision being a good one.”</blockquote>
+          <figcaption>— Stephen J. Dubner</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Writing means sharing. It’s part of the human condition to want to share things – thoughts, ideas, opinions.”</blockquote>
+          <figcaption>— Paulo Coelho</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Clothes make the man. Naked people have little or no influence on society.”</blockquote>
+          <figcaption>— Mark Twain</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“A surplus of effort could overcome a deficit of confidence.”</blockquote>
+          <figcaption>— Sonia Sotomayor</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Don’t bother just to be better than your contemporaries or predecessors. Try to be better than yourself.”</blockquote>
+          <figcaption>— William Faulkner</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“It is more important to do the right thing than to do things right.”</blockquote>
+          <figcaption>— Peter Drucker</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“The opera always loses money. That’s as it should be. Opera has no business making money.”</blockquote>
+          <figcaption>— Rudolf Bing, general manager, Metropolitan Opera</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“The road to success is always under construction.”</blockquote>
+          <figcaption>— Unknown</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Anytime four New Yorkers get into a cab together without arguing, a bank robbery has just taken place.”</blockquote>
+          <figcaption>— Johnny Carson</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Piano pieces -->
+    <section id="piano" class="section container">
+      <h3 class="section-title"><span>06.</span> Favorite Piano Pieces</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Piece Title</h4>
+          <p class="meta">Composer</p>
+          <p class="note">Optional: a favorite recording or performer.</p>
+        </article>
+        <article class="entry">
+          <h4>Another Piece</h4>
+          <p class="meta">Composer</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Music albums -->
+    <section id="albums" class="section container">
+      <h3 class="section-title"><span>07.</span> Favorite Music Albums</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Album Title</h4>
+          <p class="meta">Artist · Year</p>
+        </article>
+        <article class="entry">
+          <h4>Another Album</h4>
+          <p class="meta">Artist · Year</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Paintings -->
+    <section id="paintings" class="section container">
+      <h3 class="section-title"><span>08.</span> Favorite Paintings</h3>
+      <div class="entries">
+        <article class="entry">
+          <h4>Painting Title</h4>
+          <p class="meta">Artist · Year</p>
+        </article>
+        <article class="entry">
+          <h4>Another Painting</h4>
+          <p class="meta">Artist · Year</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Current projects -->
     <section id="projects" class="section container">
-      <h3 class="section-title"><span>02.</span> Things I've Built</h3>
+      <h3 class="section-title"><span>09.</span> Current Projects</h3>
       <div class="projects">
         <article class="card">
           <div class="card-top">
-            <span class="folder">📁</span>
+            <span class="badge badge-active">In progress</span>
             <div class="card-links">
               <a href="#" aria-label="Source code">&lt;/&gt;</a>
               <a href="#" aria-label="Live link">↗</a>
             </div>
           </div>
-          <h4>Project One</h4>
-          <p>
-            A short description of the project — what it does, the problem it
-            solves, and your role in building it.
-          </p>
-          <ul class="tech-list">
-            <li>Tech</li><li>Stack</li><li>Here</li>
-          </ul>
+          <h4>Project Name</h4>
+          <p>What it is and what you're working on right now.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
         </article>
-
         <article class="card">
           <div class="card-top">
-            <span class="folder">📁</span>
+            <span class="badge badge-active">In progress</span>
             <div class="card-links">
               <a href="#" aria-label="Source code">&lt;/&gt;</a>
-              <a href="#" aria-label="Live link">↗</a>
             </div>
           </div>
-          <h4>Project Two</h4>
-          <p>
-            Another project description. Highlight what makes it interesting or
-            what you learned building it.
-          </p>
-          <ul class="tech-list">
-            <li>Tech</li><li>Stack</li><li>Here</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-top">
-            <span class="folder">📁</span>
-            <div class="card-links">
-              <a href="#" aria-label="Source code">&lt;/&gt;</a>
-              <a href="#" aria-label="Live link">↗</a>
-            </div>
-          </div>
-          <h4>Project Three</h4>
-          <p>
-            One more. Duplicate this card block to add as many projects as you
-            like.
-          </p>
-          <ul class="tech-list">
-            <li>Tech</li><li>Stack</li><li>Here</li>
-          </ul>
+          <h4>Another Project</h4>
+          <p>Short description.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
         </article>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section container contact">
-      <h3 class="section-title centered"><span>03.</span> Get In Touch</h3>
-      <p class="contact-text">
-        I'm always happy to connect. Whether you have a question or just want to
-        say hi, my inbox is open.
-      </p>
-      <a href="mailto:you@example.com" class="btn btn-primary">Say Hello</a>
+    <!-- Completed projects -->
+    <section id="completed" class="section container">
+      <h3 class="section-title"><span>10.</span> Completed Projects</h3>
+      <div class="projects">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-done">Shipped</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Finished Project</h4>
+          <p>What it was and what you accomplished.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
+        </article>
+      </div>
     </section>
   </main>
 
