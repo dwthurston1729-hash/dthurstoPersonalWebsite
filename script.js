@@ -16,7 +16,6 @@ toggle.addEventListener("click", () => {
 
 function setTheme(theme) {
   root.setAttribute("data-theme", theme);
-  toggle.textContent = theme === "dark" ? "☀️" : "🌙";
 }
 
 // Spreadsheet-style sortable tables
