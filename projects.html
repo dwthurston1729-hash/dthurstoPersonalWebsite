@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects · David Thurston</title>
+  <meta name="description" content="Current and completed projects by David Thurston." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="brand">DT</a>
+      <div class="nav-links">
+        <a href="index.html">About Me</a>
+        <a href="favorites.html">My Favorite Things</a>
+        <a href="projects.html" class="active">Projects</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projects" class="section container">
+      <h3 class="section-title page-title">Projects</h3>
+
+      <h4 class="sub-title-static">Current Projects</h4>
+      <div class="projects">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-active">In progress</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Project Name</h4>
+          <p>What it is and what you're working on right now.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-active">In progress</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+            </div>
+          </div>
+          <h4>Another Project</h4>
+          <p>Short description.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
+        </article>
+      </div>
+
+      <h4 class="sub-title-static">Completed Projects</h4>
+      <div class="projects">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-done">Shipped</span>
+            <div class="card-links">
+              <a href="#" aria-label="Source code">&lt;/&gt;</a>
+              <a href="#" aria-label="Live link">↗</a>
+            </div>
+          </div>
+          <h4>Finished Project</h4>
+          <p>What it was and what you accomplished.</p>
+          <ul class="tech-list"><li>Tech</li><li>Stack</li></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built by David Thurston · <span id="year"></span></p>
+  </footer>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>

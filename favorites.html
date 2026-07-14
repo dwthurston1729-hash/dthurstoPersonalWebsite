@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favorite Things · David Thurston</title>
+  <meta name="description" content="A personal collection of favorite books, films, music, art, and ideas by David Thurston." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="brand">DT</a>
+      <div class="nav-links">
+        <a href="index.html">About Me</a>
+        <a href="favorites.html" class="active">My Favorite Things</a>
+        <a href="projects.html">Projects</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="favorites" class="section container">
+      <h3 class="section-title page-title">My Favorite Things</h3>
+
+      <!-- Books -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Books</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Title</th><th>Author</th><th>Genre(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">2010</td><td class="col-title">Freedom</td><td>Jonathan Franzen</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1927</td><td class="col-title">To the Lighthouse</td><td>Virginia Woolf</td><td class="col-genre">Modernist fiction</td></tr>
+              <tr><td class="col-year">1973</td><td class="col-title">Sula</td><td>Toni Morrison</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">2011</td><td class="col-title">My Brilliant Friend</td><td>Elena Ferrante</td><td class="col-genre">Literary fiction, Bildungsroman</td></tr>
+              <tr><td class="col-year">1925</td><td class="col-title">The Great Gatsby</td><td>F. Scott Fitzgerald</td><td class="col-genre">Literary fiction, Tragedy</td></tr>
+              <tr><td class="col-year">1969</td><td class="col-title">Slaughterhouse-Five</td><td>Kurt Vonnegut</td><td class="col-genre">Satire, Science fiction</td></tr>
+              <tr><td class="col-year">1937</td><td class="col-title">Their Eyes Were Watching God</td><td>Zora Neale Hurston</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1952</td><td class="col-title">Invisible Man</td><td>Ralph Ellison</td><td class="col-genre">Literary fiction, Bildungsroman</td></tr>
+              <tr><td class="col-year">1968</td><td class="col-title">Welcome to the Monkey House</td><td>Kurt Vonnegut</td><td class="col-genre">Short stories, Satire</td></tr>
+              <tr><td class="col-year">1961</td><td class="col-title">Mother Night</td><td>Kurt Vonnegut</td><td class="col-genre">Literary fiction, Satire</td></tr>
+              <tr><td class="col-year">1987</td><td class="col-title">Bluebeard</td><td>Kurt Vonnegut</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1952</td><td class="col-title">Player Piano</td><td>Kurt Vonnegut</td><td class="col-genre">Science fiction, Dystopian</td></tr>
+              <tr><td class="col-year">2001</td><td class="col-title">The Corrections</td><td>Jonathan Franzen</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">2015</td><td class="col-title">Purity</td><td>Jonathan Franzen</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1920</td><td class="col-title">The Age of Innocence</td><td>Edith Wharton</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1993</td><td class="col-title">The Giver</td><td>Lois Lowry</td><td class="col-genre">Young adult, Dystopian</td></tr>
+              <tr><td class="col-year">1958</td><td class="col-title">The Human Condition</td><td>Hannah Arendt</td><td class="col-genre">Philosophy, Nonfiction</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Watership Down</td><td>Richard Adams</td><td class="col-genre">Fantasy, Adventure</td></tr>
+              <tr><td class="col-year">2018</td><td class="col-title">Enlightenment Now</td><td>Steven Pinker</td><td class="col-genre">Nonfiction, Science</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Movies -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Movies</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Title</th><th>Director</th><th>Genre(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">2004</td><td class="col-title">Eternal Sunshine of the Spotless Mind</td><td>Michel Gondry</td><td class="col-genre">Sci-fi romance, Drama</td></tr>
+              <tr><td class="col-year">2016</td><td class="col-title">Moonlight</td><td>Barry Jenkins</td><td class="col-genre">Drama</td></tr>
+              <tr><td class="col-year">1994</td><td class="col-title">Pulp Fiction</td><td>Quentin Tarantino</td><td class="col-genre">Crime</td></tr>
+              <tr><td class="col-year">1991</td><td class="col-title">The Silence of the Lambs</td><td>Jonathan Demme</td><td class="col-genre">Thriller, Horror</td></tr>
+              <tr><td class="col-year">1974</td><td class="col-title">Chinatown</td><td>Roman Polanski</td><td class="col-genre">Neo-noir, Mystery</td></tr>
+              <tr><td class="col-year">1964</td><td class="col-title">My Fair Lady</td><td>George Cukor</td><td class="col-genre">Musical</td></tr>
+              <tr><td class="col-year">1977</td><td class="col-title">Annie Hall</td><td>Woody Allen</td><td class="col-genre">Romantic comedy</td></tr>
+              <tr><td class="col-year">1997</td><td class="col-title">L.A. Confidential</td><td>Curtis Hanson</td><td class="col-genre">Neo-noir, Crime</td></tr>
+              <tr><td class="col-year">2014</td><td class="col-title">Whiplash</td><td>Damien Chazelle</td><td class="col-genre">Drama</td></tr>
+              <tr><td class="col-year">2011</td><td class="col-title">Moneyball</td><td>Bennett Miller</td><td class="col-genre">Sports drama</td></tr>
+              <tr><td class="col-year">2017</td><td class="col-title">The Shape of Water</td><td>Guillermo del Toro</td><td class="col-genre">Romantic fantasy</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Essays -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Essays</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th>Title</th><th>Author</th><th>Publication</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-title">Essay Title</td><td>Author Name</td><td class="col-genre">Publication</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Short stories -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Short Stories</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th>Title</th><th>Author</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-title">Story Title</td><td>Author Name</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Poems -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Poems</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Poem</th><th>Poet</th><th>Format</th><th>Memorized?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">1920</td><td class="col-title">The Second Coming</td><td>W. B. Yeats</td><td class="col-genre">Blank verse</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1893</td><td class="col-title">When You Are Old</td><td>W. B. Yeats</td><td class="col-genre">Rhymed quatrains</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1924</td><td class="col-title">Leda and the Swan</td><td>W. B. Yeats</td><td class="col-genre">Sonnet</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1899</td><td class="col-title">He Wishes for the Cloths of Heaven</td><td>W. B. Yeats</td><td class="col-genre">Lyric</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1976</td><td class="col-title">One Art</td><td>Elizabeth Bishop</td><td class="col-genre">Villanelle</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1933</td><td class="col-title">Old Men</td><td>Ogden Nash</td><td class="col-genre">Light verse</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1892</td><td class="col-title">A Dream of Death</td><td>W. B. Yeats</td><td class="col-genre">Rhymed lyric</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1914</td><td class="col-title">A Coat</td><td>W. B. Yeats</td><td class="col-genre">Lyric</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1928</td><td class="col-title">Sailing to Byzantium</td><td>W. B. Yeats</td><td class="col-genre">Ottava rima</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">—</td><td class="col-title">my sun, my moon, and all my stars</td><td>E. E. Cummings</td><td class="col-genre">Free verse</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1952</td><td class="col-title">[i carry your heart with me(i carry it in]</td><td>E. E. Cummings</td><td class="col-genre">Free verse</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1940</td><td class="col-title">[anyone lived in a pretty how town]</td><td>E. E. Cummings</td><td class="col-genre">Free verse</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1923</td><td class="col-title">Nothing Gold Can Stay</td><td>Robert Frost</td><td class="col-genre">Rhymed couplets</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1916</td><td class="col-title">A Time to Talk</td><td>Robert Frost</td><td class="col-genre">Lyric</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1916</td><td class="col-title">The Road Not Taken</td><td>Robert Frost</td><td class="col-genre">Quintains</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+              <tr><td class="col-year">1888</td><td class="col-title">Invictus</td><td>William Ernest Henley</td><td class="col-genre">Rhymed quatrains</td><td class="col-memo" contenteditable="true" data-placeholder="add date"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quotes -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Quotes</h4>
+        <div class="table-wrap">
+          <table class="fav-table quote-table">
+            <thead>
+              <tr><th>Quote</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-quote">“Our lives begin to end the day we become silent about things that matter.”</td><td class="col-source">Martin Luther King Jr.</td></tr>
+              <tr><td class="col-quote">“A ship in port is safe, but that’s not what ships are built for.”</td><td class="col-source">Grace Hopper</td></tr>
+              <tr><td class="col-quote">“The voyage of the best ship is a zigzag line of a hundred tacks.”</td><td class="col-source">Ralph Waldo Emerson</td></tr>
+              <tr><td class="col-quote">“When you were born, you cried and the world rejoiced. Live your life in such a manner that when you die the world cries and you rejoice.”</td><td class="col-source">Indian proverb</td></tr>
+              <tr><td class="col-quote">“Things which do not grow and change are dead things.”</td><td class="col-source">Louise Erdrich</td></tr>
+              <tr><td class="col-quote">“If everything seems under control, you’re just not moving fast enough.”</td><td class="col-source">Mario Andretti (of Andretti Indoor Karting &amp; Games fame)</td></tr>
+              <tr><td class="col-quote">“The horizon is still way beyond you.”</td><td class="col-source">Zora Neale Hurston</td></tr>
+              <tr><td class="col-quote">“Skill is successfully walking a tightrope over Niagara Falls. Intelligence is not trying.”</td><td class="col-source">Unknown</td></tr>
+              <tr><td class="col-quote">“Success has been defined as the ability to go from failure to failure without losing enthusiasm.”</td><td class="col-source">David Guy Powers</td></tr>
+              <tr><td class="col-quote">“Sometimes, rather than relying on people to constantly make good decisions, you have to design the system so that success is not dependent on every decision being a good one.”</td><td class="col-source">Stephen J. Dubner</td></tr>
+              <tr><td class="col-quote">“Writing means sharing. It’s part of the human condition to want to share things – thoughts, ideas, opinions.”</td><td class="col-source">Paulo Coelho</td></tr>
+              <tr><td class="col-quote">“Clothes make the man. Naked people have little or no influence on society.”</td><td class="col-source">Mark Twain</td></tr>
+              <tr><td class="col-quote">“A surplus of effort could overcome a deficit of confidence.”</td><td class="col-source">Sonia Sotomayor</td></tr>
+              <tr><td class="col-quote">“Don’t bother just to be better than your contemporaries or predecessors. Try to be better than yourself.”</td><td class="col-source">William Faulkner</td></tr>
+              <tr><td class="col-quote">“It is more important to do the right thing than to do things right.”</td><td class="col-source">Peter Drucker</td></tr>
+              <tr><td class="col-quote">“The opera always loses money. That’s as it should be. Opera has no business making money.”</td><td class="col-source">Rudolf Bing, Metropolitan Opera</td></tr>
+              <tr><td class="col-quote">“The road to success is always under construction.”</td><td class="col-source">Unknown</td></tr>
+              <tr><td class="col-quote">“Anytime four New Yorkers get into a cab together without arguing, a bank robbery has just taken place.”</td><td class="col-source">Johnny Carson</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Piano composers -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Piano Composers</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Years</th><th>Composer</th><th>Country</th><th>Genre(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">1898–1937</td><td class="col-title">George Gershwin</td><td>United States</td><td class="col-genre">Classical, Jazz</td></tr>
+              <tr><td class="col-year">1895–1963</td><td class="col-title">Ernesto Lecuona</td><td>Cuba</td><td class="col-genre">Classical, Latin</td></tr>
+              <tr><td class="col-year">1809–1847</td><td class="col-title">Felix Mendelssohn</td><td>Germany</td><td class="col-genre">Romantic</td></tr>
+              <tr><td class="col-year">1810–1849</td><td class="col-title">Frédéric Chopin</td><td>Poland</td><td class="col-genre">Romantic</td></tr>
+              <tr><td class="col-year">1873–1943</td><td class="col-title">Sergei Rachmaninoff</td><td>Russia</td><td class="col-genre">Late Romantic</td></tr>
+              <tr><td class="col-year">1833–1897</td><td class="col-title">Johannes Brahms</td><td>Germany</td><td class="col-genre">Romantic</td></tr>
+              <tr><td class="col-year">1770–1827</td><td class="col-title">Ludwig van Beethoven</td><td>Germany</td><td class="col-genre">Classical, Romantic</td></tr>
+              <tr><td class="col-year">1882–1948</td><td class="col-title">Manuel Ponce</td><td>Mexico</td><td class="col-genre">Romantic, Folk</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Music albums -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Music Albums</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Album</th><th>Artist</th><th>Genre(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">1977</td><td class="col-title">Rumours</td><td>Fleetwood Mac</td><td class="col-genre">Soft rock</td></tr>
+              <tr><td class="col-year">1982</td><td class="col-title">Thriller</td><td>Michael Jackson</td><td class="col-genre">Pop, R&amp;B</td></tr>
+              <tr><td class="col-year">1971</td><td class="col-title">What's Going On</td><td>Marvin Gaye</td><td class="col-genre">Soul</td></tr>
+              <tr><td class="col-year">1969</td><td class="col-title">Abbey Road</td><td>The Beatles</td><td class="col-genre">Rock</td></tr>
+              <tr><td class="col-year">2006</td><td class="col-title">Back to Black</td><td>Amy Winehouse</td><td class="col-genre">Soul, R&amp;B</td></tr>
+              <tr><td class="col-year">2024</td><td class="col-title">Hit Me Hard and Soft</td><td>Billie Eilish</td><td class="col-genre">Pop</td></tr>
+              <tr><td class="col-year">2024</td><td class="col-title">Dandelion</td><td>Ella Langley</td><td class="col-genre">Country</td></tr>
+              <tr><td class="col-year">2002</td><td class="col-title">A Rush of Blood to the Head</td><td>Coldplay</td><td class="col-genre">Alternative rock</td></tr>
+              <tr><td class="col-year">2018</td><td class="col-title">Die Lit</td><td>Playboi Carti</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">1971</td><td class="col-title">Hot Rocks 1964–1971</td><td>The Rolling Stones</td><td class="col-genre">Rock</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Talking Book</td><td>Stevie Wonder</td><td class="col-genre">Soul, Funk</td></tr>
+              <tr><td class="col-year">1979</td><td class="col-title">Spirits Having Flown</td><td>Bee Gees</td><td class="col-genre">Disco, Pop</td></tr>
+              <tr><td class="col-year">1977</td><td class="col-title">Saturday Night Fever</td><td>Bee Gees</td><td class="col-genre">Disco, Soundtrack</td></tr>
+              <tr><td class="col-year">2006</td><td class="col-title">Everything All the Time</td><td>Band of Horses</td><td class="col-genre">Indie rock</td></tr>
+              <tr><td class="col-year">2007</td><td class="col-title">Cease to Begin</td><td>Band of Horses</td><td class="col-genre">Indie rock</td></tr>
+              <tr><td class="col-year">1973</td><td class="col-title">Innervisions</td><td>Stevie Wonder</td><td class="col-genre">Soul, Funk</td></tr>
+              <tr><td class="col-year">1992</td><td class="col-title">Automatic for the People</td><td>R.E.M.</td><td class="col-genre">Alternative rock</td></tr>
+              <tr><td class="col-year">1998</td><td class="col-title">The Miseducation of Lauryn Hill</td><td>Lauryn Hill</td><td class="col-genre">R&amp;B, Soul, Hip hop</td></tr>
+              <tr><td class="col-year">1966</td><td class="col-title">Pet Sounds</td><td>The Beach Boys</td><td class="col-genre">Pop rock</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Eagles</td><td>Eagles</td><td class="col-genre">Rock</td></tr>
+              <tr><td class="col-year">1975</td><td class="col-title">One of These Nights</td><td>Eagles</td><td class="col-genre">Rock</td></tr>
+              <tr><td class="col-year">2011</td><td class="col-title">21</td><td>Adele</td><td class="col-genre">Pop, Soul</td></tr>
+              <tr><td class="col-year">2014</td><td class="col-title">Hozier</td><td>Hozier</td><td class="col-genre">Indie rock, Soul</td></tr>
+              <tr><td class="col-year">1967</td><td class="col-title">How Great Thou Art</td><td>Elvis Presley</td><td class="col-genre">Gospel</td></tr>
+              <tr><td class="col-year">1969</td><td class="col-title">From Elvis in Memphis</td><td>Elvis Presley</td><td class="col-genre">Rock, Soul, Country</td></tr>
+              <tr><td class="col-year">1959</td><td class="col-title">The Genius of Ray Charles</td><td>Ray Charles</td><td class="col-genre">Soul, R&amp;B</td></tr>
+              <tr><td class="col-year">1973</td><td class="col-title">Goodbye Yellow Brick Road</td><td>Elton John</td><td class="col-genre">Rock, Pop</td></tr>
+              <tr><td class="col-year">1979</td><td class="col-title">Off the Wall</td><td>Michael Jackson</td><td class="col-genre">Disco, Funk, R&amp;B</td></tr>
+              <tr><td class="col-year">2014</td><td class="col-title">Xscape</td><td>Michael Jackson</td><td class="col-genre">Pop, R&amp;B</td></tr>
+              <tr><td class="col-year">1987</td><td class="col-title">Bad</td><td>Michael Jackson</td><td class="col-genre">Pop, R&amp;B, Funk</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Harvest</td><td>Neil Young</td><td class="col-genre">Folk rock, Country rock</td></tr>
+              <tr><td class="col-year">1968</td><td class="col-title">The Beatles (White Album)</td><td>The Beatles</td><td class="col-genre">Rock</td></tr>
+              <tr><td class="col-year">1965</td><td class="col-title">Help!</td><td>The Beatles</td><td class="col-genre">Rock, Pop</td></tr>
+              <tr><td class="col-year">1964</td><td class="col-title">A Hard Day's Night</td><td>The Beatles</td><td class="col-genre">Rock, Pop</td></tr>
+              <tr><td class="col-year">1969</td><td class="col-title">Green River</td><td>Creedence Clearwater Revival</td><td class="col-genre">Roots rock, Swamp rock</td></tr>
+              <tr><td class="col-year">1969</td><td class="col-title">The Band</td><td>The Band</td><td class="col-genre">Roots rock, Americana</td></tr>
+              <tr><td class="col-year">1971</td><td class="col-title">At Fillmore East</td><td>The Allman Brothers Band</td><td class="col-genre">Blues rock, Southern rock</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Eat a Peach</td><td>The Allman Brothers Band</td><td class="col-genre">Southern rock, Blues rock</td></tr>
+              <tr><td class="col-year">2010</td><td class="col-title">My Beautiful Dark Twisted Fantasy</td><td>Kanye West</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">2015</td><td class="col-title">To Pimp a Butterfly</td><td>Kendrick Lamar</td><td class="col-genre">Hip hop, Jazz rap</td></tr>
+              <tr><td class="col-year">2018</td><td class="col-title">Astroworld</td><td>Travis Scott</td><td class="col-genre">Hip hop, Trap</td></tr>
+              <tr><td class="col-year">1994</td><td class="col-title">Illmatic</td><td>Nas</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">2004</td><td class="col-title">The College Dropout</td><td>Kanye West</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">2005</td><td class="col-title">Late Registration</td><td>Kanye West</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">1976</td><td class="col-title">Songs in the Key of Life</td><td>Stevie Wonder</td><td class="col-genre">Soul, Funk, R&amp;B</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Music of My Mind</td><td>Stevie Wonder</td><td class="col-genre">Soul, Funk</td></tr>
+              <tr><td class="col-year">2023</td><td class="col-title">Jackman</td><td>Jack Harlow</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">2025</td><td class="col-title">Monica</td><td>Jack Harlow</td><td class="col-genre">Hip hop</td></tr>
+              <tr><td class="col-year">2025</td><td class="col-title">Swag</td><td>Justin Bieber</td><td class="col-genre">R&amp;B, Pop</td></tr>
+              <tr><td class="col-year">2002</td><td class="col-title">Castaways and Cutouts</td><td>The Decemberists</td><td class="col-genre">Indie folk</td></tr>
+              <tr><td class="col-year">1979</td><td class="col-title">London Calling</td><td>The Clash</td><td class="col-genre">Punk rock, Post-punk</td></tr>
+              <tr><td class="col-year">2002</td><td class="col-title">Justified</td><td>Justin Timberlake</td><td class="col-genre">Pop, R&amp;B</td></tr>
+              <tr><td class="col-year">2006</td><td class="col-title">FutureSex/LoveSounds</td><td>Justin Timberlake</td><td class="col-genre">Pop, R&amp;B, Dance</td></tr>
+              <tr><td class="col-year">2013</td><td class="col-title">The 20/20 Experience</td><td>Justin Timberlake</td><td class="col-genre">Pop, R&amp;B, Soul</td></tr>
+              <tr><td class="col-year">1988</td><td class="col-title">Tracy Chapman</td><td>Tracy Chapman</td><td class="col-genre">Folk rock, Folk</td></tr>
+              <tr><td class="col-year">1986</td><td class="col-title">Master of Puppets</td><td>Metallica</td><td class="col-genre">Thrash metal</td></tr>
+              <tr><td class="col-year">1987</td><td class="col-title">Appetite for Destruction</td><td>Guns N' Roses</td><td class="col-genre">Hard rock</td></tr>
+              <tr><td class="col-year">1984</td><td class="col-title">Diamond Life</td><td>Sade</td><td class="col-genre">Sophisti-pop, Soul</td></tr>
+              <tr><td class="col-year">1971</td><td class="col-title">Tapestry</td><td>Carole King</td><td class="col-genre">Pop, Soft rock</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Paul Simon</td><td>Paul Simon</td><td class="col-genre">Folk rock, Singer-songwriter</td></tr>
+              <tr><td class="col-year">1986</td><td class="col-title">Graceland</td><td>Paul Simon</td><td class="col-genre">Worldbeat, Folk rock</td></tr>
+              <tr><td class="col-year">1991</td><td class="col-title">Metallica (The Black Album)</td><td>Metallica</td><td class="col-genre">Heavy metal</td></tr>
+              <tr><td class="col-year">1998</td><td class="col-title">This Afternoon's Malady</td><td>Jejune</td><td class="col-genre">Emo, Indie rock</td></tr>
+              <tr><td class="col-year">2001</td><td class="col-title">Room for Squares</td><td>John Mayer</td><td class="col-genre">Pop rock, Acoustic</td></tr>
+              <tr><td class="col-year">2006</td><td class="col-title">Continuum</td><td>John Mayer</td><td class="col-genre">Blues rock, Pop rock</td></tr>
+              <tr><td class="col-year">2021</td><td class="col-title">Sob Rock</td><td>John Mayer</td><td class="col-genre">Pop rock, Soft rock</td></tr>
+              <tr><td class="col-year">2003</td><td class="col-title">Heavier Things</td><td>John Mayer</td><td class="col-genre">Pop rock</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Paintings -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Paintings</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Title</th><th>Artist</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">Year</td><td class="col-title">Painting Title</td><td>Artist</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Architecture -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Architecture</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Building</th><th>Architect</th><th>Style</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">1883</td><td class="col-title">Brooklyn Bridge</td><td>John A. Roebling</td><td class="col-genre">Neo-Gothic, Suspension</td></tr>
+              <tr><td class="col-year">1937</td><td class="col-title">Golden Gate Bridge</td><td>Joseph Strauss &amp; Irving Morrow</td><td class="col-genre">Art Deco, Suspension</td></tr>
+              <tr><td class="col-year">1914</td><td class="col-title">Park Güell</td><td>Antoni Gaudí</td><td class="col-genre">Modernisme</td></tr>
+              <tr><td class="col-year">1911</td><td class="col-title">Taliesin</td><td>Frank Lloyd Wright</td><td class="col-genre">Prairie School, Organic</td></tr>
+              <tr><td class="col-year">1959</td><td class="col-title">Guggenheim Museum (New York)</td><td>Frank Lloyd Wright</td><td class="col-genre">Modernist, Organic</td></tr>
+              <tr><td class="col-year">1930</td><td class="col-title">Chrysler Building</td><td>William Van Alen</td><td class="col-genre">Art Deco</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sports -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Sports</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th>Sport</th><th>Enjoyment</th><th>Skill level</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-title">Sport</td><td class="col-genre">Enjoyment</td><td class="col-genre">Skill level</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Places -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Places</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th>Place</th><th>Last time I was there</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-title">Place</td><td class="col-genre">Month Year</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built by David Thurston · <span id="year"></span></p>
+  </footer>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>

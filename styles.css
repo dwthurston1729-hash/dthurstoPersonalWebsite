@@ -64,6 +64,7 @@ a:hover { opacity: 0.75; }
 }
 .nav-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .nav-links a { color: var(--text); font-weight: 500; font-size: 0.9rem; }
+.nav-links a.active { color: var(--accent); font-weight: 600; }
 .theme-toggle {
   background: none; border: none; cursor: pointer;
   font-size: 1.2rem; padding: 4px; border-radius: 8px;
@@ -81,6 +82,24 @@ a:hover { opacity: 0.75; }
 .section-title { display: flex; align-items: baseline; gap: 12px; font-size: 1.6rem; margin-bottom: 32px; font-weight: 600; }
 .section-title span { color: var(--accent); font-size: 1rem; font-family: monospace; }
 .page-title { font-family: var(--serif); font-size: clamp(2rem, 6vw, 2.8rem); margin: 24px 0 44px; }
+
+/* ---------- About Me page ---------- */
+.about-hero { margin-bottom: 20px; }
+.about-intro { max-width: 640px; color: var(--text-muted); font-size: 1.05rem; margin-bottom: 24px; }
+.timeline { list-style: none; display: flex; flex-direction: column; gap: 28px; max-width: 720px; }
+.timeline li { display: grid; grid-template-columns: 150px 1fr; gap: 20px; }
+.tl-when { color: var(--text-muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+.tl-what strong { display: block; font-size: 1.05rem; }
+.tl-what span { color: var(--text-muted); font-size: 0.92rem; }
+.tl-what p { color: var(--text-muted); font-size: 0.9rem; margin-top: 6px; }
+@media (max-width: 560px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Non-collapsible subheading (Projects page) */
+.sub-title-static {
+  font-size: 1.2rem; font-weight: 600; margin: 44px 0 22px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--text);
+}
+.sub-title-static:first-of-type { margin-top: 0; }
 
 /* ---------- Favorite sub-groups ---------- */
 .fav-group { margin-bottom: 52px; }
