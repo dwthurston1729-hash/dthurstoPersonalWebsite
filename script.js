@@ -19,9 +19,6 @@ function setTheme(theme) {
   toggle.textContent = theme === "dark" ? "☀️" : "🌙";
 }
 
-// Auto-update footer year
-document.getElementById("year").textContent = new Date().getFullYear();
-
 // Spreadsheet-style sortable tables
 document.querySelectorAll(".fav-table").forEach((table) => {
   const headers = table.querySelectorAll("thead th");

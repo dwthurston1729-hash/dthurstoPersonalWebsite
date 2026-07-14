@@ -39,6 +39,16 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Favorite Things page background photo (expects wp4106132.jpg in this folder) */
+body.page-favorites::before {
+  content: ""; position: fixed; inset: 0; z-index: -2;
+  background: url("wp4106132.jpg") center / cover no-repeat;
+}
+body.page-favorites::after {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background: var(--bg); opacity: 0.8;
+}
+
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
 a { color: var(--accent); text-decoration: none; transition: opacity 0.2s ease; }

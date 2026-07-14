@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
-<body>
+<body class="page-favorites">
   <header class="site-header">
     <nav class="nav container">
       <a href="index.html" class="brand">DT</a>
@@ -344,13 +344,39 @@
           </table>
         </div>
       </div>
+
+      <!-- Articles -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Articles</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Title</th><th>Author</th><th>Publication</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">Year</td><td class="col-title">Article Title</td><td>Author Name</td><td class="col-genre">Publication</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Famous people -->
+      <div class="fav-group collapsed">
+        <h4 class="sub-title">Famous People</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th>Name (years alive)</th><th>Vocation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-title">Name (years alive)</td><td class="col-genre">Vocation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Built by David Thurston · <span id="year"></span></p>
-  </footer>
-
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
