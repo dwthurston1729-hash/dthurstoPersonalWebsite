@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <header class="site-header">
@@ -23,20 +23,9 @@
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero container">
-      <p class="eyebrow">David Thurston</p>
-      <h1>A few of my<br />favorite things.</h1>
-      <p class="intro">
-        A running collection of the books, films, music, art, and ideas I keep
-        coming back to — plus the things I'm building. Replace this intro with a
-        sentence or two in your own voice.
-      </p>
-    </section>
-
     <!-- ============ MY FAVORITE THINGS ============ -->
     <section id="favorites" class="section container">
-      <h3 class="section-title"><span>01.</span> My Favorite Things</h3>
+      <h3 class="section-title page-title">My Favorite Things</h3>
 
       <!-- Books -->
       <div class="fav-group">
@@ -55,6 +44,17 @@
               <tr><td class="col-year">1969</td><td class="col-title">Slaughterhouse-Five</td><td>Kurt Vonnegut</td><td class="col-genre">Satire, Science fiction</td></tr>
               <tr><td class="col-year">1937</td><td class="col-title">Their Eyes Were Watching God</td><td>Zora Neale Hurston</td><td class="col-genre">Literary fiction</td></tr>
               <tr><td class="col-year">1952</td><td class="col-title">Invisible Man</td><td>Ralph Ellison</td><td class="col-genre">Literary fiction, Bildungsroman</td></tr>
+              <tr><td class="col-year">1968</td><td class="col-title">Welcome to the Monkey House</td><td>Kurt Vonnegut</td><td class="col-genre">Short stories, Satire</td></tr>
+              <tr><td class="col-year">1961</td><td class="col-title">Mother Night</td><td>Kurt Vonnegut</td><td class="col-genre">Literary fiction, Satire</td></tr>
+              <tr><td class="col-year">1987</td><td class="col-title">Bluebeard</td><td>Kurt Vonnegut</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1952</td><td class="col-title">Player Piano</td><td>Kurt Vonnegut</td><td class="col-genre">Science fiction, Dystopian</td></tr>
+              <tr><td class="col-year">2001</td><td class="col-title">The Corrections</td><td>Jonathan Franzen</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">2015</td><td class="col-title">Purity</td><td>Jonathan Franzen</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1920</td><td class="col-title">The Age of Innocence</td><td>Edith Wharton</td><td class="col-genre">Literary fiction</td></tr>
+              <tr><td class="col-year">1993</td><td class="col-title">The Giver</td><td>Lois Lowry</td><td class="col-genre">Young adult, Dystopian</td></tr>
+              <tr><td class="col-year">1958</td><td class="col-title">The Human Condition</td><td>Hannah Arendt</td><td class="col-genre">Philosophy, Nonfiction</td></tr>
+              <tr><td class="col-year">1972</td><td class="col-title">Watership Down</td><td>Richard Adams</td><td class="col-genre">Fantasy, Adventure</td></tr>
+              <tr><td class="col-year">2018</td><td class="col-title">Enlightenment Now</td><td>Steven Pinker</td><td class="col-genre">Nonfiction, Science</td></tr>
             </tbody>
           </table>
         </div>
@@ -294,11 +294,31 @@
           </table>
         </div>
       </div>
+
+      <!-- Architecture -->
+      <div class="fav-group">
+        <h4 class="sub-title">Architecture</h4>
+        <div class="table-wrap">
+          <table class="fav-table">
+            <thead>
+              <tr><th class="col-year">Year</th><th>Architect</th><th>Building</th><th>Style</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-year">1883</td><td>John A. Roebling</td><td class="col-title">Brooklyn Bridge</td><td class="col-genre">Neo-Gothic, Suspension</td></tr>
+              <tr><td class="col-year">1937</td><td>Joseph Strauss &amp; Irving Morrow</td><td class="col-title">Golden Gate Bridge</td><td class="col-genre">Art Deco, Suspension</td></tr>
+              <tr><td class="col-year">1914</td><td>Antoni Gaudí</td><td class="col-title">Park Güell</td><td class="col-genre">Modernisme</td></tr>
+              <tr><td class="col-year">1911</td><td>Frank Lloyd Wright</td><td class="col-title">Taliesin</td><td class="col-genre">Prairie School, Organic</td></tr>
+              <tr><td class="col-year">1959</td><td>Frank Lloyd Wright</td><td class="col-title">Guggenheim Museum (New York)</td><td class="col-genre">Modernist, Organic</td></tr>
+              <tr><td class="col-year">1930</td><td>William Van Alen</td><td class="col-title">Chrysler Building</td><td class="col-genre">Art Deco</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- ============ PROJECTS ============ -->
     <section id="projects" class="section container">
-      <h3 class="section-title"><span>02.</span> Current Projects</h3>
+      <h3 class="section-title">Current Projects</h3>
       <div class="projects">
         <article class="card">
           <div class="card-top">
@@ -327,7 +347,7 @@
     </section>
 
     <section id="completed" class="section container">
-      <h3 class="section-title"><span>03.</span> Completed Projects</h3>
+      <h3 class="section-title">Completed Projects</h3>
       <div class="projects">
         <article class="card">
           <div class="card-top">
@@ -349,6 +369,6 @@
     <p>Built by David Thurston · <span id="year"></span></p>
   </footer>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

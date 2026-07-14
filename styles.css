@@ -80,6 +80,7 @@ a:hover { opacity: 0.75; }
 .section { padding: 56px 24px; border-top: 1px solid var(--border); }
 .section-title { display: flex; align-items: baseline; gap: 12px; font-size: 1.6rem; margin-bottom: 32px; font-weight: 600; }
 .section-title span { color: var(--accent); font-size: 1rem; font-family: monospace; }
+.page-title { font-family: var(--serif); font-size: clamp(2rem, 6vw, 2.8rem); margin: 24px 0 44px; }
 
 /* ---------- Favorite sub-groups ---------- */
 .fav-group { margin-bottom: 52px; }
@@ -88,7 +89,17 @@ a:hover { opacity: 0.75; }
   font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;
   padding-bottom: 10px; border-bottom: 1px solid var(--border);
   color: var(--text); letter-spacing: 0.2px;
+  cursor: pointer; user-select: none; display: flex; align-items: center; gap: 10px;
+  transition: color 0.15s ease;
 }
+.sub-title:hover { color: var(--accent); }
+.sub-title::before {
+  content: "▾"; color: var(--accent); font-size: 0.8em;
+  transition: transform 0.15s ease;
+}
+.fav-group.collapsed .sub-title { margin-bottom: 0; }
+.fav-group.collapsed .sub-title::before { transform: rotate(-90deg); }
+.fav-group.collapsed .table-wrap { display: none; }
 
 /* ---------- Tables (books, movies, etc.) ---------- */
 .table-wrap { overflow-x: auto; }

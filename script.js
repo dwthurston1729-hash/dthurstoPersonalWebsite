@@ -76,3 +76,10 @@ document.querySelectorAll("td.col-memo").forEach((cell) => {
     else localStorage.removeItem(key);
   });
 });
+
+// Collapsible favorite sub-sections — click a category heading to expand/collapse
+document.querySelectorAll(".fav-group .sub-title").forEach((title) => {
+  title.addEventListener("click", () => {
+    title.parentElement.classList.toggle("collapsed");
+  });
+});
