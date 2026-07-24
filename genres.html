@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Genre Map · David Thurston</title>
-  <meta name="description" content="An interactive mind map of how music genres influenced one another." />
+  <title>Music Genre Mind Map · David Thurston</title>
+  <meta name="description" content="An interactive mind map of how music genres influenced one another, their key artists, and the countries they came from." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <header class="site-header">
@@ -18,8 +18,7 @@
         <a href="index.html">About Me</a>
         <a href="favorites.html">My Favorite Things</a>
         <a href="music.html">Music</a>
-        <a href="genres.html" class="active">Genre Map</a>
-        <a href="projects.html">Projects</a>
+        <a href="projects.html" class="active">Projects</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
@@ -27,12 +26,15 @@
 
   <main>
     <section id="genre-map" class="section container">
-      <h3 class="section-title page-title">Genre Map</h3>
+      <p style="margin-bottom:8px"><a href="projects.html">&larr; Back to Projects</a></p>
+      <h3 class="section-title page-title">Music Genre Mind Map</h3>
       <p class="genre-intro">
         A family tree of popular music. Arrows point from an older genre to one it
-        helped create or shape — roots up top, their descendants below. Click any
-        genre to trace its influences and read how the connections worked. Drag to
-        pan, scroll to zoom, and use the legend to focus on a family.
+        helped create or shape — roots up top, their descendants below. Dashed lines
+        from the grey boxes mark the <strong>countries and scenes</strong> where genres
+        were born. Click any node to <strong>light up its entire lineage</strong> —
+        every branch leading to and away from it — and see the <strong>key artists</strong>
+        who defined it. Drag to pan, scroll to zoom, and use the legend to focus on a family.
       </p>
 
       <div id="genre-legend" class="genre-legend"></div>
@@ -49,18 +51,18 @@
 
         <aside id="genre-panel" class="genre-panel">
           <p class="gp-hint">
-            <strong>Pick a genre</strong> in the diagram to see where it came from,
-            what it went on to inspire, and a short note on each connection.
+            <strong>Pick a node</strong> in the diagram to light up its full lineage,
+            list its key artists, and read a short note on each connection.
           </p>
         </aside>
       </div>
     </section>
   </main>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
   <script>
   /* =========================================================================
-     Genre influence mind map — data + interactive SVG renderer (no libraries)
+     Music Genre Mind Map — data + interactive SVG renderer (no libraries)
      ========================================================================= */
 
   // Color families. Chosen to read on both light and dark backgrounds.
@@ -73,52 +75,60 @@
     reggae:     { label: "Ska & reggae",                color: "#2a9d8f" },
     electronic: { label: "Electronic & dance",          color: "#9b5de5" },
     hiphop:     { label: "Hip-hop",                      color: "#e07a5f" },
-    pop:        { label: "Pop",                          color: "#e56399" }
+    pop:        { label: "Pop",                          color: "#e56399" },
+    place:      { label: "Countries & scenes",          color: "#64748b" }
   };
 
-  // Nodes: id, label, era, group, x/y in a 1200 x 1400 layout space, description.
+  // Genre nodes: id, label, era, group, x/y layout coords, description, key artists.
   const NODES = [
-    { id: "ragtime",   label: "Ragtime",          era: "1890s–1910s", group: "jazz",       x: 120,  y: 70,   desc: "Syncopated piano music that set American popular music swinging and fed straight into early jazz." },
-    { id: "blues",     label: "Blues",            era: "Early 1900s", group: "roots",      x: 360,  y: 70,   desc: "African-American folk music built on the 12-bar form and 'blue notes' — the DNA of nearly everything below it." },
-    { id: "gospel",    label: "Gospel",           era: "Early 1900s", group: "roots",      x: 640,  y: 70,   desc: "Sacred call-and-response singing whose emotional fervor powered soul and R&B vocals." },
-    { id: "folk",      label: "Folk",             era: "Traditional", group: "country",    x: 960,  y: 70,   desc: "Anglo-Celtic and Appalachian song traditions passed down orally — the seedbed of country and later singer-songwriters." },
+    { id: "ragtime",   label: "Ragtime",          era: "1890s–1910s", group: "jazz",       x: 120,  y: 70,   desc: "Syncopated piano music that set American popular music swinging and fed straight into early jazz.", artists: ["Scott Joplin"] },
+    { id: "blues",     label: "Blues",            era: "Early 1900s", group: "roots",      x: 360,  y: 70,   desc: "African-American folk music built on the 12-bar form and 'blue notes' — the DNA of nearly everything below it.", artists: ["Robert Johnson", "Muddy Waters", "B.B. King", "Bessie Smith"] },
+    { id: "gospel",    label: "Gospel",           era: "Early 1900s", group: "roots",      x: 640,  y: 70,   desc: "Sacred call-and-response singing whose emotional fervor powered soul and R&B vocals.", artists: ["Mahalia Jackson", "Sister Rosetta Tharpe", "The Staple Singers"] },
+    { id: "folk",      label: "Folk",             era: "Traditional", group: "country",    x: 960,  y: 70,   desc: "Anglo-Celtic and Appalachian song traditions passed down orally — the seedbed of country and later singer-songwriters.", artists: ["Woody Guthrie", "Bob Dylan", "Pete Seeger"] },
 
-    { id: "jazz",      label: "Jazz",             era: "1910s–1920s", group: "jazz",       x: 200,  y: 220,  desc: "Improvised, swinging music combining blues feeling with ragtime rhythm and brass-band instrumentation." },
-    { id: "country",   label: "Country",          era: "1920s",       group: "country",    x: 980,  y: 220,  desc: "Rural American music rooted in folk balladry and the blues, built around guitar, fiddle, and storytelling." },
+    { id: "jazz",      label: "Jazz",             era: "1910s–1920s", group: "jazz",       x: 200,  y: 220,  desc: "Improvised, swinging music combining blues feeling with ragtime rhythm and brass-band instrumentation.", artists: ["Louis Armstrong", "Duke Ellington", "Miles Davis", "John Coltrane"] },
+    { id: "country",   label: "Country",          era: "1920s",       group: "country",    x: 980,  y: 220,  desc: "Rural American music rooted in folk balladry and the blues, built around guitar, fiddle, and storytelling.", artists: ["Hank Williams", "Johnny Cash", "Dolly Parton", "Willie Nelson"] },
 
-    { id: "rhythm-blues", label: "Rhythm & Blues", era: "1940s",      group: "soul",       x: 470,  y: 370,  desc: "Electrified, up-tempo blues with a strong backbeat — dance music made for the jukebox era." },
-    { id: "bluegrass", label: "Bluegrass",        era: "1940s",       group: "country",    x: 1070, y: 370,  desc: "A fast, acoustic, virtuosic branch of country built on banjo, mandolin, and tight harmony." },
+    { id: "rhythm-blues", label: "Rhythm & Blues", era: "1940s",      group: "soul",       x: 470,  y: 370,  desc: "Electrified, up-tempo blues with a strong backbeat — dance music made for the jukebox era.", artists: ["Ray Charles", "Ruth Brown", "Louis Jordan"] },
+    { id: "bluegrass", label: "Bluegrass",        era: "1940s",       group: "country",    x: 1070, y: 370,  desc: "A fast, acoustic, virtuosic branch of country built on banjo, mandolin, and tight harmony.", artists: ["Bill Monroe", "Earl Scruggs", "Flatt & Scruggs"] },
 
-    { id: "soul",      label: "Soul",             era: "1950s–60s",   group: "soul",       x: 320,  y: 520,  desc: "Gospel's passion turned toward secular love songs, delivered with raw, personal vocals." },
-    { id: "rocknroll", label: "Rock & Roll",      era: "1950s",       group: "rock",       x: 570,  y: 520,  desc: "The teenage fusion of R&B backbeat and country twang that exploded into mainstream pop culture." },
-    { id: "ska",       label: "Ska",              era: "1950s–60s",   group: "reggae",     x: 830,  y: 520,  desc: "Jamaica's upbeat reworking of American R&B, defined by a chopping off-beat guitar." },
+    { id: "soul",      label: "Soul",             era: "1950s–60s",   group: "soul",       x: 320,  y: 520,  desc: "Gospel's passion turned toward secular love songs, delivered with raw, personal vocals.", artists: ["Aretha Franklin", "Otis Redding", "Sam Cooke", "Marvin Gaye"] },
+    { id: "rocknroll", label: "Rock & Roll",      era: "1950s",       group: "rock",       x: 570,  y: 520,  desc: "The teenage fusion of R&B backbeat and country twang that exploded into mainstream pop culture.", artists: ["Chuck Berry", "Elvis Presley", "Little Richard"] },
+    { id: "ska",       label: "Ska",              era: "1950s–60s",   group: "reggae",     x: 830,  y: 520,  desc: "Jamaica's upbeat reworking of American R&B, defined by a chopping off-beat guitar.", artists: ["The Skatalites", "Prince Buster", "Desmond Dekker"] },
 
-    { id: "funk",      label: "Funk",             era: "1960s–70s",   group: "soul",       x: 260,  y: 670,  desc: "Rhythm-first music that stripped soul down to a tight, syncopated groove locked to 'the one.'" },
-    { id: "rock",      label: "Rock",             era: "1960s",       group: "rock",       x: 560,  y: 670,  desc: "Guitar-driven, album-oriented evolution of rock & roll, louder and more ambitious." },
-    { id: "psychedelic", label: "Psychedelic Rock", era: "1960s",     group: "rock",       x: 740,  y: 670,  desc: "Studio experimentation and extended jams that expanded rock's sonic and structural boundaries." },
-    { id: "reggae",    label: "Reggae",           era: "1960s–70s",   group: "reggae",     x: 940,  y: 670,  desc: "A slowed-down, bass-heavy descendant of ska with a laid-back off-beat and social lyrics." },
-    { id: "electronic", label: "Electronic",     era: "1960s–70s",   group: "electronic", x: 80,   y: 670,  desc: "Music built from synthesizers, tape, and drum machines rather than traditional instruments." },
+    { id: "funk",      label: "Funk",             era: "1960s–70s",   group: "soul",       x: 260,  y: 670,  desc: "Rhythm-first music that stripped soul down to a tight, syncopated groove locked to 'the one.'", artists: ["James Brown", "Parliament-Funkadelic", "Sly & the Family Stone"] },
+    { id: "rock",      label: "Rock",             era: "1960s",       group: "rock",       x: 560,  y: 670,  desc: "Guitar-driven, album-oriented evolution of rock & roll, louder and more ambitious.", artists: ["The Beatles", "The Rolling Stones", "Led Zeppelin"] },
+    { id: "psychedelic", label: "Psychedelic Rock", era: "1960s",     group: "rock",       x: 740,  y: 670,  desc: "Studio experimentation and extended jams that expanded rock's sonic and structural boundaries.", artists: ["Jimi Hendrix", "Pink Floyd", "The Doors"] },
+    { id: "reggae",    label: "Reggae",           era: "1960s–70s",   group: "reggae",     x: 940,  y: 670,  desc: "A slowed-down, bass-heavy descendant of ska with a laid-back off-beat and social lyrics.", artists: ["Bob Marley", "Peter Tosh", "Toots & the Maytals"] },
+    { id: "electronic", label: "Electronic",     era: "1960s–70s",   group: "electronic", x: 80,   y: 670,  desc: "Music built from synthesizers, tape, and drum machines rather than traditional instruments.", artists: ["Kraftwerk", "Brian Eno", "Wendy Carlos"] },
 
-    { id: "disco",     label: "Disco",            era: "1970s",       group: "electronic", x: 330,  y: 820,  desc: "Lush, four-on-the-floor dance music built on funk basslines and orchestral sweep." },
-    { id: "punk",      label: "Punk",             era: "1970s",       group: "rock",       x: 560,  y: 820,  desc: "Rock stripped back to fast, raw, three-chord basics with a do-it-yourself attitude." },
-    { id: "metal",     label: "Heavy Metal",      era: "1970s",       group: "rock",       x: 740,  y: 820,  desc: "Blues-rock amplified and distorted into something heavier, darker, and more virtuosic." },
-    { id: "house",     label: "House",            era: "1980s",       group: "electronic", x: 100,  y: 820,  desc: "Chicago DJs extended disco with drum machines and a hypnotic four-on-the-floor pulse." },
+    { id: "disco",     label: "Disco",            era: "1970s",       group: "electronic", x: 330,  y: 820,  desc: "Lush, four-on-the-floor dance music built on funk basslines and orchestral sweep.", artists: ["Donna Summer", "Chic", "Bee Gees"] },
+    { id: "punk",      label: "Punk",             era: "1970s",       group: "rock",       x: 560,  y: 820,  desc: "Rock stripped back to fast, raw, three-chord basics with a do-it-yourself attitude.", artists: ["Ramones", "Sex Pistols", "The Clash"] },
+    { id: "metal",     label: "Heavy Metal",      era: "1970s",       group: "rock",       x: 740,  y: 820,  desc: "Blues-rock amplified and distorted into something heavier, darker, and more virtuosic.", artists: ["Black Sabbath", "Metallica", "Iron Maiden"] },
+    { id: "house",     label: "House",            era: "1980s",       group: "electronic", x: 100,  y: 820,  desc: "Chicago DJs extended disco with drum machines and a hypnotic four-on-the-floor pulse.", artists: ["Frankie Knuckles", "Daft Punk", "Disclosure"] },
 
-    { id: "hiphop",    label: "Hip-Hop",          era: "1970s–80s",   group: "hiphop",     x: 300,  y: 970,  desc: "Rapped vocals over looped breakbeats, born from block-party DJs cutting between records." },
-    { id: "synthpop",  label: "Synth-Pop",        era: "1980s",       group: "pop",        x: 470,  y: 970,  desc: "Pop songwriting built around affordable synthesizers and sequencers." },
-    { id: "pop",       label: "Pop",              era: "1960s–now",   group: "pop",        x: 620,  y: 970,  desc: "The catch-all mainstream: whatever's most melodic, hooky, and radio-ready in any era." },
-    { id: "alternative", label: "Alternative / Indie", era: "1980s–90s", group: "rock",    x: 800,  y: 970,  desc: "Guitar music outside the mainstream, carrying punk's DIY ethic across many styles." },
-    { id: "techno",    label: "Techno",           era: "1980s",       group: "electronic", x: 100,  y: 970,  desc: "Detroit's futurist, machine-made dance music fusing funk's groove with electronic textures." },
+    { id: "hiphop",    label: "Hip-Hop",          era: "1970s–80s",   group: "hiphop",     x: 300,  y: 970,  desc: "Rapped vocals over looped breakbeats, born from block-party DJs cutting between records.", artists: ["Grandmaster Flash", "Run-D.M.C.", "Nas", "Jay-Z", "Kendrick Lamar"] },
+    { id: "synthpop",  label: "Synth-Pop",        era: "1980s",       group: "pop",        x: 470,  y: 970,  desc: "Pop songwriting built around affordable synthesizers and sequencers.", artists: ["Depeche Mode", "New Order", "Pet Shop Boys"] },
+    { id: "pop",       label: "Pop",              era: "1960s–now",   group: "pop",        x: 620,  y: 970,  desc: "The catch-all mainstream: whatever's most melodic, hooky, and radio-ready in any era.", artists: ["Michael Jackson", "Madonna", "Taylor Swift"] },
+    { id: "alternative", label: "Alternative / Indie", era: "1980s–90s", group: "rock",    x: 800,  y: 970,  desc: "Guitar music outside the mainstream, carrying punk's DIY ethic across many styles.", artists: ["R.E.M.", "Radiohead", "The Smiths", "Pixies"] },
+    { id: "techno",    label: "Techno",           era: "1980s",       group: "electronic", x: 100,  y: 970,  desc: "Detroit's futurist, machine-made dance music fusing funk's groove with electronic textures.", artists: ["Juan Atkins", "Derrick May", "Jeff Mills"] },
 
-    { id: "rnb-contemp", label: "Contemporary R&B", era: "1990s",     group: "soul",       x: 340,  y: 1120, desc: "Soul updated with hip-hop production, synths, and smooth, layered vocals." },
-    { id: "grunge",    label: "Grunge",           era: "1990s",       group: "rock",       x: 760,  y: 1120, desc: "Punk energy welded to heavy-metal weight, with raw, introspective songwriting." },
-    { id: "edm",       label: "EDM",              era: "2000s",       group: "electronic", x: 100,  y: 1120, desc: "Festival-scale electronic dance music descended from house and techno." },
+    { id: "rnb-contemp", label: "Contemporary R&B", era: "1990s",     group: "soul",       x: 340,  y: 1120, desc: "Soul updated with hip-hop production, synths, and smooth, layered vocals.", artists: ["Usher", "Beyoncé", "Frank Ocean", "D'Angelo"] },
+    { id: "grunge",    label: "Grunge",           era: "1990s",       group: "rock",       x: 760,  y: 1120, desc: "Punk energy welded to heavy-metal weight, with raw, introspective songwriting.", artists: ["Nirvana", "Pearl Jam", "Soundgarden"] },
+    { id: "edm",       label: "EDM",              era: "2000s",       group: "electronic", x: 100,  y: 1120, desc: "Festival-scale electronic dance music descended from house and techno.", artists: ["Daft Punk", "Skrillex", "Calvin Harris", "Avicii"] },
 
-    { id: "trap",      label: "Trap",             era: "2000s–now",   group: "hiphop",     x: 300,  y: 1270, desc: "A hip-hop subgenre defined by booming 808 bass, rapid hi-hats, and dark, spacious beats." },
-    { id: "poppunk",   label: "Pop-Punk / Emo",   era: "1990s–2000s", group: "rock",       x: 620,  y: 1270, desc: "Punk speed and distortion paired with big pop melodies and confessional lyrics." }
+    { id: "trap",      label: "Trap",             era: "2000s–now",   group: "hiphop",     x: 300,  y: 1270, desc: "A hip-hop subgenre defined by booming 808 bass, rapid hi-hats, and dark, spacious beats.", artists: ["T.I.", "Gucci Mane", "Future", "Migos"] },
+    { id: "poppunk",   label: "Pop-Punk / Emo",   era: "1990s–2000s", group: "rock",       x: 620,  y: 1270, desc: "Punk speed and distortion paired with big pop melodies and confessional lyrics.", artists: ["Green Day", "Blink-182", "Fall Out Boy"] },
+
+    /* ---- Countries & scenes (drawn as grey boxes) ---- */
+    { id: "united-states",  label: "United States",  era: "Scene / origin", group: "place", x: 250, y: -95,  desc: "The engine room of 20th-century popular music — birthplace of blues, jazz, country, rock & roll, soul, funk, house, techno, and hip-hop." },
+    { id: "united-kingdom", label: "United Kingdom", era: "Scene / origin", group: "place", x: 640, y: -95,  desc: "Britain repackaged American forms and shipped them back: the 1960s rock invasion, heavy metal, punk, and 1980s synth-pop." },
+    { id: "jamaica",        label: "Jamaica",        era: "Scene / origin", group: "place", x: 940, y: -95,  desc: "A tiny island with an outsized footprint — home of ska, rocksteady, reggae, dub, and the sound-system culture that fed hip-hop." },
+    { id: "germany",        label: "Germany",        era: "Scene / origin", group: "place", x: -60, y: 470,  desc: "Krautrock and Kraftwerk pioneered electronic pop, directly inspiring synth-pop, house, and techno." }
   ];
 
   // Edges: from → to, with a note on HOW the influence worked.
+  // (Edges out of a "place" node render dashed and read as origin/association.)
   const EDGES = [
     ["ragtime", "jazz",         "Ragtime's syncopated piano rhythms fed directly into early jazz."],
     ["blues", "jazz",           "Jazz absorbed the blues scale and 'blue notes' as a base for improvisation."],
@@ -162,7 +172,18 @@
     ["soul", "rnb-contemp",     "Contemporary R&B updates soul with modern production and synths."],
     ["hiphop", "rnb-contemp",   "Hip-hop beats and swagger reshaped modern R&B."],
     ["hiphop", "trap",          "Trap is a hip-hop subgenre defined by 808s and rapid hi-hats."],
-    ["punk", "poppunk",         "Pop-punk pairs punk's speed with pop melodies and emo lyrics."]
+    ["punk", "poppunk",         "Pop-punk pairs punk's speed with pop melodies and emo lyrics."],
+
+    /* ---- Country / scene origins (dashed) ---- */
+    ["united-states", "blues",  "The blues was born in the American South (the Mississippi Delta)."],
+    ["united-states", "jazz",   "Jazz emerged in New Orleans in the early 1900s."],
+    ["united-states", "hiphop", "Hip-hop began in the Bronx, New York City, in the 1970s."],
+    ["united-kingdom", "rock",  "Britain drove rock's 1960s explosion — the British Invasion."],
+    ["united-kingdom", "metal", "Heavy metal was pioneered by UK bands like Black Sabbath."],
+    ["united-kingdom", "synthpop","Synth-pop flourished in early-1980s Britain."],
+    ["jamaica", "ska",          "Ska originated in Jamaica in the late 1950s."],
+    ["jamaica", "reggae",       "Reggae developed in Jamaica in the late 1960s."],
+    ["germany", "electronic",   "German acts like Kraftwerk shaped modern electronic music."]
   ];
 
   /* ------------------------------ build model ------------------------------ */
@@ -174,10 +195,11 @@
     s.out.push({ node: d, note });
     d.in.push({ node: s, note });
   });
-  NODES.forEach(n => { n.r = Math.min(30, 17 + (n.in.length + n.out.length) * 1.4); });
+  NODES.forEach(n => {
+    n.r = n.group === "place" ? 18 : Math.min(30, 17 + (n.in.length + n.out.length) * 1.4);
+  });
 
   const SVGNS = "http://www.w3.org/2000/svg";
-  const VIEW_W = 1200, VIEW_H = 1360;
   const svg = document.getElementById("genre-svg");
 
   // <defs> with two arrowheads (normal + highlighted)
@@ -199,15 +221,16 @@
 
   /* ------------------------------ draw edges ------------------------------- */
   const edgeEls = [];
-  EDGES.forEach(([f, t, note]) => {
+  EDGES.forEach(([f, t]) => {
     const s = byId[f], d = byId[t];
     if (!s || !d) return;
     const path = document.createElementNS(SVGNS, "path");
-    path.setAttribute("class", "gm-edge");
+    const origin = s.group === "place";
+    path.setAttribute("class", origin ? "gm-edge gm-edge-origin" : "gm-edge");
     path.setAttribute("marker-end", "url(#gm-arrow)");
     path.setAttribute("d", edgePath(s, d));
     edgeLayer.appendChild(path);
-    edgeEls.push({ el: path, from: f, to: t });
+    edgeEls.push({ el: path, from: f, to: t, key: f + "->" + t });
   });
 
   function edgePath(s, d) {
@@ -216,7 +239,6 @@
     const ux = dx / len, uy = dy / len;
     const sx = s.x + ux * (s.r + 2), sy = s.y + uy * (s.r + 2);
     const ex = d.x - ux * (d.r + 8), ey = d.y - uy * (d.r + 8);
-    // gentle arc: nudge the control point perpendicular to the line
     const mx = (sx + ex) / 2, my = (sy + ey) / 2;
     const bend = Math.min(60, len * 0.12);
     const cx = mx - uy * bend, cy = my + ux * bend;
@@ -227,43 +249,76 @@
   const nodeEls = {};
   NODES.forEach(n => {
     const g = document.createElementNS(SVGNS, "g");
-    g.setAttribute("class", "gm-node");
     g.setAttribute("data-id", n.id);
     g.setAttribute("transform", `translate(${n.x} ${n.y})`);
 
-    const c = document.createElementNS(SVGNS, "circle");
-    c.setAttribute("r", n.r);
-    c.setAttribute("fill", GROUPS[n.group].color);
-    g.appendChild(c);
-
-    const label = document.createElementNS(SVGNS, "text");
-    label.setAttribute("text-anchor", "middle");
-    label.setAttribute("y", n.r + 15);
-    label.textContent = n.label;
-    g.appendChild(label);
+    if (n.group === "place") {
+      g.setAttribute("class", "gm-node gm-place");
+      const w = n.label.length * 8 + 26, h = 32;
+      const rect = document.createElementNS(SVGNS, "rect");
+      rect.setAttribute("x", -w / 2); rect.setAttribute("y", -h / 2);
+      rect.setAttribute("width", w); rect.setAttribute("height", h);
+      rect.setAttribute("rx", 8);
+      rect.setAttribute("fill", GROUPS.place.color);
+      g.appendChild(rect);
+      const label = document.createElementNS(SVGNS, "text");
+      label.setAttribute("text-anchor", "middle");
+      label.setAttribute("dominant-baseline", "central");
+      label.textContent = n.label;
+      g.appendChild(label);
+    } else {
+      g.setAttribute("class", "gm-node");
+      const c = document.createElementNS(SVGNS, "circle");
+      c.setAttribute("r", n.r);
+      c.setAttribute("fill", GROUPS[n.group].color);
+      g.appendChild(c);
+      const label = document.createElementNS(SVGNS, "text");
+      label.setAttribute("text-anchor", "middle");
+      label.setAttribute("y", n.r + 15);
+      label.textContent = n.label;
+      g.appendChild(label);
+    }
 
     g.addEventListener("click", (e) => { e.stopPropagation(); select(n.id); });
     nodeLayer.appendChild(g);
     nodeEls[n.id] = g;
   });
 
-  /* ------------------------------ selection -------------------------------- */
-  let selected = null;
+  /* ---------------------- trace full lineage (both ways) ------------------- */
+  function trace(startId) {
+    const nodesOn = new Set([startId]);
+    const edgeKeys = new Set();
 
+    const walk = (dir) => {
+      const seen = new Set([startId]);
+      const stack = [startId];
+      while (stack.length) {
+        const cur = stack.pop();
+        byId[cur][dir].forEach(e => {
+          const key = dir === "in" ? e.node.id + "->" + cur : cur + "->" + e.node.id;
+          edgeKeys.add(key);
+          nodesOn.add(e.node.id);
+          if (!seen.has(e.node.id)) { seen.add(e.node.id); stack.push(e.node.id); }
+        });
+      }
+    };
+    walk("in");   // everything leading TO the node
+    walk("out");  // everything leading AWAY from the node
+    return { nodesOn, edgeKeys };
+  }
+
+  /* ------------------------------ selection -------------------------------- */
   function select(id) {
-    selected = id;
     const n = byId[id];
-    const connected = new Set([id]);
-    n.in.forEach(e => connected.add(e.node.id));
-    n.out.forEach(e => connected.add(e.node.id));
+    const { nodesOn, edgeKeys } = trace(id);
 
     NODES.forEach(m => {
       const g = nodeEls[m.id];
-      g.classList.toggle("gm-dim", !connected.has(m.id));
+      g.classList.toggle("gm-dim", !nodesOn.has(m.id));
       g.classList.toggle("sel", m.id === id);
     });
-    edgeEls.forEach(({ el, from, to }) => {
-      const hot = from === id || to === id;
+    edgeEls.forEach(({ el, key }) => {
+      const hot = edgeKeys.has(key);
       el.classList.toggle("hot", hot);
       el.classList.toggle("gm-dim", !hot);
       el.setAttribute("marker-end", hot ? "url(#gm-arrow-hot)" : "url(#gm-arrow)");
@@ -272,20 +327,19 @@
   }
 
   function clearSelection() {
-    selected = null;
     NODES.forEach(m => nodeEls[m.id].classList.remove("gm-dim", "sel"));
     edgeEls.forEach(({ el }) => {
       el.classList.remove("hot", "gm-dim");
       el.setAttribute("marker-end", "url(#gm-arrow)");
     });
     document.getElementById("genre-panel").innerHTML =
-      '<p class="gp-hint"><strong>Pick a genre</strong> in the diagram to see where it ' +
-      'came from, what it went on to inspire, and a short note on each connection.</p>';
+      '<p class="gp-hint"><strong>Pick a node</strong> in the diagram to light up its ' +
+      'full lineage, list its key artists, and read a short note on each connection.</p>';
   }
 
   function renderPanel(n) {
     const color = GROUPS[n.group].color;
-    const list = (arr) => arr.map(e =>
+    const link = (arr) => arr.map(e =>
       `<p class="gp-influence"><b data-jump="${e.node.id}">${e.node.label}</b>` +
       `<span>${e.note}</span></p>`).join("");
 
@@ -294,12 +348,25 @@
       `<div class="gp-era">${n.era}</div>` +
       `<p class="gp-desc">${n.desc}</p>`;
 
-    if (n.in.length)
-      html += `<div class="gp-section-title">Grew out of</div>${list(n.in)}`;
-    if (n.out.length)
-      html += `<div class="gp-section-title">Went on to shape</div>${list(n.out)}`;
-    if (!n.in.length && !n.out.length)
-      html += `<p class="gp-hint">A root genre with no listed ancestors here.</p>`;
+    if (n.group === "place") {
+      // A country / scene: list the genres it's associated with.
+      if (n.out.length)
+        html += `<div class="gp-section-title">Associated genres</div>${link(n.out)}`;
+    } else {
+      if (n.artists && n.artists.length)
+        html += `<div class="gp-section-title">Key artists</div>` +
+                `<p class="gp-artists">${n.artists.join(" · ")}</p>`;
+      const origins = n.in.filter(e => e.node.group === "place");
+      const ancestors = n.in.filter(e => e.node.group !== "place");
+      if (origins.length)
+        html += `<div class="gp-section-title">Origin</div>${link(origins)}`;
+      if (ancestors.length)
+        html += `<div class="gp-section-title">Grew out of</div>${link(ancestors)}`;
+      if (n.out.length)
+        html += `<div class="gp-section-title">Went on to shape</div>${link(n.out)}`;
+      if (!n.in.length && !n.out.length)
+        html += `<p class="gp-hint">A root genre with no listed ancestors here.</p>`;
+    }
 
     const panel = document.getElementById("genre-panel");
     panel.innerHTML = html;
@@ -323,9 +390,7 @@
   });
 
   function applyGroupFilter() {
-    NODES.forEach(n => {
-      nodeEls[n.id].style.display = hidden.has(n.group) ? "none" : "";
-    });
+    NODES.forEach(n => { nodeEls[n.id].style.display = hidden.has(n.group) ? "none" : ""; });
     edgeEls.forEach(({ el, from, to }) => {
       const off = hidden.has(byId[from].group) || hidden.has(byId[to].group);
       el.style.display = off ? "none" : "";
@@ -339,19 +404,29 @@
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`);
   }
 
+  function contentBounds() {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    NODES.forEach(n => {
+      const pad = n.group === "place" ? 90 : n.r + 42;
+      minX = Math.min(minX, n.x - pad); maxX = Math.max(maxX, n.x + pad);
+      minY = Math.min(minY, n.y - pad); maxY = Math.max(maxY, n.y + pad);
+    });
+    return { minX, minY, w: maxX - minX, h: maxY - minY };
+  }
+
   function fit() {
     const rect = svg.getBoundingClientRect();
-    const pad = 40;
-    const s = Math.min((rect.width - pad * 2) / VIEW_W, (rect.height - pad * 2) / VIEW_H);
-    scale = s > 0 ? s : 1;
-    tx = (rect.width - VIEW_W * scale) / 2;
-    ty = pad;
+    const b = contentBounds();
+    const pad = 20;
+    const s = Math.min((rect.width - pad * 2) / b.w, (rect.height - pad * 2) / b.h);
+    scale = Math.max(0.2, Math.min(2, s || 1));
+    tx = (rect.width - b.w * scale) / 2 - b.minX * scale;
+    ty = (rect.height - b.h * scale) / 2 - b.minY * scale;
     applyTransform();
   }
 
   function zoomAt(cx, cy, factor) {
-    const next = Math.max(0.3, Math.min(3, scale * factor));
-    // keep the point under the cursor fixed
+    const next = Math.max(0.25, Math.min(3, scale * factor));
     tx = cx - (cx - tx) * (next / scale);
     ty = cy - (cy - ty) * (next / scale);
     scale = next;
@@ -364,7 +439,6 @@
     zoomAt(e.clientX - rect.left, e.clientY - rect.top, e.deltaY < 0 ? 1.12 : 0.89);
   }, { passive: false });
 
-  // drag to pan (mouse + touch via pointer events)
   let dragging = false, moved = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
   svg.addEventListener("pointerdown", (e) => {
     dragging = true; moved = false;
@@ -382,7 +456,6 @@
   function endDrag() { dragging = false; svg.classList.remove("grabbing"); }
   svg.addEventListener("pointerup", endDrag);
   svg.addEventListener("pointercancel", endDrag);
-  // click on empty canvas clears selection (but not at the end of a pan)
   svg.addEventListener("click", () => { if (!moved) clearSelection(); });
 
   document.getElementById("gm-zoom-in").addEventListener("click", () => {

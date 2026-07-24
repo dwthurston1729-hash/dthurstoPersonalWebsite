@@ -232,6 +232,15 @@ a:hover { opacity: 0.75; }
 .gm-dim { opacity: 0.13; }
 .gm-node.sel circle { stroke: var(--accent); stroke-width: 4; }
 
+/* Country / scene boxes */
+.gm-edge-origin { stroke-dasharray: 5 5; }
+.gm-place rect { stroke: var(--bg-alt); stroke-width: 2.5; transition: stroke 0.15s ease, stroke-width 0.15s ease; }
+.gm-place text {
+  font-family: "Inter", system-ui, sans-serif; font-size: 12.5px; font-weight: 600;
+  fill: #fff; stroke: none; pointer-events: none;
+}
+.gm-node.gm-place.sel rect { stroke: var(--accent); stroke-width: 4; }
+
 /* Info panel */
 .genre-panel {
   border: 1px solid var(--border); border-radius: var(--radius); background: var(--card);
@@ -246,6 +255,7 @@ a:hover { opacity: 0.75; }
 .gp-influence b { color: var(--text); cursor: pointer; border-bottom: 1px dashed var(--border); }
 .gp-influence b:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .gp-influence span { display: block; color: var(--text-muted); margin-top: 1px; }
+.gp-artists { font-size: 0.9rem; color: var(--text); line-height: 1.6; margin-bottom: 4px; }
 .gp-hint { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 
 /* ---------- Responsive ---------- */

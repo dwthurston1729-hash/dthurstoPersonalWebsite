@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <header class="site-header">
@@ -18,7 +18,6 @@
         <a href="index.html">About Me</a>
         <a href="favorites.html">My Favorite Things</a>
         <a href="music.html">Music</a>
-        <a href="genres.html">Genre Map</a>
         <a href="projects.html" class="active">Projects</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
       </div>
@@ -31,6 +30,18 @@
 
       <h4 class="sub-title-static">Current Projects</h4>
       <div class="projects">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-active">Interactive</span>
+            <div class="card-links">
+              <a href="genres.html" aria-label="Open the mind map">↗</a>
+            </div>
+          </div>
+          <h4><a href="genres.html">Music Genre Mind Map</a></h4>
+          <p>An interactive family tree of popular music: click any genre to light up its
+             full lineage, meet the key artists, and see the countries where it was born.</p>
+          <ul class="tech-list"><li>SVG</li><li>Vanilla JS</li><li>Pan / zoom</li></ul>
+        </article>
         <article class="card">
           <div class="card-top">
             <span class="badge badge-active">In progress</span>
@@ -76,6 +87,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
