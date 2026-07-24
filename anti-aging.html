@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anti-Aging Research Mind Map · David Thurston</title>
+  <meta name="description" content="An interactive mind map of the most promising avenues of human anti-aging research, the scientists driving them, and the studies and books behind each." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=7" />
+  <style>
+    /* ---------- Node type colors ---------- */
+    :root {
+      --n-root:    var(--accent);
+      --n-avenue:  #2f9e77;
+      --n-person:  #e08a1e;
+      --n-study:   #6d5ae0;
+      --n-book:    #d24b7a;
+      --n-writing: #1f97a8;
+    }
+    [data-theme="dark"] {
+      --n-avenue:  #46c093;
+      --n-person:  #f0a63f;
+      --n-study:   #9585ff;
+      --n-book:    #ef6f9d;
+      --n-writing: #43bccd;
+    }
+
+    .mm-intro { max-width: 720px; color: var(--text-muted); font-size: 1.02rem; margin-bottom: 22px; }
+
+    /* Toolbar */
+    .mm-toolbar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+      margin-bottom: 16px;
+    }
+    .mm-search {
+      flex: 1 1 220px; min-width: 180px; max-width: 340px;
+      background: var(--card); color: var(--text);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 9px 16px; font: inherit; font-size: 0.9rem;
+      transition: border-color 0.15s ease;
+    }
+    .mm-search:focus { outline: none; border-color: var(--accent); }
+    .mm-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mm-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2px;
+      padding: 6px 12px; border-radius: 999px; cursor: pointer; user-select: none;
+      border: 1px solid var(--border); background: var(--card); color: var(--text-muted);
+      transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .mm-chip .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .mm-chip.off { opacity: 0.4; }
+    .mm-chip:hover { border-color: var(--accent); }
+    .mm-btn {
+      font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      transition: border-color 0.15s ease, transform 0.1s ease;
+    }
+    .mm-btn:hover { border-color: var(--accent); }
+    .mm-btn:active { transform: scale(0.96); }
+
+    /* Layout: canvas + detail panel */
+    .mm-layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: stretch; }
+    @media (max-width: 820px) { .mm-layout { grid-template-columns: 1fr; } }
+
+    .mm-canvas-wrap {
+      position: relative;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 640px;
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 820px) { .mm-canvas-wrap { height: 480px; } }
+    #mm-svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+    #mm-svg.panning { cursor: grabbing; }
+
+    .mm-hint {
+      position: absolute; left: 12px; bottom: 10px;
+      font-size: 0.72rem; color: var(--text-muted);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      padding: 4px 10px; border-radius: 999px; pointer-events: none;
+    }
+
+    /* Graph elements */
+    .mm-link { stroke: var(--border); stroke-width: 1.4px; transition: stroke 0.2s ease, opacity 0.2s ease; }
+    .mm-node { cursor: pointer; }
+    .mm-node circle { stroke: var(--bg-alt); stroke-width: 2.5px; transition: opacity 0.2s ease; }
+    .mm-node text {
+      font-family: "Inter", sans-serif; fill: var(--text);
+      paint-order: stroke; stroke: var(--bg-alt); stroke-width: 3px; stroke-linejoin: round;
+      pointer-events: none; transition: opacity 0.2s ease;
+    }
+    .node-root   circle { fill: var(--n-root); }
+    .node-avenue circle { fill: var(--n-avenue); }
+    .node-person circle { fill: var(--n-person); }
+    .node-study  circle { fill: var(--n-study); }
+    .node-book   circle { fill: var(--n-book); }
+    .node-writing circle { fill: var(--n-writing); }
+    .mm-node.sel circle { stroke: var(--accent); stroke-width: 3.5px; }
+    .mm-dim { opacity: 0.12 !important; }
+    .mm-dim text { opacity: 0.12 !important; }
+
+    /* Detail panel */
+    .mm-panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 14px;
+      max-height: 640px; overflow-y: auto;
+    }
+    @media (max-width: 820px) { .mm-panel { max-height: none; } }
+    .mm-panel .p-badge {
+      align-self: flex-start; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px;
+      text-transform: uppercase; padding: 4px 11px; border-radius: 999px; color: #fff;
+    }
+    .mm-panel h4 { font-family: var(--serif); font-size: 1.35rem; line-height: 1.2; font-weight: 600; }
+    .mm-panel .p-desc { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+    .mm-panel .p-open {
+      align-self: flex-start; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 16px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .mm-panel .p-open:hover { opacity: 1; background: var(--accent); color: #fff; }
+    .p-links-label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px;
+      color: var(--text-muted); font-weight: 700; margin-top: 4px;
+    }
+    .p-neighbors { display: flex; flex-wrap: wrap; gap: 7px; }
+    .p-neighbors button {
+      font: inherit; font-size: 0.78rem; cursor: pointer;
+      padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--bg-alt); color: var(--text);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: border-color 0.15s ease;
+    }
+    .p-neighbors button:hover { border-color: var(--accent); }
+    .p-neighbors button .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+    .mm-panel .p-empty { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+
+    .mm-footnote { color: var(--text-muted); font-size: 0.8rem; margin-top: 22px; line-height: 1.6; }
+    .mm-footnote a { font-weight: 500; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="brand">DT</a>
+      <div class="nav-links">
+        <a href="index.html">About Me</a>
+        <a href="favorites.html">My Favorite Things</a>
+        <a href="music.html">Music</a>
+        <a href="projects.html" class="active">Projects</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section container">
+      <h1 class="page-title" style="margin-bottom:18px;">Anti-Aging Research Mind Map</h1>
+      <p class="mm-intro">
+        An interactive map of the most promising avenues of human longevity research — the
+        biological levers scientists are pulling to slow, stop, or reverse aging — connected to the
+        researchers driving them and the landmark studies and books behind each idea.
+        <strong>Click any node</strong> to read about it and jump to its sources. Drag nodes to
+        rearrange, scroll to zoom, and drag the background to pan.
+      </p>
+
+      <div class="mm-toolbar">
+        <input id="mm-search" class="mm-search" type="search" placeholder="Search nodes…" aria-label="Search the mind map" />
+        <div class="mm-filters" id="mm-filters"></div>
+        <button id="mm-reset" class="mm-btn" type="button">Reset view</button>
+      </div>
+
+      <div class="mm-layout">
+        <div class="mm-canvas-wrap">
+          <svg id="mm-svg" role="img" aria-label="Interactive anti-aging research mind map"></svg>
+          <div class="mm-hint">Drag · scroll to zoom · click a node</div>
+        </div>
+        <aside class="mm-panel" id="mm-panel">
+          <p class="p-empty">Select a node to see details, sources, and connections. Start with the
+            blue hub in the center, or one of the green research avenues around it.</p>
+        </aside>
+      </div>
+
+      <p class="mm-footnote">
+        Studies link to their DOI (permanent). Books link to a web search. This map is a personal
+        learning tool, not medical advice — many interventions shown are supported chiefly by animal
+        or early human data. Framework grounded in
+        <a href="https://doi.org/10.1016/j.cell.2022.11.001" target="_blank" rel="noopener">López-Otín et al., “Hallmarks of Aging: An Expanding Universe,” <em>Cell</em> (2023)</a>.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js?v=7"></script>
+  <script>
+  /* ============================================================
+     Anti-Aging Research Mind Map — self-contained force-directed graph
+     ============================================================ */
+  (function () {
+    // ---------- Data ----------
+    // types: root | avenue | person | study | book | writing
+    const N = [
+      { id: "root", type: "root", label: "Anti-Aging Research",
+        desc: "The pursuit of extending human healthspan and lifespan by targeting the underlying biology of aging rather than treating age-related diseases one at a time. The organizing framework is the 'hallmarks of aging' — a set of interconnected cellular and molecular processes that drive age-related decline. The avenues around this hub each target one or more of those hallmarks." },
+
+      // ---------- Avenues ----------
+      { id: "a_senescence", type: "avenue", label: "Senescence & Senolytics",
+        desc: "As we age, cells stop dividing but refuse to die, becoming 'senescent' and secreting inflammatory signals (the SASP) that damage neighboring tissue. Senolytics are drugs that selectively clear these zombie cells. In mice, clearing them extends healthspan and lifespan." },
+      { id: "a_nad", type: "avenue", label: "NAD⁺ & Sirtuins",
+        desc: "NAD⁺ is a coenzyme central to metabolism and DNA repair that declines with age. Sirtuins are a family of NAD⁺-dependent enzymes that regulate cellular stress responses and gene silencing. Boosting NAD⁺ (e.g., with NMN or NR) aims to restore sirtuin activity and metabolic resilience." },
+      { id: "a_mtor", type: "avenue", label: "mTOR Inhibition",
+        desc: "mTOR is a master nutrient-sensing pathway that promotes growth. Dialing it down — most famously with the drug rapamycin — mimics aspects of caloric restriction, boosts autophagy, and is one of the most reproducible ways to extend lifespan across species." },
+      { id: "a_cr", type: "avenue", label: "Caloric Restriction & Fasting",
+        desc: "Eating less (without malnutrition), and time-restricted eating or periodic fasting, reliably extends lifespan in many organisms. Fasting flips a 'metabolic switch' toward fat-burning and ketones, triggering repair pathways like autophagy and lowering IGF-1." },
+      { id: "a_reprog", type: "avenue", label: "Partial Epigenetic Reprogramming",
+        desc: "The 'information theory of aging' holds that cells lose their epigenetic identity over time. Briefly expressing Yamanaka factors (OSKM) can reset a cell's epigenetic age without erasing its identity — reversing hallmarks of aging and, in mice, restoring vision in aged optic nerves." },
+      { id: "a_metformin", type: "avenue", label: "Metformin & Nutrient Sensing",
+        desc: "The diabetes drug metformin activates AMPK and dampens insulin/IGF-1 signaling — the same nutrient-sensing axis whose mutation doubles worm lifespan. It's the basis of the proposed TAME trial to test whether an aging drug can delay multiple diseases at once." },
+      { id: "a_autophagy", type: "avenue", label: "Autophagy",
+        desc: "Autophagy is the cell's recycling system, clearing damaged proteins and organelles. It declines with age ('disabled macroautophagy' is a hallmark). Fasting, rapamycin, and spermidine all upregulate it, and restoring it improves proteostasis and mitochondrial quality." },
+      { id: "a_stem", type: "avenue", label: "Stem Cells & Regeneration",
+        desc: "Stem cell pools exhaust with age, slowing tissue repair. Regenerative approaches aim to replenish or rejuvenate stem cells and the signaling environment (the 'niche') — including parabiosis experiments showing young blood factors can rejuvenate old tissue." },
+      { id: "a_clock", type: "avenue", label: "Epigenetic Clocks",
+        desc: "DNA methylation patterns change predictably with age, letting scientists build 'clocks' that estimate biological (not chronological) age. These biomarkers are becoming the field's yardstick — a way to measure whether an intervention is actually slowing aging." },
+      { id: "a_telomere", type: "avenue", label: "Telomeres & Telomerase",
+        desc: "Telomeres are protective caps on chromosomes that shorten each time a cell divides; when too short, cells senesce. Telomerase can rebuild them. The interplay between telomere maintenance and cancer risk makes this a double-edged longevity lever." },
+      { id: "a_mito", type: "avenue", label: "Mitochondrial Health",
+        desc: "Mitochondria are the cell's power plants; their decline drives fatigue, reduced repair capacity, and increased oxidative stress. Interventions include mitophagy (clearing bad mitochondria), NAD⁺ support, exercise, and molecules like urolithin A." },
+      { id: "a_inflamm", type: "avenue", label: "Inflammaging & Immune Aging",
+        desc: "Aging is accompanied by chronic, low-grade inflammation ('inflammaging') and a declining immune system (immunosenescence). Both accelerate other hallmarks. Targeting the SASP, senescent cells, and immune rejuvenation aims to break this feed-forward loop." },
+
+      // ---------- People ----------
+      { id: "p_sinclair", type: "person", label: "David Sinclair",
+        url: "https://sinclair.hms.harvard.edu/",
+        desc: "Harvard geneticist known for work on sirtuins, NAD⁺ boosters, and the 'information theory of aging.' His lab's 2020 study reversed epigenetic age to restore vision in mice. Author of the bestseller Lifespan." },
+      { id: "p_longo", type: "person", label: "Valter Longo",
+        url: "https://valterlongo.com/",
+        desc: "USC biogerontologist and director of the Longevity Institute. Pioneered the fasting-mimicking diet (FMD) and studies how nutrition and periodic fasting regulate longevity pathways. Author of The Longevity Diet." },
+      { id: "p_attia", type: "person", label: "Peter Attia",
+        url: "https://peterattiamd.com/",
+        desc: "Physician focused on the practical application of longevity science — 'Medicine 3.0.' Emphasizes exercise, metabolic health, and risk reduction for the chronic diseases of aging. Author of Outlive and host of The Drive podcast." },
+      { id: "p_kenyon", type: "person", label: "Cynthia Kenyon",
+        url: "https://en.wikipedia.org/wiki/Cynthia_Kenyon",
+        desc: "Molecular biologist whose 1993 discovery that a single daf-2 mutation doubles the lifespan of C. elegans launched the modern genetics of aging, revealing nutrient-sensing (insulin/IGF-1) as a master regulator. Now VP at Calico." },
+      { id: "p_barzilai", type: "person", label: "Nir Barzilai",
+        url: "https://www.einsteinmed.edu/faculty/484/nir-barzilai/",
+        desc: "Director of the Institute for Aging Research at Einstein. Studies centenarian genetics and leads the push for the TAME trial — testing metformin as the first drug approved to target aging itself." },
+      { id: "p_degrey", type: "person", label: "Aubrey de Grey",
+        url: "https://www.levf.org/",
+        desc: "Biogerontologist who framed aging as accumulated damage that can be repaired ('SENS'). A provocative, influential advocate for engineering-style rejuvenation. Author of Ending Aging." },
+      { id: "p_horvath", type: "person", label: "Steve Horvath",
+        url: "https://en.wikipedia.org/wiki/Steve_Horvath",
+        desc: "Geneticist and biostatistician who built the first widely used epigenetic clock (2013), giving the field a rigorous way to measure biological age from DNA methylation." },
+      { id: "p_campisi", type: "person", label: "Judith Campisi",
+        url: "https://www.buckinstitute.org/lab/campisi-lab/",
+        desc: "Buck Institute biologist who defined how senescent cells drive aging through the senescence-associated secretory phenotype (SASP). Co-founder of Unity Biotechnology." },
+      { id: "p_kaeberlein", type: "person", label: "Matt Kaeberlein",
+        url: "https://en.wikipedia.org/wiki/Matt_Kaeberlein",
+        desc: "Biogerontologist and leading voice on rapamycin as a longevity intervention. Founder of the Dog Aging Project, translating lifespan research into companion animals as a bridge to humans." },
+      { id: "p_blackburn", type: "person", label: "Elizabeth Blackburn",
+        url: "https://en.wikipedia.org/wiki/Elizabeth_Blackburn",
+        desc: "Nobel laureate (2009) for the discovery of telomerase, the enzyme that maintains telomeres. Co-author of The Telomere Effect, linking cellular aging to lifestyle and stress." },
+
+      // ---------- Studies ----------
+      { id: "r_hallmarks23", type: "study", label: "Hallmarks of Aging (2023)",
+        url: "https://doi.org/10.1016/j.cell.2022.11.001",
+        desc: "López-Otín et al., Cell (2023). The updated field-defining review expanding the framework to twelve interconnected hallmarks of aging — the conceptual backbone of this whole map." },
+      { id: "r_hallmarks13", type: "study", label: "Hallmarks of Aging (2013)",
+        url: "https://doi.org/10.1016/j.cell.2013.05.039",
+        desc: "López-Otín et al., Cell (2013). The original, massively cited paper that organized aging into nine hallmarks and gave the field a shared vocabulary." },
+      { id: "r_ocampo16", type: "study", label: "In Vivo Partial Reprogramming (2016)",
+        url: "https://doi.org/10.1016/j.cell.2016.11.052",
+        desc: "Ocampo et al., Cell (2016). Showed that short cyclic expression of Yamanaka factors ameliorates hallmarks of aging and extends lifespan in progeroid mice — the proof of concept for reprogramming-based rejuvenation." },
+      { id: "r_lu20", type: "study", label: "Reprogramming Restores Vision (2020)",
+        url: "https://doi.org/10.1038/s41586-020-2975-4",
+        desc: "Lu et al. (Sinclair lab), Nature (2020). Partial reprogramming reset the epigenetic age of retinal neurons and restored vision in aged and injured mouse eyes — evidence aging carries recoverable 'youthful information.'" },
+      { id: "r_xu18", type: "study", label: "Senolytics Extend Lifespan (2018)",
+        url: "https://doi.org/10.1038/s41591-018-0092-9",
+        desc: "Xu et al., Nature Medicine (2018). Intermittent dasatinib + quercetin cleared senescent cells, improved physical function, and increased lifespan in naturally aged mice." },
+      { id: "r_baker16", type: "study", label: "Clearing Senescent Cells (2016)",
+        url: "https://doi.org/10.1038/nature16932",
+        desc: "Baker et al., Nature (2016). Genetically eliminating p16-positive senescent cells extended median lifespan and delayed age-related deterioration across multiple organs." },
+      { id: "r_harrison09", type: "study", label: "Rapamycin Extends Lifespan (2009)",
+        url: "https://doi.org/10.1038/nature08221",
+        desc: "Harrison et al., Nature (2009). The landmark ITP result: rapamycin extended lifespan even when started late in life in genetically diverse mice — the first drug to do so." },
+      { id: "r_horvath13", type: "study", label: "The Epigenetic Clock (2013)",
+        url: "https://doi.org/10.1186/gb-2013-14-10-r115",
+        desc: "Horvath, Genome Biology (2013). Introduced a DNA-methylation clock predicting age across tissues — the tool that let researchers quantify biological age." },
+      { id: "r_decabo19", type: "study", label: "Intermittent Fasting Review (2019)",
+        url: "https://doi.org/10.1056/NEJMra1905136",
+        desc: "de Cabo & Mattson, New England Journal of Medicine (2019). An authoritative review of how intermittent fasting triggers a metabolic switch that improves healthspan and disease resistance." },
+      { id: "r_kenyon93", type: "study", label: "A Worm That Lives Twice as Long (1993)",
+        url: "https://doi.org/10.1038/366461a0",
+        desc: "Kenyon et al., Nature (1993). A single daf-2 mutation doubled C. elegans lifespan — the discovery that aging is genetically malleable and gated by nutrient-sensing." },
+
+      // ---------- Books ----------
+      { id: "b_lifespan", type: "book", label: "Lifespan (2019)",
+        url: "https://www.google.com/search?q=Lifespan+Why+We+Age+David+Sinclair+book",
+        desc: "David Sinclair's popular case that aging is a treatable condition, built around sirtuins, NAD⁺, and the information theory of aging." },
+      { id: "b_longevitydiet", type: "book", label: "The Longevity Diet (2018)",
+        url: "https://www.google.com/search?q=The+Longevity+Diet+Valter+Longo+book",
+        desc: "Valter Longo distills decades of nutrition and fasting research into a practical dietary program, including the fasting-mimicking diet." },
+      { id: "b_outlive", type: "book", label: "Outlive (2023)",
+        url: "https://www.google.com/search?q=Outlive+The+Science+and+Art+of+Longevity+Peter+Attia+book",
+        desc: "Peter Attia's framework for 'Medicine 3.0' — proactively managing the chronic diseases of aging through exercise, metabolism, sleep, and emotional health." },
+      { id: "b_ageless", type: "book", label: "Ageless (2020)",
+        url: "https://www.google.com/search?q=Ageless+The+New+Science+of+Getting+Older+Andrew+Steele+book",
+        desc: "Andrew Steele's accessible tour of the whole field — a clear, hallmark-by-hallmark survey of the science of not aging." },
+      { id: "b_endingaging", type: "book", label: "Ending Aging (2007)",
+        url: "https://www.google.com/search?q=Ending+Aging+Aubrey+de+Grey+book",
+        desc: "Aubrey de Grey's manifesto for the damage-repair (SENS) approach to defeating aging through engineering-style interventions." },
+      { id: "b_telomere", type: "book", label: "The Telomere Effect (2017)",
+        url: "https://www.google.com/search?q=The+Telomere+Effect+Blackburn+Epel+book",
+        desc: "Nobel laureate Elizabeth Blackburn and Elissa Epel connect telomere biology to stress, lifestyle, and everyday choices." },
+
+      // ---------- Writings / resources ----------
+      { id: "w_tame", type: "writing", label: "TAME Trial (Metformin)",
+        url: "https://www.afar.org/tame-trial",
+        desc: "The American Federation for Aging Research's overview of Targeting Aging with Metformin — the pivotal effort to win regulatory recognition of aging as a treatable indication." },
+      { id: "w_drive", type: "writing", label: "The Drive (Podcast)",
+        url: "https://peterattiamd.com/podcast/",
+        desc: "Peter Attia's long-form podcast — deep interviews with longevity scientists translating primary research into practical strategy." },
+    ];
+
+    // ---------- Links (undirected) ----------
+    const L = [
+      // root -> avenues
+      ["root","a_senescence"],["root","a_nad"],["root","a_mtor"],["root","a_cr"],
+      ["root","a_reprog"],["root","a_metformin"],["root","a_autophagy"],["root","a_stem"],
+      ["root","a_clock"],["root","a_telomere"],["root","a_mito"],["root","a_inflamm"],
+      // framework studies + general book to root
+      ["root","r_hallmarks23"],["root","r_hallmarks13"],["root","b_ageless"],
+      // cross-links among avenues
+      ["a_cr","a_autophagy"],["a_mtor","a_autophagy"],["a_metformin","a_mtor"],
+      ["a_senescence","a_inflamm"],["a_nad","a_mito"],["a_reprog","a_clock"],
+      ["a_stem","a_telomere"],
+      // people -> avenues
+      ["p_sinclair","a_nad"],["p_sinclair","a_reprog"],["p_sinclair","a_clock"],
+      ["p_longo","a_cr"],["p_longo","a_autophagy"],
+      ["p_attia","a_metformin"],["p_attia","a_mtor"],
+      ["p_kenyon","a_metformin"],
+      ["p_barzilai","a_metformin"],["p_barzilai","a_inflamm"],
+      ["p_degrey","a_senescence"],["p_degrey","a_stem"],
+      ["p_horvath","a_clock"],
+      ["p_campisi","a_senescence"],["p_campisi","a_inflamm"],
+      ["p_kaeberlein","a_mtor"],
+      ["p_blackburn","a_telomere"],
+      // studies -> avenues / people
+      ["r_ocampo16","a_reprog"],
+      ["r_lu20","a_reprog"],["r_lu20","p_sinclair"],
+      ["r_xu18","a_senescence"],
+      ["r_baker16","a_senescence"],["r_baker16","p_campisi"],
+      ["r_harrison09","a_mtor"],["r_harrison09","p_kaeberlein"],
+      ["r_horvath13","a_clock"],["r_horvath13","p_horvath"],
+      ["r_decabo19","a_cr"],["r_decabo19","a_autophagy"],
+      ["r_kenyon93","a_metformin"],["r_kenyon93","p_kenyon"],
+      // books -> people / avenues
+      ["b_lifespan","p_sinclair"],["b_lifespan","a_nad"],
+      ["b_longevitydiet","p_longo"],["b_longevitydiet","a_cr"],
+      ["b_outlive","p_attia"],
+      ["b_endingaging","p_degrey"],["b_endingaging","a_senescence"],
+      ["b_telomere","p_blackburn"],["b_telomere","a_telomere"],
+      // writings
+      ["w_tame","a_metformin"],["w_tame","p_barzilai"],
+      ["w_drive","p_attia"],
+    ];
+
+    const TYPE_META = {
+      root:    { label: "Hub",     color: "var(--n-root)" },
+      avenue:  { label: "Avenue",  color: "var(--n-avenue)" },
+      person:  { label: "Person",  color: "var(--n-person)" },
+      study:   { label: "Study",   color: "var(--n-study)" },
+      book:    { label: "Book",    color: "var(--n-book)" },
+      writing: { label: "Resource",color: "var(--n-writing)" },
+    };
+    const RADIUS = { root: 30, avenue: 19, person: 15, study: 11, book: 11, writing: 11 };
+
+    // ---------- Setup ----------
+    const svg = document.getElementById("mm-svg");
+    const SVGNS = "http://www.w3.org/2000/svg";
+    const byId = {};
+    N.forEach(n => { byId[n.id] = n; n.neighbors = []; });
+
+    // resolve links to node refs
+    const links = L.map(([a, b]) => {
+      const s = byId[a], t = byId[b];
+      s.neighbors.push(t); t.neighbors.push(s);
+      return { source: s, target: t };
+    });
+
+    // initial positions (spread around center)
+    let W = svg.clientWidth || 800, H = svg.clientHeight || 640;
+    N.forEach((n, i) => {
+      if (n.id === "root") { n.x = W / 2; n.y = H / 2; }
+      else {
+        const ang = (i / N.length) * Math.PI * 2;
+        const rad = n.type === "avenue" ? 190 : 300;
+        n.x = W / 2 + Math.cos(ang) * rad + (Math.random() - 0.5) * 60;
+        n.y = H / 2 + Math.sin(ang) * rad + (Math.random() - 0.5) * 60;
+      }
+      n.vx = 0; n.vy = 0;
+    });
+
+    // svg groups
+    const gRoot = document.createElementNS(SVGNS, "g");
+    svg.appendChild(gRoot);
+    const gLinks = document.createElementNS(SVGNS, "g");
+    const gNodes = document.createElementNS(SVGNS, "g");
+    gRoot.appendChild(gLinks);
+    gRoot.appendChild(gNodes);
+
+    // draw links
+    links.forEach(l => {
+      const line = document.createElementNS(SVGNS, "line");
+      line.setAttribute("class", "mm-link");
+      l.el = line;
+      gLinks.appendChild(line);
+    });
+
+    // draw nodes
+    N.forEach(n => {
+      const g = document.createElementNS(SVGNS, "g");
+      g.setAttribute("class", "mm-node node-" + n.type);
+      g.dataset.id = n.id;
+      const c = document.createElementNS(SVGNS, "circle");
+      c.setAttribute("r", RADIUS[n.type]);
+      g.appendChild(c);
+      const t = document.createElementNS(SVGNS, "text");
+      const fs = n.type === "root" ? 15 : n.type === "avenue" ? 12 : 10.5;
+      t.setAttribute("font-size", fs);
+      t.setAttribute("font-weight", n.type === "root" || n.type === "avenue" ? 600 : 500);
+      t.setAttribute("text-anchor", "middle");
+      t.setAttribute("dy", RADIUS[n.type] + fs + 2);
+      t.textContent = n.label;
+      g.appendChild(t);
+      n.el = g; n.circleEl = c;
+      gNodes.appendChild(g);
+    });
+
+    // ---------- Force simulation ----------
+    let alpha = 1;
+    const LINK_DIST = l => (l.source.type === "root" || l.target.type === "root") ? 130 : 90;
+    const CHARGE = -900;
+
+    function tick() {
+      W = svg.clientWidth || W; H = svg.clientHeight || H;
+      const cx = W / 2, cy = H / 2;
+
+      // repulsion (O(n^2), fine for ~50 nodes)
+      for (let i = 0; i < N.length; i++) {
+        const a = N[i];
+        for (let j = i + 1; j < N.length; j++) {
+          const b = N[j];
+          let dx = a.x - b.x, dy = a.y - b.y;
+          let d2 = dx * dx + dy * dy || 0.01;
+          let d = Math.sqrt(d2);
+          const f = (CHARGE * alpha) / d2;
+          const fx = (dx / d) * f, fy = (dy / d) * f;
+          a.vx -= fx; a.vy -= fy;
+          b.vx += fx; b.vy += fy;
+        }
+      }
+      // spring on links
+      links.forEach(l => {
+        const s = l.source, t = l.target;
+        let dx = t.x - s.x, dy = t.y - s.y;
+        let d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        const desired = LINK_DIST(l);
+        const f = ((d - desired) / d) * 0.06 * alpha;
+        const fx = dx * f, fy = dy * f;
+        s.vx += fx; s.vy += fy;
+        t.vx -= fx; t.vy -= fy;
+      });
+      // gravity to center
+      N.forEach(n => {
+        n.vx += (cx - n.x) * 0.008 * alpha;
+        n.vy += (cy - n.y) * 0.008 * alpha;
+      });
+      // integrate
+      N.forEach(n => {
+        if (n === dragNode) return;
+        n.x += n.vx; n.y += n.vy;
+        n.vx *= 0.82; n.vy *= 0.82;
+        n.x = Math.max(28, Math.min(W - 28, n.x));
+        n.y = Math.max(28, Math.min(H - 28, n.y));
+      });
+
+      render();
+      alpha *= 0.985;
+      if (alpha > 0.01 || dragNode) requestAnimationFrame(tick);
+      else running = false;
+    }
+
+    let running = false;
+    function reheat(a) { alpha = Math.max(alpha, a || 0.4); if (!running) { running = true; requestAnimationFrame(tick); } }
+
+    function render() {
+      links.forEach(l => {
+        l.el.setAttribute("x1", l.source.x); l.el.setAttribute("y1", l.source.y);
+        l.el.setAttribute("x2", l.target.x); l.el.setAttribute("y2", l.target.y);
+      });
+      N.forEach(n => { n.el.setAttribute("transform", `translate(${n.x},${n.y})`); });
+    }
+
+    // ---------- View transform (zoom / pan) ----------
+    const tf = { x: 0, y: 0, k: 1 };
+    function applyTF() { gRoot.setAttribute("transform", `translate(${tf.x},${tf.y}) scale(${tf.k})`); }
+    function toGraph(clientX, clientY) {
+      const r = svg.getBoundingClientRect();
+      return { x: (clientX - r.left - tf.x) / tf.k, y: (clientY - r.top - tf.y) / tf.k };
+    }
+
+    svg.addEventListener("wheel", e => {
+      e.preventDefault();
+      const r = svg.getBoundingClientRect();
+      const mx = e.clientX - r.left, my = e.clientY - r.top;
+      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+      const newK = Math.max(0.35, Math.min(3, tf.k * factor));
+      // zoom around cursor
+      tf.x = mx - (mx - tf.x) * (newK / tf.k);
+      tf.y = my - (my - tf.y) * (newK / tf.k);
+      tf.k = newK;
+      applyTF();
+    }, { passive: false });
+
+    // ---------- Pointer interaction ----------
+    let dragNode = null, panning = false;
+    let startPan = null, moved = false, pressNode = null;
+
+    svg.addEventListener("pointerdown", e => {
+      const nodeG = e.target.closest(".mm-node");
+      moved = false;
+      if (nodeG) {
+        pressNode = byId[nodeG.dataset.id];
+        dragNode = pressNode;
+        svg.setPointerCapture(e.pointerId);
+      } else {
+        panning = true;
+        startPan = { x: e.clientX - tf.x, y: e.clientY - tf.y };
+        svg.classList.add("panning");
+        svg.setPointerCapture(e.pointerId);
+      }
+    });
+
+    svg.addEventListener("pointermove", e => {
+      if (dragNode) {
+        moved = true;
+        const p = toGraph(e.clientX, e.clientY);
+        dragNode.x = p.x; dragNode.y = p.y;
+        dragNode.vx = 0; dragNode.vy = 0;
+        reheat(0.3);
+      } else if (panning) {
+        moved = true;
+        tf.x = e.clientX - startPan.x;
+        tf.y = e.clientY - startPan.y;
+        applyTF();
+      }
+    });
+
+    function endPointer(e) {
+      if (dragNode && !moved && pressNode) select(pressNode);
+      dragNode = null; panning = false; pressNode = null;
+      svg.classList.remove("panning");
+    }
+    svg.addEventListener("pointerup", endPointer);
+    svg.addEventListener("pointercancel", endPointer);
+
+    // ---------- Selection & detail panel ----------
+    const panel = document.getElementById("mm-panel");
+    let selected = null;
+
+    function select(node) {
+      selected = node;
+      N.forEach(n => n.el.classList.remove("sel"));
+      node.el.classList.add("sel");
+
+      // dim non-neighbors
+      const keep = new Set([node.id, ...node.neighbors.map(x => x.id)]);
+      N.forEach(n => n.el.classList.toggle("mm-dim", !keep.has(n.id)));
+      links.forEach(l => {
+        const on = l.source === node || l.target === node;
+        l.el.classList.toggle("mm-dim", !on);
+        l.el.style.stroke = on ? "var(--accent)" : "";
+      });
+
+      renderPanel(node);
+    }
+
+    function renderPanel(node) {
+      const meta = TYPE_META[node.type];
+      panel.innerHTML = "";
+
+      const badge = document.createElement("span");
+      badge.className = "p-badge";
+      badge.style.background = meta.color;
+      badge.textContent = meta.label;
+      panel.appendChild(badge);
+
+      const h = document.createElement("h4");
+      h.textContent = node.label;
+      panel.appendChild(h);
+
+      const p = document.createElement("p");
+      p.className = "p-desc";
+      p.textContent = node.desc;
+      panel.appendChild(p);
+
+      if (node.url) {
+        const a = document.createElement("a");
+        a.className = "p-open";
+        a.href = node.url; a.target = "_blank"; a.rel = "noopener";
+        a.textContent = (node.type === "study" ? "Read the study" :
+                         node.type === "book" ? "Find the book" :
+                         node.type === "person" ? "Learn more" : "Open") + " ↗";
+        panel.appendChild(a);
+      }
+
+      if (node.neighbors.length) {
+        const lab = document.createElement("div");
+        lab.className = "p-links-label";
+        lab.textContent = "Connected to";
+        panel.appendChild(lab);
+
+        const wrap = document.createElement("div");
+        wrap.className = "p-neighbors";
+        // sort neighbors: avenues first, then people, then resources
+        const order = { avenue: 0, root: 1, person: 2, study: 3, book: 4, writing: 5 };
+        node.neighbors.slice().sort((a, b) => (order[a.type] - order[b.type]) || a.label.localeCompare(b.label))
+          .forEach(nb => {
+            const b = document.createElement("button");
+            b.type = "button";
+            const dot = document.createElement("span");
+            dot.className = "dot";
+            dot.style.background = TYPE_META[nb.type].color;
+            b.appendChild(dot);
+            b.appendChild(document.createTextNode(nb.label));
+            b.addEventListener("click", () => select(nb));
+            wrap.appendChild(b);
+          });
+        panel.appendChild(wrap);
+      }
+    }
+
+    function clearSelection() {
+      selected = null;
+      N.forEach(n => { n.el.classList.remove("sel"); n.el.classList.remove("mm-dim"); });
+      links.forEach(l => { l.el.classList.remove("mm-dim"); l.el.style.stroke = ""; });
+    }
+
+    // ---------- Filters ----------
+    const filtersEl = document.getElementById("mm-filters");
+    const active = new Set(Object.keys(TYPE_META));
+    Object.entries(TYPE_META).forEach(([type, meta]) => {
+      if (type === "root") return; // hub always shown
+      const chip = document.createElement("span");
+      chip.className = "mm-chip";
+      chip.dataset.type = type;
+      const dot = document.createElement("span");
+      dot.className = "dot"; dot.style.background = meta.color;
+      chip.appendChild(dot);
+      chip.appendChild(document.createTextNode(meta.label + (type === "person" ? "s" : "s")));
+      chip.addEventListener("click", () => {
+        if (active.has(type)) { active.delete(type); chip.classList.add("off"); }
+        else { active.add(type); chip.classList.remove("off"); }
+        applyFilter();
+      });
+      filtersEl.appendChild(chip);
+    });
+
+    function applyFilter() {
+      N.forEach(n => {
+        const vis = n.type === "root" || active.has(n.type);
+        n.el.style.display = vis ? "" : "none";
+      });
+      links.forEach(l => {
+        const vis = (l.source.type === "root" || active.has(l.source.type)) &&
+                    (l.target.type === "root" || active.has(l.target.type));
+        l.el.style.display = vis ? "" : "none";
+      });
+      reheat(0.3);
+    }
+
+    // ---------- Search ----------
+    const search = document.getElementById("mm-search");
+    search.addEventListener("input", () => {
+      const q = search.value.trim().toLowerCase();
+      if (!q) { N.forEach(n => n.el.classList.remove("mm-dim")); if (selected) select(selected); return; }
+      let first = null;
+      N.forEach(n => {
+        const hit = n.label.toLowerCase().includes(q) || n.desc.toLowerCase().includes(q);
+        n.el.classList.toggle("mm-dim", !hit);
+        if (hit && !first) first = n;
+      });
+      links.forEach(l => l.el.classList.add("mm-dim"));
+      if (first) renderPanel(first);
+    });
+
+    // ---------- Reset ----------
+    document.getElementById("mm-reset").addEventListener("click", () => {
+      tf.x = 0; tf.y = 0; tf.k = 1; applyTF();
+      search.value = "";
+      clearSelection();
+      // re-seed positions
+      N.forEach((n, i) => {
+        if (n.id === "root") { n.x = W / 2; n.y = H / 2; }
+        else {
+          const ang = (i / N.length) * Math.PI * 2;
+          const rad = n.type === "avenue" ? 190 : 300;
+          n.x = W / 2 + Math.cos(ang) * rad + (Math.random() - 0.5) * 60;
+          n.y = H / 2 + Math.sin(ang) * rad + (Math.random() - 0.5) * 60;
+        }
+        n.vx = 0; n.vy = 0;
+      });
+      reheat(1);
+      panel.innerHTML = '<p class="p-empty">Select a node to see details, sources, and connections. Start with the blue hub in the center, or one of the green research avenues around it.</p>';
+    });
+
+    // background click clears selection
+    svg.addEventListener("click", e => {
+      if (!e.target.closest(".mm-node") && !moved) { clearSelection(); }
+    });
+
+    // recompute size on resize
+    window.addEventListener("resize", () => { reheat(0.2); });
+
+    // ---------- Go ----------
+    applyTF();
+    reheat(1);
+  })();
+  </script>
+</body>
+</html>
