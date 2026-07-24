@@ -32,16 +32,12 @@
     .mm-intro { max-width: 740px; color: var(--text-muted); font-size: 1.02rem; margin-bottom: 22px; }
 
     /* Toolbar */
-    .mm-toolbar {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
-      margin-bottom: 16px;
-    }
+    .mm-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 16px; }
     .mm-search {
       flex: 1 1 220px; min-width: 180px; max-width: 320px;
       background: var(--card); color: var(--text);
       border: 1px solid var(--border); border-radius: 999px;
-      padding: 9px 16px; font: inherit; font-size: 0.9rem;
-      transition: border-color 0.15s ease;
+      padding: 9px 16px; font: inherit; font-size: 0.9rem; transition: border-color 0.15s ease;
     }
     .mm-search:focus { outline: none; border-color: var(--accent); }
     .mm-filters { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -64,34 +60,26 @@
     .mm-btn:hover { border-color: var(--accent); }
     .mm-btn:active { transform: scale(0.96); }
 
-    /* Layout: canvas + detail panel */
-    .mm-layout { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: stretch; }
-    @media (max-width: 860px) { .mm-layout { grid-template-columns: 1fr; } }
+    /* Layout */
+    .mm-layout { display: grid; grid-template-columns: 1fr 350px; gap: 20px; align-items: stretch; }
+    @media (max-width: 880px) { .mm-layout { grid-template-columns: 1fr; } }
 
     .mm-canvas-wrap {
-      position: relative;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 720px;
-      box-shadow: var(--shadow);
+      position: relative; background: var(--bg-alt);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; height: 760px; box-shadow: var(--shadow);
     }
-    @media (max-width: 860px) { .mm-canvas-wrap { height: 520px; } }
+    @media (max-width: 880px) { .mm-canvas-wrap { height: 540px; } }
     #mm-svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
     #mm-svg.panning { cursor: grabbing; }
 
     .mm-hint {
-      position: absolute; left: 12px; bottom: 10px;
-      font-size: 0.72rem; color: var(--text-muted);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      padding: 4px 10px; border-radius: 999px; pointer-events: none;
+      position: absolute; left: 12px; bottom: 10px; font-size: 0.72rem; color: var(--text-muted);
+      background: color-mix(in srgb, var(--bg) 78%, transparent); padding: 4px 10px; border-radius: 999px; pointer-events: none;
     }
     .mm-count {
-      position: absolute; right: 12px; top: 10px;
-      font-size: 0.72rem; color: var(--text-muted);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      padding: 4px 10px; border-radius: 999px; pointer-events: none;
+      position: absolute; right: 12px; top: 10px; font-size: 0.72rem; color: var(--text-muted);
+      background: color-mix(in srgb, var(--bg) 78%, transparent); padding: 4px 10px; border-radius: 999px; pointer-events: none;
     }
 
     /* Graph elements */
@@ -118,10 +106,9 @@
     .mm-panel {
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 22px; box-shadow: var(--shadow);
-      display: flex; flex-direction: column; gap: 13px;
-      max-height: 720px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 13px; max-height: 760px; overflow-y: auto;
     }
-    @media (max-width: 860px) { .mm-panel { max-height: none; } }
+    @media (max-width: 880px) { .mm-panel { max-height: none; } }
     .mm-panel .p-badge {
       align-self: flex-start; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px;
       text-transform: uppercase; padding: 4px 11px; border-radius: 999px; color: #fff;
@@ -129,6 +116,13 @@
     .mm-panel h4 { font-family: var(--serif); font-size: 1.35rem; line-height: 1.25; font-weight: 600; }
     .mm-panel .p-desc { color: var(--text); font-size: 0.95rem; line-height: 1.6; }
     .mm-panel .p-detail { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
+    .mm-panel .p-facts { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 2px 0; }
+    .mm-panel .p-facts li {
+      font-size: 0.84rem; line-height: 1.45; color: var(--text-muted);
+      padding-left: 15px; position: relative;
+    }
+    .mm-panel .p-facts li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .mm-panel .p-facts li b { color: var(--text); font-weight: 600; }
     .mm-panel blockquote {
       margin: 2px 0; padding: 10px 16px; border-left: 3px solid var(--accent);
       background: var(--accent-soft); border-radius: 0 8px 8px 0;
@@ -138,12 +132,17 @@
       display: block; margin-top: 8px; font-family: "Inter", sans-serif;
       font-style: normal; font-size: 0.76rem; color: var(--text-muted); font-weight: 500;
     }
+    .p-actions { display: flex; flex-wrap: wrap; gap: 8px; }
     .mm-panel .p-open {
-      align-self: flex-start; font-size: 0.82rem; font-weight: 600;
-      padding: 8px 16px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 15px; border-radius: 999px;
       background: var(--accent-soft); color: var(--accent);
     }
     .mm-panel .p-open:hover { opacity: 1; background: var(--accent); color: #fff; }
+    .mm-panel .p-wiki {
+      font-size: 0.82rem; font-weight: 600; padding: 8px 15px; border-radius: 999px;
+      background: var(--bg-alt); color: var(--text); border: 1px solid var(--border);
+    }
+    .mm-panel .p-wiki:hover { opacity: 1; border-color: var(--accent); color: var(--accent); }
     .p-links-label {
       font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px;
       color: var(--text-muted); font-weight: 700; margin-top: 4px;
@@ -153,8 +152,7 @@
       font: inherit; font-size: 0.78rem; cursor: pointer;
       padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border);
       background: var(--bg-alt); color: var(--text);
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: border-color 0.15s ease;
+      display: inline-flex; align-items: center; gap: 6px; transition: border-color 0.15s ease;
     }
     .p-neighbors button:hover { border-color: var(--accent); }
     .p-neighbors button .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
@@ -186,8 +184,9 @@
         An interactive map of the most promising avenues of human longevity research — the
         biological levers scientists are pulling to slow, stop, or reverse aging — connected to the
         researchers driving them and the landmark studies, books, and films behind each idea.
-        <strong>Click any node</strong> to read a summary, a deeper explanation, source excerpts, and
-        its connections. Drag nodes to rearrange, scroll to zoom, and drag the background to pan.
+        <strong>Click any node</strong> to read a summary, a deeper explanation, quick facts, source
+        excerpts, and (where one exists) a Wikipedia link. Drag nodes to rearrange, scroll to zoom,
+        and drag the background to pan.
       </p>
 
       <div class="mm-toolbar">
@@ -203,17 +202,18 @@
           <div class="mm-hint">Drag · scroll to zoom · click a node</div>
         </div>
         <aside class="mm-panel" id="mm-panel">
-          <p class="p-empty">Select a node to see a summary, a deeper explanation, source excerpts,
-            and connections. Start with the blue hub in the center, or one of the green research
-            avenues around it — or use the filters to isolate people, papers, books, or films.</p>
+          <p class="p-empty">Select a node to see a summary, a deeper explanation, quick facts,
+            source excerpts, and connections. Start with the blue hub in the center, or a green
+            research avenue around it — or use the filters to isolate people, papers, books, or films.</p>
         </aside>
       </div>
 
       <p class="mm-footnote">
         Studies link to their DOI (permanent); books and some resources link to a web search or
-        official page. This map is a personal learning tool, <strong>not medical advice</strong> —
-        many interventions shown are supported chiefly by animal or early human data, and a few
-        (e.g. taurine, young-blood factors) remain contested. Framework grounded in
+        official page; every node with a Wikipedia article links to it. This map is a personal
+        learning tool, <strong>not medical advice</strong> — many interventions shown are supported
+        chiefly by animal or early human data, and a few (e.g. taurine, young-blood factors) remain
+        contested. Framework grounded in
         <a href="https://doi.org/10.1016/j.cell.2022.11.001" target="_blank" rel="noopener">López-Otín et al., “Hallmarks of Aging: An Expanding Universe,” <em>Cell</em> (2023)</a>.
       </p>
     </section>
@@ -224,312 +224,532 @@
   /* ============================================================
      Anti-Aging Research Mind Map — self-contained force-directed graph
      types: root | avenue | person | study | book | writing | watch
-     node fields: id, type, label, desc, detail?, quote{text,cite}?, url?, badge?
+     node fields: id, type, label, desc, detail?, facts[]?, quote{text,cite}?, url?, wiki?, badge?
      ============================================================ */
   (function () {
-    // ---------- Data ----------
+    const WIKI = "https://en.wikipedia.org/wiki/";
     const N = [
       { id: "root", type: "root", label: "Anti-Aging Research",
         desc: "The pursuit of extending human healthspan and lifespan by targeting the underlying biology of aging rather than treating age-related diseases one at a time.",
-        detail: "The organizing framework is the 'hallmarks of aging' — a set of interconnected cellular and molecular processes that drive age-related decline. The avenues arranged around this hub each target one or more of those hallmarks. The unifying bet of the field is that because these processes are shared across nearly all age-related diseases, slowing them could delay many diseases at once." },
+        detail: "The organizing framework is the 'hallmarks of aging' — a set of interconnected cellular and molecular processes that drive age-related decline. The avenues arranged around this hub each target one or more of those hallmarks. The unifying bet of the field, sometimes called 'geroscience,' is that because these processes are shared across nearly all age-related diseases, slowing them could delay many diseases at once — compressing sickness into a shorter window at the very end of a longer life.",
+        facts: [ "Core idea: treat aging itself, not each disease separately",
+                 "Framework: the 12 hallmarks of aging",
+                 "Two goals: lifespan (how long) and healthspan (how well)" ],
+        wiki: WIKI + "Life_extension" },
 
       /* ==================== AVENUES ==================== */
       { id: "a_senescence", type: "avenue", label: "Senescence & Senolytics",
         desc: "Clearing 'zombie' cells that have stopped dividing but refuse to die and instead poison surrounding tissue.",
-        detail: "As we age, damaged cells enter senescence: they halt division but secrete a cocktail of inflammatory signals (the senescence-associated secretory phenotype, or SASP) that damages neighbors and drives chronic inflammation. Senolytics are drugs — such as dasatinib + quercetin, or the flavonoid fisetin — that selectively trigger death in senescent cells. In mice, clearing these cells extends healthspan and lifespan and delays multiple age-related conditions." },
+        detail: "As we age, damaged cells enter senescence: they halt division but secrete a cocktail of inflammatory signals (the senescence-associated secretory phenotype, or SASP) that damages neighbors and drives chronic inflammation. Senolytics are drugs — such as dasatinib + quercetin, or the flavonoid fisetin — that selectively trigger death in senescent cells. In mice, clearing these cells extends healthspan and lifespan and delays multiple age-related conditions; human trials are now underway.",
+        facts: [ "Hallmark targeted: cellular senescence",
+                 "Key drugs: dasatinib + quercetin, fisetin, navitoclax",
+                 "Evidence: strong in mice; early human trials",
+                 "Watch-out: senescence also suppresses cancer — timing matters" ],
+        wiki: WIKI + "Cellular_senescence" },
       { id: "a_nad", type: "avenue", label: "NAD⁺ & Sirtuins",
         desc: "Restoring a coenzyme central to metabolism and DNA repair that steeply declines with age.",
-        detail: "NAD⁺ powers hundreds of reactions and is the required fuel for sirtuins — a family of enzymes that regulate stress responses, DNA repair, and gene silencing. NAD⁺ levels fall with age, dimming sirtuin activity. Precursors like NMN and NR aim to rebuild the NAD⁺ pool and restore metabolic resilience, though human lifespan benefits remain unproven." },
+        detail: "NAD⁺ powers hundreds of reactions and is the required fuel for sirtuins — enzymes that regulate stress responses, DNA repair, and gene silencing. NAD⁺ levels fall with age, dimming sirtuin activity. Precursors like NMN and NR aim to rebuild the NAD⁺ pool and restore metabolic resilience. Human trials confirm these supplements raise NAD⁺ levels, but whether that translates into slower aging remains unproven.",
+        facts: [ "Hallmark targeted: deregulated nutrient-sensing, DNA repair",
+                 "Interventions: NMN, NR (nicotinamide riboside)",
+                 "Evidence: raises NAD⁺ in humans; longevity benefit unproven",
+                 "Champion: David Sinclair" ],
+        wiki: WIKI + "Sirtuin" },
       { id: "a_mtor", type: "avenue", label: "mTOR Inhibition",
         desc: "Dialing down a master growth pathway to mimic the benefits of eating less.",
-        detail: "mTOR is a nutrient-sensing hub that promotes growth and suppresses cellular cleanup. Inhibiting it — most famously with rapamycin — mimics aspects of caloric restriction, boosts autophagy, and is one of the most reproducible ways to extend lifespan across species, from yeast to mice. It is the leading small-molecule candidate for a true human 'geroprotector.'" },
+        detail: "mTOR is a nutrient-sensing hub that promotes growth and suppresses cellular cleanup. Inhibiting it — most famously with rapamycin — mimics aspects of caloric restriction, boosts autophagy, and is one of the most reproducible ways to extend lifespan across species, from yeast to mice. It is the leading small-molecule candidate for a true human 'geroprotector,' now being tested in dogs and humans at low, intermittent doses.",
+        facts: [ "Hallmark targeted: deregulated nutrient-sensing",
+                 "Key drug: rapamycin (sirolimus) and rapalogs",
+                 "Evidence: most reproducible lifespan extension across species",
+                 "Champions: Matt Kaeberlein, Brian Kennedy" ],
+        wiki: WIKI + "MTOR" },
       { id: "a_cr", type: "avenue", label: "Caloric Restriction & Fasting",
         desc: "Eating less, or eating in a narrower window, to trigger the body's repair programs.",
-        detail: "Reducing calories without malnutrition, along with time-restricted eating and periodic fasting, reliably extends lifespan across many organisms. Fasting flips a 'metabolic switch' from glucose- to ketone-based fuel, lowers IGF-1 and insulin, and activates repair pathways like autophagy. The human CALERIE trial showed even modest, sustained restriction can slow the measured pace of biological aging." },
+        detail: "Reducing calories without malnutrition, along with time-restricted eating and periodic fasting, reliably extends lifespan across many organisms. Fasting flips a 'metabolic switch' from glucose- to ketone-based fuel, lowers IGF-1 and insulin, and activates repair pathways like autophagy. The human CALERIE trial showed even modest, sustained restriction can slow the measured pace of biological aging — the first randomized causal evidence in people.",
+        facts: [ "Hallmark targeted: deregulated nutrient-sensing",
+                 "Forms: caloric restriction, time-restricted eating, fasting-mimicking diet",
+                 "Evidence: strong in animals; CALERIE trial positive in humans",
+                 "Champions: Valter Longo, Mark Mattson" ],
+        wiki: WIKI + "Calorie_restriction" },
       { id: "a_reprog", type: "avenue", label: "Partial Epigenetic Reprogramming",
         desc: "Resetting a cell's epigenetic 'age' without erasing its identity — arguably the field's most exciting frontier.",
-        detail: "The 'information theory of aging' holds that cells accumulate epigenetic noise and lose their identity over time. Briefly expressing Yamanaka factors (OSK/OSKM) can wind a cell's epigenetic clock backward while keeping it the same cell type. In mice this has reversed hallmarks of aging and even restored vision in aged optic nerves. The central risk is that too much reprogramming causes tumors, so control is everything." },
+        detail: "The 'information theory of aging' holds that cells accumulate epigenetic noise and lose their identity over time. Briefly expressing Yamanaka factors (OSK/OSKM) can wind a cell's epigenetic clock backward while keeping it the same cell type. In mice this has reversed hallmarks of aging and even restored vision in aged optic nerves. The central risk is that too much reprogramming causes tumors or erases cell identity, so precise, transient control is everything — and it is the focus of billion-dollar startups like Altos Labs.",
+        facts: [ "Hallmark targeted: epigenetic alterations",
+                 "Tool: Yamanaka factors (OSK / OSKM), delivered transiently",
+                 "Evidence: dramatic in mice; not yet in humans",
+                 "Risk: cancer / loss of cell identity if overdone",
+                 "Players: Sinclair, Belmonte, Altos Labs, Retro Bio" ],
+        wiki: WIKI + "Induced_pluripotent_stem_cell" },
       { id: "a_metformin", type: "avenue", label: "Metformin & Nutrient Sensing",
         desc: "Repurposing a cheap diabetes drug that acts on the same nutrient-sensing axis linked to longevity.",
-        detail: "Metformin activates AMPK and dampens insulin/IGF-1 signaling — the very axis whose mutation doubles worm lifespan. Observational data hint that diabetics on metformin may outlive non-diabetics, motivating the proposed TAME trial to test whether a drug can delay aging itself. Evidence is mixed (it may blunt some exercise gains), but it remains a flagship 'geroscience' candidate." },
+        detail: "Metformin activates AMPK and dampens insulin/IGF-1 signaling — the very axis whose mutation doubles worm lifespan. Observational data hint that diabetics on metformin may outlive non-diabetics, motivating the proposed TAME trial to test whether a drug can delay aging itself. Evidence is genuinely mixed (some studies suggest it blunts exercise gains), but as a safe, cheap, decades-old drug it remains a flagship 'geroscience' candidate.",
+        facts: [ "Hallmark targeted: deregulated nutrient-sensing (AMPK, IGF-1)",
+                 "Status: proposed TAME trial to validate 'aging' as an indication",
+                 "Evidence: promising observational data; RCT results mixed",
+                 "Champion: Nir Barzilai" ],
+        wiki: WIKI + "Metformin" },
       { id: "a_autophagy", type: "avenue", label: "Autophagy",
         desc: "Boosting the cell's recycling system, which clears damaged parts and declines with age.",
-        detail: "Autophagy degrades and recycles damaged proteins and organelles; 'disabled macroautophagy' is a hallmark of aging. Fasting, rapamycin, exercise, and the polyamine spermidine all upregulate it. Restoring autophagy improves proteostasis and mitochondrial quality and is a shared downstream mechanism of several other avenues on this map." },
+        detail: "Autophagy degrades and recycles damaged proteins and organelles; 'disabled macroautophagy' is a hallmark of aging. Fasting, rapamycin, exercise, and the polyamine spermidine all upregulate it. Restoring autophagy improves proteostasis and mitochondrial quality and is a shared downstream mechanism of several other avenues on this map — which is part of why so many roads lead back to it.",
+        facts: [ "Hallmark targeted: disabled macroautophagy, loss of proteostasis",
+                 "Triggers: fasting, rapamycin, exercise, spermidine",
+                 "Role: shared mechanism behind CR, mTOR, and supplements" ],
+        wiki: WIKI + "Autophagy" },
       { id: "a_stem", type: "avenue", label: "Stem Cells & Regeneration",
         desc: "Replenishing or rejuvenating the stem cell pools that repair our tissues.",
-        detail: "Stem cell reserves exhaust with age, slowing tissue repair and regeneration. Regenerative approaches aim to restore stem cell number and function, and to rejuvenate the surrounding signaling 'niche.' Parabiosis experiments — surgically joining young and old circulatory systems — first revealed that youthful blood factors can reawaken old stem cells." },
+        detail: "Stem cell reserves exhaust with age, slowing tissue repair and regeneration. Regenerative approaches aim to restore stem cell number and function, and to rejuvenate the surrounding signaling 'niche.' Parabiosis experiments — surgically joining young and old circulatory systems — first revealed that youthful blood factors can reawaken old stem cells, linking this avenue tightly to the young-blood work.",
+        facts: [ "Hallmark targeted: stem cell exhaustion",
+                 "Approaches: cell therapy, niche rejuvenation, reprogramming",
+                 "Linked to: young blood / parabiosis, telomeres" ],
+        wiki: WIKI + "Stem_cell" },
       { id: "a_clock", type: "avenue", label: "Epigenetic Clocks",
         desc: "Biomarkers that estimate biological (not calendar) age — the field's essential measuring stick.",
-        detail: "DNA methylation patterns change predictably with age, letting scientists build 'clocks' (Horvath, PhenoAge, GrimAge, DunedinPACE) that estimate biological age and pace of aging. These biomarkers let researchers test, in years rather than decades, whether an intervention is actually slowing aging — turning longevity science from guesswork into measurement." },
+        detail: "DNA methylation patterns change predictably with age, letting scientists build 'clocks' (Horvath, PhenoAge, GrimAge, DunedinPACE) that estimate biological age and pace of aging. These biomarkers let researchers test, in years rather than decades, whether an intervention is actually slowing aging — turning longevity science from guesswork into measurement, and enabling trials that would otherwise take a lifetime.",
+        facts: [ "Hallmark targeted: epigenetic alterations (a biomarker, not a therapy)",
+                 "Clocks: Horvath, PhenoAge, GrimAge, DunedinPACE",
+                 "Why it matters: lets trials read out in years, not decades",
+                 "Pioneers: Steve Horvath, Morgan Levine, Vadim Gladyshev" ],
+        wiki: WIKI + "Epigenetic_clock" },
       { id: "a_telomere", type: "avenue", label: "Telomeres & Telomerase",
         desc: "Maintaining the protective chromosome caps that shorten each time a cell divides.",
-        detail: "Telomeres cap chromosome ends and erode with each division; critically short telomeres push cells into senescence. Telomerase can rebuild them, and interventions from lifestyle to hyperbaric oxygen have been reported to lengthen them. It's a double-edged lever, though: the same telomerase that could rejuvenate cells can also fuel cancer." },
+        detail: "Telomeres cap chromosome ends and erode with each division; critically short telomeres push cells into senescence. Telomerase can rebuild them, and interventions from lifestyle to hyperbaric oxygen have been reported to lengthen them. It's a double-edged lever, though: the same telomerase that could rejuvenate cells can also fuel cancer, so simply 'turning it on' is not a free lunch.",
+        facts: [ "Hallmark targeted: telomere attrition",
+                 "Enzyme: telomerase (discovery won the 2009 Nobel Prize)",
+                 "Watch-out: telomerase can also enable cancer growth",
+                 "Pioneer: Elizabeth Blackburn" ],
+        wiki: WIKI + "Telomere" },
       { id: "a_mito", type: "avenue", label: "Mitochondrial Health",
         desc: "Keeping the cell's power plants efficient — and clearing the broken ones.",
-        detail: "Mitochondria generate cellular energy; their decline drives fatigue, weaker repair, and oxidative stress. Interventions include mitophagy (selectively clearing defective mitochondria), NAD⁺ support, exercise, and molecules like urolithin A. Mitochondrial dysfunction is both a hallmark of aging and a common failure point across age-related diseases." },
+        detail: "Mitochondria generate cellular energy; their decline drives fatigue, weaker repair, and oxidative stress. Interventions include mitophagy (selectively clearing defective mitochondria), NAD⁺ support, exercise, and molecules like urolithin A. Mitochondrial dysfunction is both a hallmark of aging and a common failure point across age-related diseases, from sarcopenia to neurodegeneration.",
+        facts: [ "Hallmark targeted: mitochondrial dysfunction",
+                 "Interventions: exercise, NAD⁺, urolithin A, mitophagy",
+                 "Symptoms of decline: fatigue, muscle loss, oxidative stress" ],
+        wiki: WIKI + "Mitochondrion" },
       { id: "a_inflamm", type: "avenue", label: "Inflammaging & Immune Aging",
         desc: "Breaking the chronic, low-grade inflammation and immune decline that accelerate aging.",
-        detail: "Aging brings 'inflammaging' — persistent, sterile, low-grade inflammation — alongside immunosenescence, the weakening of the immune system. Both accelerate other hallmarks and feed on senescent cells' SASP. Targeting the SASP, clearing senescent cells, and rejuvenating the immune system aim to break this self-reinforcing loop." },
+        detail: "Aging brings 'inflammaging' — persistent, sterile, low-grade inflammation — alongside immunosenescence, the weakening of the immune system. Both accelerate other hallmarks and feed on senescent cells' SASP. Targeting the SASP, clearing senescent cells, and rejuvenating the immune system aim to break this self-reinforcing loop, which sits upstream of heart disease, dementia, and frailty.",
+        facts: [ "Hallmark targeted: chronic inflammation, altered intercellular communication",
+                 "Drivers: SASP from senescent cells, gut dysbiosis, immune decline",
+                 "Linked to: senescence, microbiome, most age-related disease" ],
+        wiki: WIKI + "Inflammaging" },
       { id: "a_youngblood", type: "avenue", label: "Young Blood & Plasma Factors",
         desc: "Testing whether factors in young blood — or simply diluting old blood — can rejuvenate tissue.",
-        detail: "Parabiosis studies showed that connecting an old mouse to a young one's circulation rejuvenates muscle, brain, and other tissues. Attention has focused on circulating factors (e.g. GDF11) and, intriguingly, on the idea that removing pro-aging factors — via plasma dilution or therapeutic exchange — may matter as much as adding youthful ones. Human evidence remains early and contested." },
+        detail: "Parabiosis studies showed that connecting an old mouse to a young one's circulation rejuvenates muscle, brain, and other tissues. Attention has focused on circulating factors (e.g. GDF11) and, intriguingly, on the idea that removing pro-aging factors — via plasma dilution or therapeutic exchange — may matter as much as adding youthful ones. Human evidence remains early, contested, and a magnet for unproven commercial 'young plasma' clinics.",
+        facts: [ "Hallmark targeted: altered intercellular communication",
+                 "Approaches: parabiosis, GDF11, plasma dilution / exchange",
+                 "Evidence: striking in mice; unproven and contested in humans",
+                 "Caution: commercial 'young plasma' clinics lack evidence" ],
+        wiki: WIKI + "Parabiosis" },
       { id: "a_microbiome", type: "avenue", label: "Gut Microbiome",
         desc: "Reshaping the gut ecosystem, which shifts with age and influences inflammation and metabolism.",
-        detail: "The community of gut microbes changes with age, often losing diversity and producing more inflammatory byproducts — contributing to inflammaging and metabolic decline. Interventions range from diet and fiber to fecal transplants from young donors, which have rejuvenated aspects of aging in animal studies. It's an emerging but fast-moving longevity frontier." },
+        detail: "The community of gut microbes changes with age, often losing diversity and producing more inflammatory byproducts — contributing to inflammaging and metabolic decline. Interventions range from diet and fiber to fecal transplants from young donors, which have rejuvenated aspects of aging in animal studies. It's an emerging but fast-moving longevity frontier tightly coupled to diet and immune health.",
+        facts: [ "Hallmark targeted: dysbiosis (added in the 2023 hallmarks)",
+                 "Interventions: fiber, fermented foods, fecal transplant",
+                 "Evidence: rejuvenation via young-donor FMT in mice" ],
+        wiki: WIKI + "Gut_microbiota" },
       { id: "a_klotho", type: "avenue", label: "Klotho & Longevity Proteins",
         desc: "Harnessing single proteins whose presence or absence dramatically shifts the aging process.",
-        detail: "Some individual genes act as master aging switches. Klotho, discovered in 1997, causes an aging-like syndrome when disabled and extends lifespan when overexpressed; it also shows links to cognition. Alongside factors like FGF21 and GDF11, klotho illustrates that a small number of circulating proteins can exert outsized control over how we age." },
+        detail: "Some individual genes act as master aging switches. Klotho, discovered in 1997, causes an aging-like syndrome when disabled and extends lifespan when overexpressed; it also shows striking links to cognition and brain resilience. Alongside factors like FGF21 and GDF11, klotho illustrates that a small number of circulating proteins can exert outsized control over how we age.",
+        facts: [ "Named after: Clotho, the Greek Fate who spins life's thread",
+                 "Effect: disable it → premature aging; boost it → longer life (mice)",
+                 "Bonus: linked to cognition and cardiovascular/kidney health",
+                 "Related proteins: FGF21, GDF11" ],
+        wiki: WIKI + "Klotho_(biology)" },
       { id: "a_exercise", type: "avenue", label: "Exercise & VO₂max",
         desc: "The single most evidence-backed intervention — cardiorespiratory fitness and strength as longevity drugs.",
-        detail: "No pill matches exercise for extending healthspan. Cardiorespiratory fitness (VO₂max) and muscle mass/strength are among the strongest predictors of all-cause mortality — moving from 'low fit' to 'above average' is associated with a large reduction in death risk. Exercise simultaneously boosts autophagy, mitochondrial biogenesis, NAD⁺, and immune function, making it the backbone of any serious longevity plan." },
+        detail: "No pill matches exercise for extending healthspan. Cardiorespiratory fitness (VO₂max) and muscle mass/strength are among the strongest predictors of all-cause mortality — moving from 'low fit' to 'above average' is associated with a large reduction in death risk, larger than most drugs. Exercise simultaneously boosts autophagy, mitochondrial biogenesis, NAD⁺, and immune function, making it the backbone of any serious longevity plan.",
+        facts: [ "Strongest single predictor of longevity that we can change",
+                 "Key metrics: VO₂max (cardio fitness) and muscle strength",
+                 "Mechanisms: autophagy, mitochondria, NAD⁺, immune function",
+                 "Champion: Peter Attia" ],
+        wiki: WIKI + "VO2_max" },
       { id: "a_supplements", type: "avenue", label: "Geroprotective Molecules",
         desc: "Small molecules and supplements aimed at aging hallmarks — from taurine and spermidine to AKG.",
-        detail: "A growing menu of molecules targets specific hallmarks: taurine (which declines with age), spermidine (an autophagy inducer), alpha-ketoglutarate, glycine/NAC, urolithin A (mitophagy), and NAD⁺ precursors. Most have compelling animal data but limited or contested human evidence. This is the most hype-prone corner of the field — promising, but where the gap between mouse and human is widest." },
+        detail: "A growing menu of molecules targets specific hallmarks: taurine (which declines with age), spermidine (an autophagy inducer), alpha-ketoglutarate, glycine/NAC, urolithin A (mitophagy), and NAD⁺ precursors. Most have compelling animal data but limited or contested human evidence. This is the most hype-prone corner of the field — promising, but where the gap between a striking mouse result and a proven human benefit is widest.",
+        facts: [ "Examples: taurine, spermidine, AKG, glycine/NAC, urolithin A",
+                 "Definition: a 'geroprotector' targets a root cause of aging",
+                 "Evidence: strong in mice, thin/contested in humans",
+                 "Buyer beware: the most over-hyped area of longevity" ],
+        wiki: WIKI + "Geroprotector" },
       { id: "a_dnarepair", type: "avenue", label: "Genomic Instability & DNA Repair",
         desc: "Protecting and repairing the genome, whose accumulating damage sits upstream of many hallmarks.",
-        detail: "DNA damage accumulates throughout life from radiation, chemicals, and normal metabolism. Genomic instability is a primary hallmark of aging, and impaired repair underlies premature-aging (progeroid) syndromes. Notably, the act of repairing DNA breaks may itself scramble the epigenome — linking DNA damage directly to the epigenetic 'information loss' theory of aging." },
+        detail: "DNA damage accumulates throughout life from radiation, chemicals, and normal metabolism. Genomic instability is a primary hallmark of aging, and impaired repair underlies premature-aging (progeroid) syndromes like Werner and Hutchinson-Gilford progeria. Notably, the act of repairing DNA breaks may itself scramble the epigenome — directly linking DNA damage to the epigenetic 'information loss' theory of aging.",
+        facts: [ "Hallmark targeted: genomic instability (a primary hallmark)",
+                 "Seen in: progeroid syndromes (Werner, progeria)",
+                 "Key insight: DNA repair itself can scramble the epigenome" ],
+        wiki: WIKI + "Genome_instability" },
 
       /* ==================== PEOPLE ==================== */
       { id: "p_sinclair", type: "person", label: "David Sinclair",
-        url: "https://sinclair.hms.harvard.edu/",
+        url: "https://sinclair.hms.harvard.edu/", wiki: WIKI + "David_A._Sinclair",
         desc: "Harvard geneticist known for sirtuins, NAD⁺ boosters, and the 'information theory of aging.'",
-        detail: "His lab's work argues that aging is driven by a loss of epigenetic information — and is therefore reversible. Landmark studies from his group restored vision in aged mice via partial reprogramming (2020) and framed epigenetic information loss as a cause of aging (2023). Author of the bestseller Lifespan; a prominent and sometimes polarizing public voice for the field." },
+        detail: "His lab argues that aging is driven by a loss of epigenetic information — and is therefore reversible. Landmark studies from his group restored vision in aged mice via partial reprogramming (2020) and framed epigenetic information loss as a cause of aging (2023). A prominent and sometimes polarizing public voice, criticized by some peers for optimism that runs ahead of the human evidence.",
+        facts: [ "Role: Professor of Genetics, Harvard Medical School",
+                 "Known for: sirtuins, NAD⁺, reprogramming, information theory of aging",
+                 "Book: Lifespan (2019)" ] },
       { id: "p_longo", type: "person", label: "Valter Longo",
-        url: "https://valterlongo.com/",
+        url: "https://valterlongo.com/", wiki: WIKI + "Valter_Longo",
         desc: "USC biogerontologist who pioneered the fasting-mimicking diet.",
-        detail: "Director of the USC Longevity Institute, Longo studies how nutrition and periodic fasting regulate longevity pathways like IGF-1 and TOR. He developed the fasting-mimicking diet (FMD) — a 5-day low-calorie protocol designed to capture fasting's benefits while still eating. Author of The Longevity Diet." },
+        detail: "Director of the USC Longevity Institute, Longo studies how nutrition and periodic fasting regulate longevity pathways like IGF-1 and TOR. He developed the fasting-mimicking diet (FMD) — a 5-day low-calorie protocol designed to capture fasting's benefits while still eating — and studies the diets of long-lived populations.",
+        facts: [ "Role: Director, USC Longevity Institute",
+                 "Known for: fasting-mimicking diet, IGF-1 / nutrient sensing",
+                 "Book: The Longevity Diet (2018)" ] },
       { id: "p_attia", type: "person", label: "Peter Attia",
-        url: "https://peterattiamd.com/",
+        url: "https://peterattiamd.com/", wiki: WIKI + "Peter_Attia",
         desc: "Physician focused on the practical application of longevity science — 'Medicine 3.0.'",
-        detail: "Attia translates longevity research into clinical strategy, emphasizing exercise (especially VO₂max and strength), metabolic health, sleep, and aggressive early risk reduction for the chronic diseases of aging. Author of the #1 bestseller Outlive and host of the deep-dive podcast The Drive." },
+        detail: "Attia translates longevity research into clinical strategy, emphasizing exercise (especially VO₂max and strength), metabolic health, sleep, and aggressive early risk reduction for the chronic diseases of aging. Author of the #1 bestseller Outlive and host of the deep-dive podcast The Drive.",
+        facts: [ "Role: physician, longevity-focused practice",
+                 "Emphasis: exercise, metabolic health, early prevention",
+                 "Book: Outlive (2023) · Podcast: The Drive" ] },
       { id: "p_kenyon", type: "person", label: "Cynthia Kenyon",
-        url: "https://en.wikipedia.org/wiki/Cynthia_Kenyon",
+        wiki: WIKI + "Cynthia_Kenyon",
         desc: "Molecular biologist whose 1993 discovery launched the modern genetics of aging.",
-        detail: "Kenyon showed that a single mutation in the daf-2 gene doubles the lifespan of C. elegans, proving that aging is genetically malleable and gated by nutrient-sensing (insulin/IGF-1) — a pathway conserved from worms to humans. Now vice president of aging research at Calico, Google's longevity company." },
+        detail: "Kenyon showed that a single mutation in the daf-2 gene doubles the lifespan of C. elegans, proving that aging is genetically malleable and gated by nutrient-sensing (insulin/IGF-1) — a pathway conserved from worms to humans. Now vice president of aging research at Calico, Google/Alphabet's longevity company.",
+        facts: [ "Discovery: daf-2 mutation doubles C. elegans lifespan (1993)",
+                 "Impact: founded the genetics of aging",
+                 "Now: VP of Aging Research, Calico (Alphabet)" ] },
       { id: "p_barzilai", type: "person", label: "Nir Barzilai",
-        url: "https://www.einsteinmed.edu/faculty/484/nir-barzilai/",
+        url: "https://www.einsteinmed.edu/faculty/484/nir-barzilai/", wiki: WIKI + "Nir_Barzilai",
         desc: "Directs the Institute for Aging Research at Einstein; champion of the TAME trial.",
-        detail: "Barzilai studies the genetics of centenarians (why some people age slowly) and leads the push for TAME — Targeting Aging with Metformin — designed to win regulatory recognition of aging as a treatable indication. Author of Age Later." },
+        detail: "Barzilai studies the genetics of centenarians (why some people age slowly) and leads the push for TAME — Targeting Aging with Metformin — designed to win regulatory recognition of aging as a treatable indication so future geroprotectors have an approval path.",
+        facts: [ "Role: Director, Institute for Aging Research, Einstein",
+                 "Known for: centenarian genetics, the TAME trial",
+                 "Book: Age Later (2020)" ] },
       { id: "p_degrey", type: "person", label: "Aubrey de Grey",
-        url: "https://www.levf.org/",
+        url: "https://www.levf.org/", wiki: WIKI + "Aubrey_de_Grey",
         desc: "Biogerontologist who reframed aging as repairable accumulated damage ('SENS').",
-        detail: "De Grey argues aging is simply the accumulation of seven categories of molecular and cellular damage, each of which could in principle be repaired — an engineering rather than a 'cure a disease' mindset. A provocative, influential, and controversial advocate for radical life extension. Author of Ending Aging." },
+        detail: "De Grey argues aging is simply the accumulation of seven categories of molecular and cellular damage, each of which could in principle be repaired — an engineering rather than a 'cure a disease' mindset. A provocative, influential, and controversial advocate for radical life extension.",
+        facts: [ "Framework: SENS (repair the 7 types of aging damage)",
+                 "Role: co-founder, LEV Foundation; ex-SENS Research Foundation",
+                 "Book: Ending Aging (2007)" ] },
       { id: "p_horvath", type: "person", label: "Steve Horvath",
-        url: "https://en.wikipedia.org/wiki/Steve_Horvath",
+        wiki: WIKI + "Steve_Horvath",
         desc: "Geneticist who built the first widely used epigenetic clock (2013).",
-        detail: "Horvath's DNA-methylation clock estimates age across nearly all human tissues from a single mathematical model, giving the field its first rigorous biomarker of biological age. His clocks underpin much of today's work measuring whether interventions actually slow aging." },
+        detail: "Horvath's DNA-methylation clock estimates age across nearly all human tissues from a single mathematical model, giving the field its first rigorous biomarker of biological age. His clocks underpin much of today's work measuring whether interventions actually slow aging.",
+        facts: [ "Known for: the Horvath epigenetic clock (2013)",
+                 "Contribution: a universal, cross-tissue age predictor",
+                 "Now: Principal Investigator at Altos Labs" ] },
       { id: "p_campisi", type: "person", label: "Judith Campisi",
-        url: "https://www.buckinstitute.org/lab/campisi-lab/",
+        url: "https://www.buckinstitute.org/lab/campisi-lab/", wiki: WIKI + "Judith_Campisi",
         desc: "Buck Institute biologist who defined how senescent cells drive aging.",
-        detail: "Campisi characterized the senescence-associated secretory phenotype (SASP) — the inflammatory signals senescent cells emit — showing senescence is not just a passive dead end but an active driver of aging and cancer. Co-founder of Unity Biotechnology." },
+        detail: "Campisi characterized the senescence-associated secretory phenotype (SASP) — the inflammatory signals senescent cells emit — showing senescence is not just a passive dead end but an active driver of both aging and cancer. Co-founder of Unity Biotechnology.",
+        facts: [ "Known for: defining the SASP",
+                 "Insight: senescence is an active driver of aging, not passive",
+                 "Co-founded: Unity Biotechnology" ] },
       { id: "p_kaeberlein", type: "person", label: "Matt Kaeberlein",
-        url: "https://en.wikipedia.org/wiki/Matt_Kaeberlein",
+        url: "https://dogagingproject.org/", wiki: WIKI + "Matt_Kaeberlein",
         desc: "Leading voice on rapamycin; founder of the Dog Aging Project.",
-        detail: "A biogerontologist who has championed rapamycin as the most promising pharmacological geroprotector. His Dog Aging Project studies aging in companion dogs — a real-world model that ages faster than humans but shares our environment — as a bridge to human longevity trials." },
+        detail: "A biogerontologist who has championed rapamycin as the most promising pharmacological geroprotector. His Dog Aging Project studies aging in tens of thousands of companion dogs — a real-world model that ages faster than humans but shares our environment — as a bridge to human longevity trials.",
+        facts: [ "Known for: rapamycin advocacy, biology of aging",
+                 "Founded: the Dog Aging Project",
+                 "Why dogs: same environment as us, faster aging = faster answers" ] },
       { id: "p_blackburn", type: "person", label: "Elizabeth Blackburn",
-        url: "https://en.wikipedia.org/wiki/Elizabeth_Blackburn",
+        wiki: WIKI + "Elizabeth_Blackburn",
         desc: "Nobel laureate for the discovery of telomerase.",
-        detail: "Blackburn shared the 2009 Nobel Prize in Physiology or Medicine for discovering telomerase, the enzyme that maintains telomeres. Her later work and book, The Telomere Effect (with Elissa Epel), connect cellular aging to stress, sleep, and lifestyle." },
+        detail: "Blackburn shared the 2009 Nobel Prize in Physiology or Medicine for discovering telomerase, the enzyme that maintains telomeres. Her later work and book, The Telomere Effect (with Elissa Epel), connect cellular aging to stress, sleep, and lifestyle.",
+        facts: [ "Award: 2009 Nobel Prize (Physiology or Medicine)",
+                 "Discovery: telomerase",
+                 "Book: The Telomere Effect (2017, with Elissa Epel)" ] },
       { id: "p_yamanaka", type: "person", label: "Shinya Yamanaka",
-        url: "https://en.wikipedia.org/wiki/Shinya_Yamanaka",
+        wiki: WIKI + "Shinya_Yamanaka",
         desc: "Nobel laureate who discovered that four genes can reset an adult cell to a stem-cell state.",
-        detail: "In 2006 Yamanaka showed that just four transcription factors (Oct4, Sox2, Klf4, c-Myc — the 'Yamanaka factors') can reprogram an adult cell back into a pluripotent stem cell, winning the 2012 Nobel Prize. Partial, controlled use of these same factors is the foundation of the reprogramming-rejuvenation field." },
+        detail: "In 2006 Yamanaka showed that just four transcription factors (Oct4, Sox2, Klf4, c-Myc — the 'Yamanaka factors') can reprogram an adult cell back into a pluripotent stem cell, winning the 2012 Nobel Prize. Partial, controlled use of these same factors is the foundation of the reprogramming-rejuvenation field.",
+        facts: [ "Award: 2012 Nobel Prize (Physiology or Medicine)",
+                 "Discovery: induced pluripotent stem cells (iPSCs), 2006",
+                 "Legacy: the 'Yamanaka factors' (OSKM)" ] },
       { id: "p_belmonte", type: "person", label: "J.C. Izpisúa Belmonte",
-        url: "https://en.wikipedia.org/wiki/Juan_Carlos_Izpisua_Belmonte",
+        wiki: WIKI + "Juan_Carlos_Izpisua_Belmonte",
         desc: "Developmental biologist who first showed partial reprogramming can rejuvenate a living animal.",
-        detail: "His lab's 2016 study demonstrated that short, cyclic expression of Yamanaka factors in living mice ameliorates hallmarks of aging and extends lifespan in a premature-aging model — the proof of concept that reprogramming works in vivo, not just in a dish. Now leading aging research at Altos Labs." },
+        detail: "His lab's 2016 study demonstrated that short, cyclic expression of Yamanaka factors in living mice ameliorates hallmarks of aging and extends lifespan in a premature-aging model — the proof of concept that reprogramming works in vivo, not just in a dish. Now leading aging research at Altos Labs.",
+        facts: [ "Breakthrough: in vivo partial reprogramming (2016)",
+                 "Formerly: Salk Institute",
+                 "Now: Altos Labs" ] },
       { id: "p_gladyshev", type: "person", label: "Vadim Gladyshev",
-        url: "https://www.google.com/search?q=Vadim+Gladyshev+aging+Harvard",
+        wiki: WIKI + "Vadim_N._Gladyshev",
         desc: "Harvard biologist advancing the quantitative biology of aging and aging clocks.",
-        detail: "Gladyshev's lab develops rigorous frameworks and biomarkers for measuring biological age and the rate of aging, and studies how interventions and even early development affect the aging trajectory. A key figure in turning aging into a measurable, quantitative science." },
+        detail: "Gladyshev's lab develops rigorous frameworks and biomarkers for measuring biological age and the rate of aging, and studies how interventions — and even early development — reset or bend the aging trajectory. A key figure in turning aging into a measurable, quantitative science.",
+        facts: [ "Role: Professor of Medicine, Harvard / Brigham & Women's",
+                 "Known for: quantitative biology of aging, aging clocks",
+                 "Also: pioneering work on selenoproteins" ] },
       { id: "p_levine", type: "person", label: "Morgan Levine",
         url: "https://www.google.com/search?q=Morgan+Levine+biological+age+PhenoAge",
         desc: "Biologist behind next-generation biological-age clocks like PhenoAge.",
-        detail: "Levine helped build clocks (PhenoAge, DunedinPACE-adjacent work) that predict healthspan and mortality better than chronological age, and studies how lifestyle and interventions move these measures. Formerly at Yale, later a founding scientist at Altos Labs. Author of True Age." },
+        detail: "Levine helped build clocks (PhenoAge and related measures) that predict healthspan and mortality better than chronological age, and studies how lifestyle and interventions move these measures. Formerly a professor at Yale, later a founding principal investigator at Altos Labs. Author of True Age.",
+        facts: [ "Known for: PhenoAge and biological-age measurement",
+                 "Formerly: Yale School of Medicine · Now: Altos Labs",
+                 "Book: True Age (2022)" ] },
       { id: "p_kennedy", type: "person", label: "Brian Kennedy",
-        url: "https://www.google.com/search?q=Brian+Kennedy+longevity+biologist+NUS",
+        wiki: WIKI + "Brian_K._Kennedy",
         desc: "Geroscientist advancing translational longevity interventions and biomarkers.",
-        detail: "Former president of the Buck Institute, now at the National University of Singapore, Kennedy studies conserved longevity pathways (including mTOR) and works to translate geroprotectors and aging biomarkers toward the clinic. A leading advocate for treating aging as a modifiable risk factor." },
+        detail: "Former president and CEO of the Buck Institute, now at the National University of Singapore, Kennedy studies conserved longevity pathways (including mTOR, with Matt Kaeberlein) and works to translate geroprotectors and aging biomarkers toward the clinic. A leading advocate for treating aging as a modifiable risk factor.",
+        facts: [ "Role: Distinguished Professor, NUS (Singapore); ex-CEO, Buck Institute",
+                 "Known for: mTOR/longevity pathways, translational geroscience",
+                 "Collaborator: Matt Kaeberlein" ] },
       { id: "p_bryanjohnson", type: "person", label: "Bryan Johnson",
-        url: "https://www.bryanjohnson.com/",
+        url: "https://www.bryanjohnson.com/", wiki: WIKI + "Bryan_Johnson_(entrepreneur)",
         desc: "Tech entrepreneur running 'Blueprint,' the most publicized self-experiment in longevity.",
-        detail: "Johnson spends millions measuring and optimizing every biomarker of his body under a rigorous, open-sourced protocol he calls Blueprint — diet, sleep, exercise, and dozens of supplements — publishing his data and 'pace of aging' scores. A polarizing but highly visible figure who has pushed longevity into mainstream culture." },
+        detail: "Johnson spends millions measuring and optimizing every biomarker of his body under a rigorous, open-sourced protocol he calls Blueprint — diet, sleep, exercise, and dozens of supplements — publishing his data and 'pace of aging' scores. A polarizing but highly visible figure who has pushed longevity into mainstream culture.",
+        facts: [ "Project: Blueprint — a measured, open-source anti-aging protocol",
+                 "Approach: rigorous n=1 self-experiment, all data published",
+                 "Background: founder of Braintree/Venmo, Kernel" ] },
       { id: "p_buettner", type: "person", label: "Dan Buettner",
-        url: "https://en.wikipedia.org/wiki/Dan_Buettner",
+        url: "https://www.bluezones.com/", wiki: WIKI + "Dan_Buettner",
         desc: "Journalist who identified the world's 'Blue Zones' of exceptional longevity.",
-        detail: "Buettner's National Geographic-backed work identified five regions — Okinawa, Sardinia, Ikaria, Nicoya, and Loma Linda — where people reach 100 at extraordinary rates, and distilled shared lifestyle patterns (plant-forward diet, natural movement, purpose, community). Author of The Blue Zones and subject of a Netflix series." },
+        detail: "Buettner's National Geographic-backed work identified five regions — Okinawa, Sardinia, Ikaria, Nicoya, and Loma Linda — where people reach 100 at extraordinary rates, and distilled shared lifestyle patterns (plant-forward diet, natural movement, purpose, community) into his 'Power 9' principles.",
+        facts: [ "Known for: the Blue Zones concept",
+                 "5 zones: Okinawa, Sardinia, Ikaria, Nicoya, Loma Linda",
+                 "Book: The Blue Zones · Netflix: Live to 100" ] },
 
       /* ==================== STUDIES ==================== */
       { id: "r_hallmarks23", type: "study", label: "Hallmarks of Aging (2023)",
-        url: "https://doi.org/10.1016/j.cell.2022.11.001",
+        url: "https://doi.org/10.1016/j.cell.2022.11.001", wiki: WIKI + "Hallmarks_of_aging",
         desc: "The field-defining review, updated to twelve interconnected hallmarks of aging.",
-        detail: "López-Otín, Blasco, Partridge, Serrano & Kroemer, Cell (2023). The conceptual backbone of this whole map, expanding the original nine hallmarks to twelve: genomic instability, telomere attrition, epigenetic alterations, loss of proteostasis, disabled macroautophagy, deregulated nutrient-sensing, mitochondrial dysfunction, cellular senescence, stem cell exhaustion, altered intercellular communication, chronic inflammation, and dysbiosis." },
+        detail: "López-Otín, Blasco, Partridge, Serrano & Kroemer, Cell (2023). The conceptual backbone of this whole map, expanding the original nine hallmarks to twelve and proposing three criteria for what qualifies as a hallmark.",
+        facts: [ "Journal: Cell (2023)",
+                 "12 hallmarks: incl. genomic instability, senescence, dysbiosis",
+                 "Criteria: age-associated · accelerates aging if worsened · reversible if targeted" ] },
       { id: "r_hallmarks13", type: "study", label: "Hallmarks of Aging (2013)",
-        url: "https://doi.org/10.1016/j.cell.2013.05.039",
+        url: "https://doi.org/10.1016/j.cell.2013.05.039", wiki: WIKI + "Hallmarks_of_aging",
         desc: "The original, massively cited paper that organized aging into nine hallmarks.",
-        detail: "López-Otín et al., Cell (2013). Gave a fragmented field a shared vocabulary by grouping the drivers of aging into nine categories and proposing criteria for what counts as a true hallmark. One of the most cited biology papers of its decade." },
+        detail: "López-Otín et al., Cell (2013). Gave a fragmented field a shared vocabulary by grouping the drivers of aging into nine categories — one of the most cited biology papers of its decade.",
+        facts: [ "Journal: Cell (2013)",
+                 "Defined: the original 9 hallmarks of aging",
+                 "Impact: 20,000+ citations; created a common language" ] },
       { id: "r_ocampo16", type: "study", label: "In Vivo Reprogramming (2016)",
         url: "https://doi.org/10.1016/j.cell.2016.11.052",
         desc: "First proof that partial reprogramming can rejuvenate and extend lifespan in living mice.",
         detail: "Ocampo et al. (Belmonte lab), Cell (2016). Showed that short, cyclic expression of Yamanaka factors ameliorates cellular and physiological hallmarks of aging and prolongs lifespan in progeroid mice, and improves recovery from injury in older wild-type mice.",
+        facts: [ "Journal: Cell (2016) · Lab: Izpisúa Belmonte (Salk)",
+                 "Method: cyclic OSKM in living mice",
+                 "Result: hallmarks reversed; lifespan extended in progeroid mice" ],
         quote: { text: "Partial reprogramming by short-term cyclic expression of OSKM ameliorates cellular and physiological hallmarks of aging and prolongs lifespan in a mouse model of premature aging.", cite: "Ocampo et al., Cell (2016) — abstract" } },
       { id: "r_lu20", type: "study", label: "Reprogramming Restores Vision (2020)",
         url: "https://doi.org/10.1038/s41586-020-2975-4",
         desc: "Partial reprogramming reset the epigenetic age of neurons and restored sight in mice.",
-        detail: "Lu et al. (Sinclair lab), Nature (2020). Expressing three Yamanaka factors (OSK) reversed the epigenetic age of retinal ganglion cells, promoted nerve regeneration, and restored vision in aged mice and in a glaucoma model — striking evidence that aging carries recoverable 'youthful information.'" },
+        detail: "Lu et al. (Sinclair lab), Nature (2020). Expressing three Yamanaka factors (OSK) reversed the epigenetic age of retinal ganglion cells, promoted nerve regeneration, and restored vision in aged mice and in a glaucoma model — striking evidence that aging carries recoverable 'youthful information.'",
+        facts: [ "Journal: Nature (2020) · Lab: Sinclair (Harvard)",
+                 "Factors: OSK (omitting the cancer-linked c-Myc)",
+                 "Result: reversed nerve aging; restored vision in mice" ] },
       { id: "r_yang23", type: "study", label: "Loss of Epigenetic Info (2023)",
         url: "https://doi.org/10.1016/j.cell.2022.12.027",
         desc: "Argues aging is driven by loss of epigenetic information — and can be reversed by restoring it.",
-        detail: "Yang et al. (Sinclair lab), Cell (2023). Using a system to induce (and then heal) DNA breaks, the authors showed that the repair process itself scrambles the epigenome, accelerating aging — and that expressing OSK can restore youthful epigenetic patterns. Core experimental support for the information theory of aging." },
+        detail: "Yang et al. (Sinclair lab), Cell (2023). Using a system to induce (and then heal) DNA breaks, the authors showed that the repair process itself scrambles the epigenome, accelerating aging — and that expressing OSK can restore youthful epigenetic patterns. Core experimental support for the information theory of aging.",
+        facts: [ "Journal: Cell (2023) · Lab: Sinclair (Harvard)",
+                 "Concept: aging = loss of epigenetic 'information,' not just DNA damage",
+                 "Demonstrated: an inducible 'ICE' mouse that ages on cue" ] },
       { id: "r_xu18", type: "study", label: "Senolytics Extend Lifespan (2018)",
         url: "https://doi.org/10.1038/s41591-018-0092-9",
         desc: "Intermittent senolytic drugs improved function and increased lifespan in aged mice.",
-        detail: "Xu et al., Nature Medicine (2018). Transplanting even small numbers of senescent cells into mice caused lasting dysfunction; intermittent dasatinib + quercetin cleared senescent cells, improved physical function, and extended lifespan in naturally aged mice — a foundational senolytics paper." },
+        detail: "Xu et al., Nature Medicine (2018). Transplanting even small numbers of senescent cells into mice caused lasting dysfunction; intermittent dasatinib + quercetin cleared senescent cells, improved physical function, and extended lifespan in naturally aged mice — a foundational senolytics paper.",
+        facts: [ "Journal: Nature Medicine (2018)",
+                 "Drugs: dasatinib + quercetin (given intermittently)",
+                 "Result: +36% post-treatment survival in old mice" ] },
       { id: "r_baker16", type: "study", label: "Clearing Senescent Cells (2016)",
         url: "https://doi.org/10.1038/nature16932",
         desc: "Genetically removing senescent cells extended healthy lifespan across organs.",
-        detail: "Baker et al., Nature (2016). Using a genetic switch to eliminate p16-positive senescent cells throughout life extended median lifespan and delayed age-related deterioration of kidney, heart, and fat — direct evidence that senescent cells actively shorten healthspan." },
+        detail: "Baker et al., Nature (2016). Using a genetic switch to eliminate p16-positive senescent cells throughout life extended median lifespan and delayed age-related deterioration of kidney, heart, and fat — direct evidence that senescent cells actively shorten healthspan.",
+        facts: [ "Journal: Nature (2016)",
+                 "Method: genetic clearance of p16-positive cells",
+                 "Result: longer median lifespan; healthier organs" ] },
       { id: "r_harrison09", type: "study", label: "Rapamycin Extends Lifespan (2009)",
         url: "https://doi.org/10.1038/nature08221",
         desc: "The landmark result: rapamycin extended lifespan even when started late in life.",
         detail: "Harrison et al., Nature (2009). In the NIA Interventions Testing Program across three sites, rapamycin extended median and maximal lifespan of genetically diverse mice even when begun at 600 days of age (roughly late middle age) — the first drug shown to do so.",
+        facts: [ "Journal: Nature (2009) · Program: NIA ITP (3 labs)",
+                 "Effect: +9–14% lifespan, even started late in life",
+                 "Significance: first drug to extend mammalian lifespan" ],
         quote: { text: "Rapamycin fed near the end of life extended lifespan of both male and female mice … the first evidence that a drug can extend the lifespan of mammals when started late in life.", cite: "Summary of Harrison et al., Nature 460:392 (2009)" } },
       { id: "r_horvath13", type: "study", label: "The Epigenetic Clock (2013)",
-        url: "https://doi.org/10.1186/gb-2013-14-10-r115",
+        url: "https://doi.org/10.1186/gb-2013-14-10-r115", wiki: WIKI + "Epigenetic_clock",
         desc: "Introduced the DNA-methylation clock that predicts age across tissues.",
-        detail: "Horvath, Genome Biology (2013). Built from ~8,000 samples across 51 tissue types, this single methylation-based predictor estimates age throughout the body — the tool that let researchers quantify 'biological age' and gave the field a common yardstick." },
+        detail: "Horvath, Genome Biology (2013). Built from ~8,000 samples across 51 tissue types, this single methylation-based predictor estimates age throughout the body — the tool that let researchers quantify 'biological age' and gave the field a common yardstick.",
+        facts: [ "Journal: Genome Biology (2013)",
+                 "Built from: ~8,000 samples, 51 tissue types",
+                 "Legacy: the first universal 'aging clock'" ] },
       { id: "r_decabo19", type: "study", label: "Intermittent Fasting Review (2019)",
         url: "https://doi.org/10.1056/NEJMra1905136",
         desc: "An authoritative NEJM review of how fasting improves healthspan and disease resistance.",
-        detail: "de Cabo & Mattson, New England Journal of Medicine (2019). Synthesizes evidence that intermittent fasting triggers a 'metabolic switch' to ketone-based fuel, enhancing stress resistance, longevity signaling, and resistance to cancer, obesity, diabetes, and neurodegeneration." },
+        detail: "de Cabo & Mattson, New England Journal of Medicine (2019). Synthesizes evidence that intermittent fasting triggers a 'metabolic switch' to ketone-based fuel, enhancing stress resistance, longevity signaling, and resistance to cancer, obesity, diabetes, and neurodegeneration.",
+        facts: [ "Journal: New England Journal of Medicine (2019)",
+                 "Key idea: the fasting 'metabolic switch' to ketones",
+                 "Scope: a clinician-facing review of the human evidence" ] },
       { id: "r_calerie23", type: "study", label: "CALERIE: CR Slows Aging (2023)",
         url: "https://doi.org/10.1038/s43587-022-00357-y",
         desc: "First randomized human trial showing caloric restriction slows the measured pace of aging.",
-        detail: "Waziry et al., Nature Aging (2023). In the CALERIE randomized trial, ~25% caloric restriction over two years slowed the pace of aging by 2–3% (measured by the DunedinPACE methylation clock) in healthy, non-obese adults — a small effect, but the first causal human evidence that diet can slow biological aging." },
+        detail: "Waziry et al., Nature Aging (2023). In the CALERIE randomized trial, ~25% caloric restriction over two years slowed the pace of aging by 2–3% (measured by the DunedinPACE methylation clock) in healthy, non-obese adults — a small effect, but the first causal human evidence that diet can slow biological aging.",
+        facts: [ "Journal: Nature Aging (2023)",
+                 "Design: randomized, 220 adults, 2 years, ~25% CR",
+                 "Result: pace of aging slowed 2–3% (DunedinPACE clock)" ] },
       { id: "r_kenyon93", type: "study", label: "A Worm That Lives 2× Longer (1993)",
         url: "https://doi.org/10.1038/366461a0",
         desc: "The discovery that a single gene mutation doubles lifespan — the birth of aging genetics.",
         detail: "Kenyon, Chang, Gensch, Rudner & Tabtiang, Nature (1993). Showed that a mutation in daf-2 doubles C. elegans lifespan and requires a second gene, daf-16 — establishing that aging is under genetic control via nutrient-sensing pathways conserved all the way to humans.",
+        facts: [ "Journal: Nature (1993)",
+                 "Genes: daf-2 (insulin/IGF receptor) and daf-16",
+                 "Impact: proved aging is genetically programmable" ],
         quote: { text: "Mutations in the gene daf-2 can cause fertile, active, adult Caenorhabditis elegans hermaphrodites to live more than twice as long as wild type.", cite: "Kenyon et al., Nature 366:461 (1993) — abstract" } },
       { id: "r_yamanaka06", type: "study", label: "iPS Cells Discovered (2006)",
-        url: "https://doi.org/10.1016/j.cell.2006.07.024",
+        url: "https://doi.org/10.1016/j.cell.2006.07.024", wiki: WIKI + "Induced_pluripotent_stem_cell",
         desc: "Four genes can turn an adult cell back into a stem cell — the Nobel-winning basis of reprogramming.",
-        detail: "Takahashi & Yamanaka, Cell (2006). Demonstrated that introducing just four factors (Oct3/4, Sox2, c-Myc, Klf4) reprograms adult mouse fibroblasts into induced pluripotent stem cells. This is the discovery that all partial-reprogramming rejuvenation work builds on." },
+        detail: "Takahashi & Yamanaka, Cell (2006). Demonstrated that introducing just four factors (Oct3/4, Sox2, c-Myc, Klf4) reprograms adult mouse fibroblasts into induced pluripotent stem cells. This is the discovery that all partial-reprogramming rejuvenation work builds on.",
+        facts: [ "Journal: Cell (2006)",
+                 "The 4 factors: Oct4, Sox2, Klf4, c-Myc",
+                 "Nobel Prize: 2012 (to Yamanaka)" ] },
       { id: "r_klotho97", type: "study", label: "Klotho & Aging (1997)",
-        url: "https://doi.org/10.1038/36285",
+        url: "https://doi.org/10.1038/36285", wiki: WIKI + "Klotho_(biology)",
         desc: "Disabling a single gene produced an aging-like syndrome, revealing a longevity 'switch.'",
-        detail: "Kuro-o et al., Nature (1997). Mice with a defective klotho gene developed a syndrome resembling human aging — short lifespan, arteriosclerosis, osteoporosis, skin atrophy — identifying klotho as a gene whose activity regulates aging and age-related disease." },
+        detail: "Kuro-o et al., Nature (1997). Mice with a defective klotho gene developed a syndrome resembling human aging — short lifespan, arteriosclerosis, osteoporosis, skin atrophy — identifying klotho as a gene whose activity regulates aging and age-related disease.",
+        facts: [ "Journal: Nature (1997)",
+                 "Finding: klotho mutation → premature-aging syndrome",
+                 "Later shown: overexpression extends mouse lifespan" ] },
       { id: "r_taurine23", type: "study", label: "Taurine & Aging (2023)",
         url: "https://doi.org/10.1126/science.abn9257",
         desc: "Taurine declines with age across species; supplementing it extended healthspan in animals.",
-        detail: "Singh et al., Science (2023). Circulating taurine falls with age in mice, monkeys, and humans; restoring it extended lifespan and healthspan in mice and healthspan in monkeys, reducing senescence, DNA damage, and inflammaging. Provocative — but human causal evidence is still lacking and the finding is debated.",
+        detail: "Singh et al., Science (2023). Circulating taurine falls with age in mice, monkeys, and humans; restoring it extended lifespan and healthspan in mice and healthspan in monkeys, reducing senescence, DNA damage, and inflammaging. Provocative — but human causal evidence is still lacking and the finding is actively debated.",
+        facts: [ "Journal: Science (2023)",
+                 "Result: taurine extended healthspan in mice and monkeys",
+                 "Caveat: human benefit unproven; contested by later work" ],
         quote: { text: "A reversal of this decline through taurine supplementation increased the health span … and life span in mice and health span in monkeys.", cite: "Singh et al., Science 380:eabn9257 (2023) — abstract" } },
       { id: "r_hbot20", type: "study", label: "Hyperbaric Oxygen & Telomeres (2020)",
         url: "https://doi.org/10.18632/aging.202188",
         desc: "A small trial reported HBOT lengthened telomeres and cleared senescent immune cells.",
-        detail: "Hachmo et al., Aging (2020). In 35 healthy older adults, 60 sessions of hyperbaric oxygen therapy increased immune-cell telomere length by over 20% and reduced senescent T-cells — intriguing but small, uncontrolled, and in need of replication." },
+        detail: "Hachmo et al., Aging (2020). In 35 healthy older adults, 60 sessions of hyperbaric oxygen therapy increased immune-cell telomere length by over 20% and reduced senescent T-cells — intriguing but small, uncontrolled, and in need of replication before drawing firm conclusions.",
+        facts: [ "Journal: Aging (2020)",
+                 "Design: 35 adults 64+, 60 HBOT sessions, no control group",
+                 "Result: telomeres +20%; fewer senescent T-cells" ] },
       { id: "r_villeda14", type: "study", label: "Young Blood Rejuvenates Brain (2014)",
         url: "https://doi.org/10.1038/nm.3569",
         desc: "Exposure to young blood reversed age-related decline in the aged mouse brain.",
-        detail: "Villeda et al., Nature Medicine (2014). Young blood (via parabiosis or plasma injection) improved synaptic plasticity, hippocampal function, and learning in old mice — helping ignite the young-plasma and circulating-factors field, though human translation remains unproven and commercially fraught." },
+        detail: "Villeda et al., Nature Medicine (2014). Young blood (via parabiosis or plasma injection) improved synaptic plasticity, hippocampal function, and learning in old mice — helping ignite the young-plasma and circulating-factors field, though human translation remains unproven and commercially fraught.",
+        facts: [ "Journal: Nature Medicine (2014)",
+                 "Method: parabiosis / young plasma into old mice",
+                 "Result: improved memory and synaptic plasticity" ] },
       { id: "r_fisetin18", type: "study", label: "Fisetin Is a Senolytic (2018)",
         url: "https://doi.org/10.1016/j.ebiom.2018.09.015",
         desc: "A common plant flavonoid cleared senescent cells and extended lifespan in mice.",
-        detail: "Yousefzadeh et al., EBioMedicine (2018). Of ten flavonoids screened, fisetin was the most potent senolytic; given late in life to mice it reduced senescence markers, improved tissue health, and extended median and maximum lifespan — spurring human trials of a widely available natural compound." },
+        detail: "Yousefzadeh et al., EBioMedicine (2018). Of ten flavonoids screened, fisetin was the most potent senolytic; given late in life to mice it reduced senescence markers, improved tissue health, and extended median and maximum lifespan — spurring human trials of a widely available natural compound.",
+        facts: [ "Journal: EBioMedicine (2018)",
+                 "Compound: fisetin (found in strawberries, apples)",
+                 "Result: cleared senescent cells; extended mouse lifespan" ] },
 
       /* ==================== BOOKS ==================== */
       { id: "b_lifespan", type: "book", label: "Lifespan (2019)",
         url: "https://www.google.com/search?q=Lifespan+Why+We+Age+David+Sinclair+book",
+        wiki: WIKI + "Lifespan:_Why_We_Age_%E2%80%93_and_Why_We_Don't_Have_To",
         desc: "David Sinclair's popular case that aging is a single, treatable condition.",
-        detail: "Built around sirtuins, NAD⁺, and the 'information theory of aging,' Lifespan argues that aging is a disease with a common cause — and lays out the lifestyle levers and emerging therapies Sinclair believes could extend healthy human life." },
+        detail: "Built around sirtuins, NAD⁺, and the 'information theory of aging,' Lifespan argues that aging is a disease with a common cause — and lays out the lifestyle levers and emerging therapies Sinclair believes could extend healthy human life.",
+        facts: [ "Author: David A. Sinclair (2019)", "Best for: the reversibility-of-aging thesis" ] },
       { id: "b_longevitydiet", type: "book", label: "The Longevity Diet (2018)",
         url: "https://www.google.com/search?q=The+Longevity+Diet+Valter+Longo+book",
         desc: "Valter Longo's practical program grounded in fasting and nutrition science.",
-        detail: "Distills decades of research on nutrition, fasting, and longevity pathways into a dietary approach, including the fasting-mimicking diet, plant-forward eating, and time-restricted feeding." },
+        detail: "Distills decades of research on nutrition, fasting, and longevity pathways into a dietary approach, including the fasting-mimicking diet, plant-forward eating, and time-restricted feeding.",
+        facts: [ "Author: Valter Longo (2018)", "Best for: what and when to eat for longevity" ] },
       { id: "b_outlive", type: "book", label: "Outlive (2023)",
         url: "https://www.google.com/search?q=Outlive+The+Science+and+Art+of+Longevity+Peter+Attia+book",
+        wiki: WIKI + "Outlive:_The_Science_and_Art_of_Longevity",
         desc: "Peter Attia's #1 bestseller on proactive 'Medicine 3.0.'",
-        detail: "Reframes medicine around preventing the 'four horsemen' — heart disease, cancer, neurodegeneration, and metabolic disease — decades early, with deep practical chapters on exercise, nutrition, sleep, and emotional health as longevity tools." },
+        detail: "Reframes medicine around preventing the 'four horsemen' — heart disease, cancer, neurodegeneration, and metabolic disease — decades early, with deep practical chapters on exercise, nutrition, sleep, and emotional health as longevity tools.",
+        facts: [ "Author: Peter Attia with Bill Gifford (2023)", "Best for: a practical, clinical game plan" ] },
       { id: "b_ageless", type: "book", label: "Ageless (2020)",
         url: "https://www.google.com/search?q=Ageless+The+New+Science+of+Getting+Older+Andrew+Steele+book",
         desc: "Andrew Steele's clear, hallmark-by-hallmark tour of the whole field.",
-        detail: "A physicist-turned-biologist's accessible survey of the science of not aging — senescence, telomeres, reprogramming, senolytics and more — making the case that treating aging itself is the great opportunity of modern medicine." },
+        detail: "A physicist-turned-biologist's accessible survey of the science of not aging — senescence, telomeres, reprogramming, senolytics and more — making the case that treating aging itself is the great opportunity of modern medicine.",
+        facts: [ "Author: Andrew Steele (2020)", "Best for: a balanced overview of the whole field" ] },
       { id: "b_endingaging", type: "book", label: "Ending Aging (2007)",
         url: "https://www.google.com/search?q=Ending+Aging+Aubrey+de+Grey+book",
         desc: "Aubrey de Grey's manifesto for the damage-repair (SENS) approach.",
-        detail: "Lays out the seven categories of aging damage de Grey believes can be repaired through 'strategies for engineered negligible senescence,' arguing that a maintenance-and-repair approach could indefinitely postpone age-related decline." },
+        detail: "Lays out the seven categories of aging damage de Grey believes can be repaired through 'strategies for engineered negligible senescence,' arguing that a maintenance-and-repair approach could indefinitely postpone age-related decline.",
+        facts: [ "Author: Aubrey de Grey (2007)", "Best for: the engineering/repair philosophy" ] },
       { id: "b_telomere", type: "book", label: "The Telomere Effect (2017)",
         url: "https://www.google.com/search?q=The+Telomere+Effect+Blackburn+Epel+book",
         desc: "Nobel laureate Elizabeth Blackburn on telomeres, stress, and lifestyle.",
-        detail: "Blackburn and psychologist Elissa Epel connect telomere biology to everyday factors — chronic stress, sleep, diet, and relationships — translating cellular aging science into practical, evidence-based habits." },
+        detail: "Blackburn and psychologist Elissa Epel connect telomere biology to everyday factors — chronic stress, sleep, diet, and relationships — translating cellular aging science into practical, evidence-based habits.",
+        facts: [ "Authors: Elizabeth Blackburn & Elissa Epel (2017)", "Best for: telomeres and the stress connection" ] },
       { id: "b_agelater", type: "book", label: "Age Later (2020)",
         url: "https://www.google.com/search?q=Age+Later+Nir+Barzilai+book",
         desc: "Nir Barzilai on centenarian genetics and drugs that target aging.",
-        detail: "Draws on Barzilai's studies of exceptionally long-lived families to argue that we can target the biology of aging itself — and makes the case for metformin and the TAME trial as a first step." },
+        detail: "Draws on Barzilai's studies of exceptionally long-lived families to argue that we can target the biology of aging itself — and makes the case for metformin and the TAME trial as a first step.",
+        facts: [ "Author: Nir Barzilai (2020)", "Best for: centenarians and the drug-the-aging case" ] },
       { id: "b_hownottoage", type: "book", label: "How Not to Age (2023)",
         url: "https://www.google.com/search?q=How+Not+to+Age+Michael+Greger+book",
         desc: "Michael Greger's evidence-dense, diet-first synthesis of the aging literature.",
-        detail: "A heavily referenced tour through the aging pathways and the foods and habits that influence them, emphasizing plant-based nutrition and lifestyle over supplements and drugs." },
+        detail: "A heavily referenced tour through the aging pathways and the foods and habits that influence them, emphasizing plant-based nutrition and lifestyle over supplements and drugs.",
+        facts: [ "Author: Michael Greger (2023)", "Best for: a nutrition-first, citation-heavy deep dive" ] },
       { id: "b_bluezones", type: "book", label: "The Blue Zones (2008)",
         url: "https://www.google.com/search?q=The+Blue+Zones+Dan+Buettner+book",
+        wiki: WIKI + "Blue_zone",
         desc: "Dan Buettner's lessons from the world's longest-lived communities.",
-        detail: "Documents the shared habits of the five Blue Zones — mostly plant-based diets, constant natural movement, strong social ties, and a sense of purpose — and turns them into practical 'Power 9' principles." },
+        detail: "Documents the shared habits of the five Blue Zones — mostly plant-based diets, constant natural movement, strong social ties, and a sense of purpose — and turns them into practical 'Power 9' principles.",
+        facts: [ "Author: Dan Buettner (2008)", "Best for: real-world lessons from centenarian cultures" ] },
       { id: "b_whywesleep", type: "book", label: "Why We Sleep (2017)",
         url: "https://www.google.com/search?q=Why+We+Sleep+Matthew+Walker+book",
+        wiki: WIKI + "Why_We_Sleep",
         desc: "Matthew Walker on sleep as a non-negotiable pillar of healthy aging.",
-        detail: "Neuroscientist Matthew Walker marshals the evidence that sleep governs immune function, metabolism, memory, and brain clearance of waste — making adequate sleep one of the most powerful and underrated longevity interventions." },
+        detail: "Neuroscientist Matthew Walker marshals the evidence that sleep governs immune function, metabolism, memory, and brain clearance of waste — making adequate sleep one of the most powerful and underrated longevity interventions. (Note: some specific claims have drawn academic criticism.)",
+        facts: [ "Author: Matthew Walker (2017)", "Best for: why sleep is a longevity pillar" ] },
+      { id: "b_youngforever", type: "book", label: "Young Forever (2023)",
+        url: "https://www.google.com/search?q=Young+Forever+Mark+Hyman+book",
+        desc: "Mark Hyman's functional-medicine synthesis organized around the hallmarks of aging.",
+        detail: "A practical, hallmark-by-hallmark program combining diet, lifestyle, and targeted supplements, aimed at a general audience looking to translate longevity science into daily habits.",
+        facts: [ "Author: Mark Hyman (2023)", "Best for: an actionable, functional-medicine plan" ] },
 
       /* ==================== WRITINGS / RESOURCES ==================== */
       { id: "w_tame", type: "writing", label: "TAME Trial (Metformin)", badge: "Clinical Trial",
         url: "https://www.afar.org/tame-trial",
         desc: "The pivotal effort to prove a drug can target aging itself.",
-        detail: "The American Federation for Aging Research's overview of Targeting Aging with Metformin — a proposed large trial designed less to test metformin per se than to establish a regulatory path for treating aging as an indication, so future geroprotectors can be approved." },
+        detail: "The American Federation for Aging Research's overview of Targeting Aging with Metformin — a proposed large trial designed less to test metformin per se than to establish a regulatory path for treating aging as an indication, so future geroprotectors can be approved.",
+        facts: [ "Format: proposed multi-center clinical trial",
+                 "Led by: Nir Barzilai / AFAR",
+                 "Goal: make 'aging' an approvable drug target" ] },
       { id: "w_drive", type: "writing", label: "The Drive (Attia)", badge: "Podcast",
         url: "https://peterattiamd.com/podcast/",
         desc: "Peter Attia's long-form podcast interviewing longevity scientists.",
-        detail: "Deep, technical interviews that translate primary aging research into practical strategy — one of the best free ways to go beyond headlines into the actual evidence." },
+        detail: "Deep, technical interviews that translate primary aging research into practical strategy — one of the best free ways to go beyond headlines into the actual evidence.",
+        facts: [ "Format: podcast", "Host: Peter Attia", "Best for: going deep beyond the headlines" ] },
       { id: "w_blueprint", type: "writing", label: "Blueprint (Bryan Johnson)", badge: "Protocol",
         url: "https://www.bryanjohnson.com/",
         desc: "Bryan Johnson's open-sourced, measurement-driven longevity protocol.",
-        detail: "A fully documented regimen of diet, exercise, sleep, and supplementation, with published biomarker data and 'speed of aging' tracking. Widely debated, but a rare example of a rigorous, transparent n=1 longevity experiment." },
+        detail: "A fully documented regimen of diet, exercise, sleep, and supplementation, with published biomarker data and 'speed of aging' tracking. Widely debated, but a rare example of a rigorous, transparent n=1 longevity experiment anyone can read.",
+        facts: [ "Format: open-source personal protocol + data",
+                 "By: Bryan Johnson",
+                 "Notable: all methods and results published freely" ] },
 
       /* ==================== WATCH (docs / talks / videos) ==================== */
       { id: "doc_bluezones", type: "watch", label: "Live to 100: Blue Zones", badge: "Documentary",
-        url: "https://www.netflix.com/title/81214929",
+        url: "https://www.netflix.com/title/81214929", wiki: WIKI + "Blue_zone",
         desc: "Netflix (2023): Dan Buettner tours the world's longevity hotspots.",
-        detail: "A four-part series visiting Okinawa, Sardinia, Ikaria, Nicoya, and Loma Linda to uncover the lifestyle patterns behind exceptional longevity — the accessible, human counterpart to the lab science on this map." },
+        detail: "A four-part series visiting Okinawa, Sardinia, Ikaria, Nicoya, and Loma Linda to uncover the lifestyle patterns behind exceptional longevity — the accessible, human counterpart to the lab science on this map.",
+        facts: [ "Format: 4-part Netflix documentary (2023)", "Host: Dan Buettner", "Best for: the lifestyle side of longevity" ] },
       { id: "vid_kurzgesagt", type: "watch", label: "Why Age? (Kurzgesagt)", badge: "YouTube",
-        url: "https://www.youtube.com/watch?v=GoJsr4IwCm4",
+        url: "https://www.youtube.com/watch?v=GoJsr4IwCm4", wiki: WIKI + "Kurzgesagt",
         desc: "A crisp animated primer on the science and ethics of ending aging.",
-        detail: "Kurzgesagt's popular explainer lays out why we age and whether we should try to stop it — a great 7-minute on-ramp to the whole field for newcomers." },
+        detail: "Kurzgesagt's popular explainer lays out why we age and whether we should try to stop it — a great ~7-minute on-ramp to the whole field for newcomers.",
+        facts: [ "Format: animated YouTube explainer (~7 min)", "By: Kurzgesagt – In a Nutshell", "Best for: a fast, engaging introduction" ] },
       { id: "vid_kenyonted", type: "watch", label: "Kenyon: Longer Lives (TED)", badge: "TED Talk",
         url: "https://www.ted.com/talks/cynthia_kenyon_experiments_that_hint_of_longer_lives",
         desc: "Cynthia Kenyon on how one gene doubled a worm's lifespan.",
-        detail: "Kenyon explains, for a general audience, how her daf-2 discovery revealed that aging is controlled by nutrient-sensing genes conserved from worms to us — and what that hints for human longevity." },
+        detail: "Kenyon explains, for a general audience, how her daf-2 discovery revealed that aging is controlled by nutrient-sensing genes conserved from worms to us — and what that hints for human longevity.",
+        facts: [ "Format: TED Talk", "Speaker: Cynthia Kenyon", "Best for: the genetics of aging, made simple" ] },
       { id: "vid_degreyted", type: "watch", label: "de Grey: End Aging (TED)", badge: "TED Talk",
         url: "https://www.ted.com/talks/aubrey_de_grey_a_roadmap_to_end_aging",
         desc: "Aubrey de Grey's provocative case that aging is a curable disease.",
-        detail: "The talk that introduced the SENS 'repair the damage' framework to a wide audience, arguing that aging results from seven fixable categories of damage." },
+        detail: "The talk that introduced the SENS 'repair the damage' framework to a wide audience, arguing that aging results from seven fixable categories of damage.",
+        facts: [ "Format: TED Talk (2006)", "Speaker: Aubrey de Grey", "Best for: the case that aging is 'curable'" ] },
     ];
 
     // ---------- Links (undirected) ----------
     const L = [
-      // root -> avenues
       ["root","a_senescence"],["root","a_nad"],["root","a_mtor"],["root","a_cr"],
       ["root","a_reprog"],["root","a_metformin"],["root","a_autophagy"],["root","a_stem"],
       ["root","a_clock"],["root","a_telomere"],["root","a_mito"],["root","a_inflamm"],
       ["root","a_youngblood"],["root","a_microbiome"],["root","a_klotho"],["root","a_exercise"],
       ["root","a_supplements"],["root","a_dnarepair"],
-      // framework studies + general books to root
       ["root","r_hallmarks23"],["root","r_hallmarks13"],["root","b_ageless"],
       ["root","b_hownottoage"],["root","b_youngforever"],["root","vid_kurzgesagt"],
-      // cross-links among avenues
       ["a_cr","a_autophagy"],["a_mtor","a_autophagy"],["a_metformin","a_mtor"],
       ["a_senescence","a_inflamm"],["a_nad","a_mito"],["a_reprog","a_clock"],
       ["a_stem","a_telomere"],["a_youngblood","a_stem"],["a_microbiome","a_inflamm"],
       ["a_klotho","a_youngblood"],["a_exercise","a_mito"],["a_supplements","a_autophagy"],
       ["a_dnarepair","a_reprog"],["a_dnarepair","a_senescence"],["a_cr","a_metformin"],
-      // people -> avenues
       ["p_sinclair","a_nad"],["p_sinclair","a_reprog"],["p_sinclair","a_clock"],["p_sinclair","a_dnarepair"],
       ["p_longo","a_cr"],["p_longo","a_autophagy"],
       ["p_attia","a_exercise"],["p_attia","a_metformin"],["p_attia","a_mtor"],
@@ -547,7 +767,6 @@
       ["p_kennedy","a_mtor"],["p_kennedy","a_supplements"],
       ["p_bryanjohnson","a_supplements"],["p_bryanjohnson","a_exercise"],
       ["p_buettner","a_cr"],
-      // studies -> avenues / people
       ["r_ocampo16","a_reprog"],["r_ocampo16","p_belmonte"],
       ["r_lu20","a_reprog"],["r_lu20","p_sinclair"],
       ["r_yang23","a_reprog"],["r_yang23","a_dnarepair"],["r_yang23","p_sinclair"],
@@ -564,7 +783,6 @@
       ["r_hbot20","a_telomere"],["r_hbot20","a_inflamm"],
       ["r_villeda14","a_youngblood"],["r_villeda14","a_stem"],
       ["r_fisetin18","a_senescence"],["r_fisetin18","a_supplements"],
-      // books -> people / avenues
       ["b_lifespan","p_sinclair"],["b_lifespan","a_nad"],
       ["b_longevitydiet","p_longo"],["b_longevitydiet","a_cr"],
       ["b_outlive","p_attia"],["b_outlive","a_exercise"],
@@ -574,21 +792,13 @@
       ["b_hownottoage","a_cr"],
       ["b_bluezones","p_buettner"],["b_bluezones","a_cr"],
       ["b_whywesleep","a_inflamm"],["b_whywesleep","a_exercise"],
-      // writings
       ["w_tame","a_metformin"],["w_tame","p_barzilai"],
       ["w_drive","p_attia"],
       ["w_blueprint","p_bryanjohnson"],["w_blueprint","a_supplements"],
-      // watch
       ["doc_bluezones","p_buettner"],["doc_bluezones","a_cr"],
       ["vid_kenyonted","p_kenyon"],["vid_kenyonted","a_metformin"],
       ["vid_degreyted","p_degrey"],
     ];
-
-    // one extra general book node referenced above
-    N.push({ id: "b_youngforever", type: "book", label: "Young Forever (2023)",
-      url: "https://www.google.com/search?q=Young+Forever+Mark+Hyman+book",
-      desc: "Mark Hyman's functional-medicine synthesis organized around the hallmarks of aging.",
-      detail: "A practical, hallmark-by-hallmark program combining diet, lifestyle, and targeted supplements, aimed at a general audience looking to translate longevity science into daily habits." });
 
     const TYPE_META = {
       root:    { label: "Hub",      color: "var(--n-root)" },
@@ -606,25 +816,23 @@
     const SVGNS = "http://www.w3.org/2000/svg";
     const byId = {};
     N.forEach(n => { byId[n.id] = n; n.neighbors = []; });
-
     const links = L.map(([a, b]) => {
       const s = byId[a], t = byId[b];
       if (!s || !t) { console.warn("bad link", a, b); return null; }
       s.neighbors.push(t); t.neighbors.push(s);
       return { source: s, target: t };
     }).filter(Boolean);
-
     document.getElementById("mm-count").textContent = N.length + " nodes · " + links.length + " links";
 
-    let W = svg.clientWidth || 900, H = svg.clientHeight || 720;
+    let W = svg.clientWidth || 1000, H = svg.clientHeight || 760;
     function seed() {
       N.forEach((n, i) => {
         if (n.id === "root") { n.x = W / 2; n.y = H / 2; }
         else {
           const ang = (i / N.length) * Math.PI * 2 * 3.3;
-          const rad = n.type === "avenue" ? 240 : 360 + (i % 5) * 34;
-          n.x = W / 2 + Math.cos(ang) * rad + (Math.random() - 0.5) * 80;
-          n.y = H / 2 + Math.sin(ang) * rad + (Math.random() - 0.5) * 80;
+          const rad = n.type === "avenue" ? 300 : 470 + (i % 6) * 40;
+          n.x = W / 2 + Math.cos(ang) * rad + (Math.random() - 0.5) * 110;
+          n.y = H / 2 + Math.sin(ang) * rad + (Math.random() - 0.5) * 110;
         }
         n.vx = 0; n.vy = 0;
       });
@@ -635,262 +843,193 @@
     svg.appendChild(gRoot);
     const gLinks = document.createElementNS(SVGNS, "g");
     const gNodes = document.createElementNS(SVGNS, "g");
-    gRoot.appendChild(gLinks);
-    gRoot.appendChild(gNodes);
+    gRoot.appendChild(gLinks); gRoot.appendChild(gNodes);
 
     links.forEach(l => {
       const line = document.createElementNS(SVGNS, "line");
       line.setAttribute("class", "mm-link");
       l.el = line; gLinks.appendChild(line);
     });
-
     N.forEach(n => {
       const g = document.createElementNS(SVGNS, "g");
       g.setAttribute("class", "mm-node node-" + n.type);
       g.dataset.id = n.id;
       const c = document.createElementNS(SVGNS, "circle");
-      c.setAttribute("r", RADIUS[n.type]);
-      g.appendChild(c);
+      c.setAttribute("r", RADIUS[n.type]); g.appendChild(c);
       const t = document.createElementNS(SVGNS, "text");
       const fs = n.type === "root" ? 15 : n.type === "avenue" ? 12 : 9.5;
       t.setAttribute("font-size", fs);
       t.setAttribute("font-weight", n.type === "root" || n.type === "avenue" ? 600 : 500);
       t.setAttribute("text-anchor", "middle");
       t.setAttribute("dy", RADIUS[n.type] + fs + 2);
-      t.textContent = n.label;
-      g.appendChild(t);
-      n.el = g; n.circleEl = c;
-      gNodes.appendChild(g);
+      t.textContent = n.label; g.appendChild(t);
+      n.el = g; n.circleEl = c; gNodes.appendChild(g);
     });
 
-    // ---------- Force simulation (tuned for spread) ----------
+    // ---------- Force simulation (tuned for wide spread) ----------
     let alpha = 1, running = false, needsFit = true;
-    const CHARGE = -1700;
-    const LINK_DIST = l => (l.source.type === "root" || l.target.type === "root") ? 165 : 108;
+    const CHARGE = -3000;
+    const LINK_DIST = l => (l.source.type === "root" || l.target.type === "root") ? 230 : 165;
 
     function tick() {
       W = svg.clientWidth || W; H = svg.clientHeight || H;
       const cx = W / 2, cy = H / 2;
-
-      // repulsion
       for (let i = 0; i < N.length; i++) {
-        const a = N[i];
-        if (a.el.style.display === "none") continue;
+        const a = N[i]; if (a.el.style.display === "none") continue;
         for (let j = i + 1; j < N.length; j++) {
-          const b = N[j];
-          if (b.el.style.display === "none") continue;
+          const b = N[j]; if (b.el.style.display === "none") continue;
           let dx = a.x - b.x, dy = a.y - b.y;
-          let d2 = dx * dx + dy * dy || 0.01;
-          let d = Math.sqrt(d2);
+          let d2 = dx * dx + dy * dy || 0.01, d = Math.sqrt(d2);
           const f = (CHARGE * alpha) / d2;
           const fx = (dx / d) * f, fy = (dy / d) * f;
           a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
         }
       }
-      // springs
       links.forEach(l => {
         if (l.el.style.display === "none") return;
         const s = l.source, t = l.target;
-        let dx = t.x - s.x, dy = t.y - s.y;
-        let d = Math.sqrt(dx * dx + dy * dy) || 0.01;
-        const f = ((d - LINK_DIST(l)) / d) * 0.05 * alpha;
+        let dx = t.x - s.x, dy = t.y - s.y, d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        const f = ((d - LINK_DIST(l)) / d) * 0.045 * alpha;
         const fx = dx * f, fy = dy * f;
         s.vx += fx; s.vy += fy; t.vx -= fx; t.vy -= fy;
       });
-      // gentle gravity to center
-      N.forEach(n => { n.vx += (cx - n.x) * 0.005 * alpha; n.vy += (cy - n.y) * 0.005 * alpha; });
-      // collision (prevent overlap incl. label room)
+      N.forEach(n => { n.vx += (cx - n.x) * 0.0034 * alpha; n.vy += (cy - n.y) * 0.0034 * alpha; });
+      // collision — generous separation to declump and give labels room
       for (let i = 0; i < N.length; i++) {
         const a = N[i];
         for (let j = i + 1; j < N.length; j++) {
           const b = N[j];
-          let dx = b.x - a.x, dy = b.y - a.y;
-          let d = Math.sqrt(dx * dx + dy * dy) || 0.01;
-          const minSep = RADIUS[a.type] + RADIUS[b.type] + 30;
+          let dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          const minSep = RADIUS[a.type] + RADIUS[b.type] + 52;
           if (d < minSep) {
-            const push = (minSep - d) / d * 0.5;
-            const ox = dx * push, oy = dy * push;
+            const push = (minSep - d) / d * 0.5, ox = dx * push, oy = dy * push;
             a.x -= ox; a.y -= oy; b.x += ox; b.y += oy;
           }
         }
       }
-      // integrate
-      N.forEach(n => {
-        if (n === dragNode) return;
-        n.x += n.vx; n.y += n.vy;
-        n.vx *= 0.82; n.vy *= 0.82;
-      });
-
+      N.forEach(n => { if (n === dragNode) return; n.x += n.vx; n.y += n.vy; n.vx *= 0.83; n.vy *= 0.83; });
       render();
-      alpha *= 0.99;
-      if (needsFit && alpha < 0.08) { needsFit = false; fitView(); }
-      if (alpha > 0.008 || dragNode) requestAnimationFrame(tick);
+      alpha *= 0.992;
+      if (needsFit && alpha < 0.07) { needsFit = false; fitView(); }
+      if (alpha > 0.006 || dragNode) requestAnimationFrame(tick);
       else running = false;
     }
     function reheat(a) { alpha = Math.max(alpha, a || 0.4); if (!running) { running = true; requestAnimationFrame(tick); } }
-
     function render() {
-      links.forEach(l => {
-        l.el.setAttribute("x1", l.source.x); l.el.setAttribute("y1", l.source.y);
-        l.el.setAttribute("x2", l.target.x); l.el.setAttribute("y2", l.target.y);
-      });
+      links.forEach(l => { l.el.setAttribute("x1", l.source.x); l.el.setAttribute("y1", l.source.y); l.el.setAttribute("x2", l.target.x); l.el.setAttribute("y2", l.target.y); });
       N.forEach(n => { n.el.setAttribute("transform", `translate(${n.x},${n.y})`); });
     }
 
     // ---------- View transform ----------
     const tf = { x: 0, y: 0, k: 1 };
     function applyTF() { gRoot.setAttribute("transform", `translate(${tf.x},${tf.y}) scale(${tf.k})`); }
-    function toGraph(clientX, clientY) {
-      const r = svg.getBoundingClientRect();
-      return { x: (clientX - r.left - tf.x) / tf.k, y: (clientY - r.top - tf.y) / tf.k };
-    }
+    function toGraph(clientX, clientY) { const r = svg.getBoundingClientRect(); return { x: (clientX - r.left - tf.x) / tf.k, y: (clientY - r.top - tf.y) / tf.k }; }
     function fitView() {
       const vis = N.filter(n => n.el.style.display !== "none");
       if (!vis.length) return;
       let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-      vis.forEach(n => {
-        minX = Math.min(minX, n.x - 60); maxX = Math.max(maxX, n.x + 60);
-        minY = Math.min(minY, n.y - 30); maxY = Math.max(maxY, n.y + 40);
-      });
+      vis.forEach(n => { minX = Math.min(minX, n.x - 70); maxX = Math.max(maxX, n.x + 70); minY = Math.min(minY, n.y - 30); maxY = Math.max(maxY, n.y + 45); });
       const bw = maxX - minX, bh = maxY - minY;
       W = svg.clientWidth || W; H = svg.clientHeight || H;
-      const k = Math.max(0.35, Math.min(1.3, Math.min(W / bw, H / bh) * 0.92));
-      tf.k = k;
-      tf.x = W / 2 - k * (minX + bw / 2);
-      tf.y = H / 2 - k * (minY + bh / 2);
-      applyTF();
+      const k = Math.max(0.24, Math.min(1.15, Math.min(W / bw, H / bh) * 0.95));
+      tf.k = k; tf.x = W / 2 - k * (minX + bw / 2); tf.y = H / 2 - k * (minY + bh / 2); applyTF();
     }
 
     svg.addEventListener("wheel", e => {
       e.preventDefault();
-      const r = svg.getBoundingClientRect();
-      const mx = e.clientX - r.left, my = e.clientY - r.top;
+      const r = svg.getBoundingClientRect(); const mx = e.clientX - r.left, my = e.clientY - r.top;
       const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
-      const newK = Math.max(0.3, Math.min(3, tf.k * factor));
-      tf.x = mx - (mx - tf.x) * (newK / tf.k);
-      tf.y = my - (my - tf.y) * (newK / tf.k);
-      tf.k = newK; applyTF();
+      const newK = Math.max(0.22, Math.min(3, tf.k * factor));
+      tf.x = mx - (mx - tf.x) * (newK / tf.k); tf.y = my - (my - tf.y) * (newK / tf.k); tf.k = newK; applyTF();
     }, { passive: false });
 
     // ---------- Pointer interaction ----------
     let dragNode = null, panning = false, startPan = null, moved = false, pressNode = null;
     svg.addEventListener("pointerdown", e => {
-      const nodeG = e.target.closest(".mm-node");
-      moved = false;
-      if (nodeG) {
-        pressNode = byId[nodeG.dataset.id]; dragNode = pressNode;
-        svg.setPointerCapture(e.pointerId);
-      } else {
-        panning = true; startPan = { x: e.clientX - tf.x, y: e.clientY - tf.y };
-        svg.classList.add("panning"); svg.setPointerCapture(e.pointerId);
-      }
+      const nodeG = e.target.closest(".mm-node"); moved = false;
+      if (nodeG) { pressNode = byId[nodeG.dataset.id]; dragNode = pressNode; svg.setPointerCapture(e.pointerId); }
+      else { panning = true; startPan = { x: e.clientX - tf.x, y: e.clientY - tf.y }; svg.classList.add("panning"); svg.setPointerCapture(e.pointerId); }
     });
     svg.addEventListener("pointermove", e => {
-      if (dragNode) {
-        moved = true;
-        const p = toGraph(e.clientX, e.clientY);
-        dragNode.x = p.x; dragNode.y = p.y; dragNode.vx = 0; dragNode.vy = 0;
-        reheat(0.25);
-      } else if (panning) {
-        moved = true; tf.x = e.clientX - startPan.x; tf.y = e.clientY - startPan.y; applyTF();
-      }
+      if (dragNode) { moved = true; const p = toGraph(e.clientX, e.clientY); dragNode.x = p.x; dragNode.y = p.y; dragNode.vx = 0; dragNode.vy = 0; reheat(0.25); }
+      else if (panning) { moved = true; tf.x = e.clientX - startPan.x; tf.y = e.clientY - startPan.y; applyTF(); }
     });
-    function endPointer() {
-      if (dragNode && !moved && pressNode) select(pressNode);
-      dragNode = null; panning = false; pressNode = null; svg.classList.remove("panning");
-    }
+    function endPointer() { if (dragNode && !moved && pressNode) select(pressNode); dragNode = null; panning = false; pressNode = null; svg.classList.remove("panning"); }
     svg.addEventListener("pointerup", endPointer);
     svg.addEventListener("pointercancel", endPointer);
 
     // ---------- Selection & detail panel ----------
     const panel = document.getElementById("mm-panel");
     let selected = null;
-
     function select(node) {
       selected = node;
       N.forEach(n => n.el.classList.remove("sel"));
       node.el.classList.add("sel");
       const keep = new Set([node.id, ...node.neighbors.map(x => x.id)]);
       N.forEach(n => n.el.classList.toggle("mm-dim", !keep.has(n.id)));
-      links.forEach(l => {
-        const on = l.source === node || l.target === node;
-        l.el.classList.toggle("mm-dim", !on);
-        l.el.style.stroke = on ? "var(--accent)" : "";
-      });
+      links.forEach(l => { const on = l.source === node || l.target === node; l.el.classList.toggle("mm-dim", !on); l.el.style.stroke = on ? "var(--accent)" : ""; });
       renderPanel(node);
     }
-
     function renderPanel(node) {
       const meta = TYPE_META[node.type];
       panel.innerHTML = "";
-
       const badge = document.createElement("span");
-      badge.className = "p-badge";
-      badge.style.background = meta.color;
-      badge.textContent = node.badge || meta.label;
+      badge.className = "p-badge"; badge.style.background = meta.color; badge.textContent = node.badge || meta.label;
       panel.appendChild(badge);
-
-      const h = document.createElement("h4");
-      h.textContent = node.label;
-      panel.appendChild(h);
-
-      const p = document.createElement("p");
-      p.className = "p-desc";
-      p.textContent = node.desc;
-      panel.appendChild(p);
-
-      if (node.detail) {
-        const d = document.createElement("p");
-        d.className = "p-detail";
-        d.textContent = node.detail;
-        panel.appendChild(d);
+      const h = document.createElement("h4"); h.textContent = node.label; panel.appendChild(h);
+      const p = document.createElement("p"); p.className = "p-desc"; p.textContent = node.desc; panel.appendChild(p);
+      if (node.detail) { const d = document.createElement("p"); d.className = "p-detail"; d.textContent = node.detail; panel.appendChild(d); }
+      if (node.facts && node.facts.length) {
+        const ul = document.createElement("ul"); ul.className = "p-facts";
+        node.facts.forEach(f => {
+          const li = document.createElement("li");
+          const idx = f.indexOf(": ");
+          if (idx > 0 && idx < 26) {
+            const b = document.createElement("b"); b.textContent = f.slice(0, idx + 1);
+            li.appendChild(b); li.appendChild(document.createTextNode(" " + f.slice(idx + 2)));
+          } else { li.textContent = f; }
+          ul.appendChild(li);
+        });
+        panel.appendChild(ul);
       }
-
       if (node.quote) {
         const bq = document.createElement("blockquote");
         bq.appendChild(document.createTextNode("“" + node.quote.text + "”"));
-        if (node.quote.cite) {
-          const c = document.createElement("cite");
-          c.textContent = "— " + node.quote.cite;
-          bq.appendChild(c);
-        }
+        if (node.quote.cite) { const c = document.createElement("cite"); c.textContent = "— " + node.quote.cite; bq.appendChild(c); }
         panel.appendChild(bq);
       }
-
+      // action links
+      const acts = document.createElement("div"); acts.className = "p-actions";
       if (node.url) {
         const a = document.createElement("a");
         a.className = "p-open"; a.href = node.url; a.target = "_blank"; a.rel = "noopener";
-        const verb = node.type === "study" ? "Read the study" :
-                     node.type === "book" ? "Find the book" :
-                     node.type === "watch" ? "Watch" :
-                     node.type === "person" ? "Learn more" : "Open";
-        a.textContent = verb + " ↗";
-        panel.appendChild(a);
+        const verb = node.type === "study" ? "Read the study" : node.type === "book" ? "Find the book" :
+                     node.type === "watch" ? "Watch" : node.type === "person" ? "Website" :
+                     node.type === "writing" ? "Open" : "Learn more";
+        a.textContent = verb + " ↗"; acts.appendChild(a);
       }
+      if (node.wiki) {
+        const w = document.createElement("a");
+        w.className = "p-wiki"; w.href = node.wiki; w.target = "_blank"; w.rel = "noopener";
+        w.textContent = "Wikipedia ↗"; acts.appendChild(w);
+      }
+      if (acts.children.length) panel.appendChild(acts);
 
       if (node.neighbors.length) {
-        const lab = document.createElement("div");
-        lab.className = "p-links-label";
-        lab.textContent = "Connected to (" + node.neighbors.length + ")";
-        panel.appendChild(lab);
-        const wrap = document.createElement("div");
-        wrap.className = "p-neighbors";
+        const lab = document.createElement("div"); lab.className = "p-links-label";
+        lab.textContent = "Connected to (" + node.neighbors.length + ")"; panel.appendChild(lab);
+        const wrap = document.createElement("div"); wrap.className = "p-neighbors";
         const order = { avenue: 0, root: 1, person: 2, study: 3, book: 4, writing: 5, watch: 6 };
         node.neighbors.slice().sort((a, b) => (order[a.type] - order[b.type]) || a.label.localeCompare(b.label))
           .forEach(nb => {
-            const b = document.createElement("button");
-            b.type = "button";
-            const dot = document.createElement("span");
-            dot.className = "dot"; dot.style.background = TYPE_META[nb.type].color;
-            b.appendChild(dot);
-            b.appendChild(document.createTextNode(nb.label));
-            b.addEventListener("click", () => select(nb));
-            wrap.appendChild(b);
+            const b = document.createElement("button"); b.type = "button";
+            const dot = document.createElement("span"); dot.className = "dot"; dot.style.background = TYPE_META[nb.type].color;
+            b.appendChild(dot); b.appendChild(document.createTextNode(nb.label));
+            b.addEventListener("click", () => select(nb)); wrap.appendChild(b);
           });
         panel.appendChild(wrap);
       }
     }
-
     function clearSelection() {
       selected = null;
       N.forEach(n => { n.el.classList.remove("sel"); n.el.classList.remove("mm-dim"); });
@@ -902,16 +1041,12 @@
     const active = new Set(Object.keys(TYPE_META));
     Object.entries(TYPE_META).forEach(([type, meta]) => {
       if (type === "root") return;
-      const chip = document.createElement("span");
-      chip.className = "mm-chip"; chip.dataset.type = type;
-      const dot = document.createElement("span");
-      dot.className = "dot"; dot.style.background = meta.color;
-      chip.appendChild(dot);
+      const chip = document.createElement("span"); chip.className = "mm-chip"; chip.dataset.type = type;
+      const dot = document.createElement("span"); dot.className = "dot"; dot.style.background = meta.color; chip.appendChild(dot);
       const labels = { avenue: "Avenues", person: "People", study: "Studies", book: "Books", writing: "Resources", watch: "Watch" };
       chip.appendChild(document.createTextNode(labels[type]));
       chip.addEventListener("click", () => {
-        if (active.has(type)) { active.delete(type); chip.classList.add("off"); }
-        else { active.add(type); chip.classList.remove("off"); }
+        if (active.has(type)) { active.delete(type); chip.classList.add("off"); } else { active.add(type); chip.classList.remove("off"); }
         applyFilter();
       });
       filtersEl.appendChild(chip);
@@ -919,8 +1054,7 @@
     function applyFilter() {
       N.forEach(n => { n.el.style.display = (n.type === "root" || active.has(n.type)) ? "" : "none"; });
       links.forEach(l => {
-        const vis = (l.source.type === "root" || active.has(l.source.type)) &&
-                    (l.target.type === "root" || active.has(l.target.type));
+        const vis = (l.source.type === "root" || active.has(l.source.type)) && (l.target.type === "root" || active.has(l.target.type));
         l.el.style.display = vis ? "" : "none";
       });
       needsFit = true; reheat(0.5);
@@ -933,10 +1067,8 @@
       if (!q) { N.forEach(n => n.el.classList.remove("mm-dim")); links.forEach(l => l.el.classList.remove("mm-dim")); if (selected) select(selected); return; }
       let first = null;
       N.forEach(n => {
-        const hay = (n.label + " " + n.desc + " " + (n.detail || "")).toLowerCase();
-        const hit = hay.includes(q);
-        n.el.classList.toggle("mm-dim", !hit);
-        if (hit && !first) first = n;
+        const hay = (n.label + " " + n.desc + " " + (n.detail || "") + " " + (n.facts || []).join(" ")).toLowerCase();
+        const hit = hay.includes(q); n.el.classList.toggle("mm-dim", !hit); if (hit && !first) first = n;
       });
       links.forEach(l => l.el.classList.add("mm-dim"));
       if (first) renderPanel(first);
@@ -945,13 +1077,12 @@
     // ---------- Reset ----------
     document.getElementById("mm-reset").addEventListener("click", () => {
       search.value = ""; clearSelection(); seed(); needsFit = true; reheat(1);
-      panel.innerHTML = '<p class="p-empty">Select a node to see a summary, a deeper explanation, source excerpts, and connections. Start with the blue hub in the center, or one of the green research avenues around it — or use the filters to isolate people, papers, books, or films.</p>';
+      panel.innerHTML = '<p class="p-empty">Select a node to see a summary, a deeper explanation, quick facts, source excerpts, and connections. Start with the blue hub in the center, or a green research avenue around it — or use the filters to isolate people, papers, books, or films.</p>';
     });
 
     svg.addEventListener("click", e => { if (!e.target.closest(".mm-node") && !moved) clearSelection(); });
     window.addEventListener("resize", () => { needsFit = true; reheat(0.15); });
 
-    // ---------- Go ----------
     applyTF(); reheat(1);
   })();
   </script>
